@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class TrapBase {
-
+namespace TrapLogic.TrapAssets
+{
+    abstract public class TrapTrigger
+    {
+    }
 }
