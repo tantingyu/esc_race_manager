@@ -5,13 +5,26 @@ using UnityEngine;
 
 namespace TrapLogic
 {
-    public class PlayerTraps
+    public sealed class PlayerTraps
     {
+        public static PlayerTraps playerTraps;
         public Trap[] active;
         
-        public PlayerTraps()
+        private PlayerTraps()
         {
 
+        }
+
+        public static PlayerTraps Instance
+        {
+            get
+            {
+                if (playerTraps == null)
+                {
+                    playerTraps = new PlayerTraps();
+                }
+                return playerTraps;
+            }
         }
     }
 }
