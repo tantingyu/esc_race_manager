@@ -7,12 +7,15 @@ namespace TrapLogic
 {
     public sealed class PlayerTraps
     {
-        public static PlayerTraps playerTraps;
-        public Trap[] active;
+        private static PlayerTraps playerTraps = null;
+        public Trap[] active=new Trap[3];
         
         private PlayerTraps()
         {
-
+            active[0] = Traps.Beartrap;
+            //Debug.Log(active[0].description);
+            active[1] = Traps.Caltrops;
+            active[2] = Traps.Springboard;
         }
 
         public static PlayerTraps Instance

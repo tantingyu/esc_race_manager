@@ -11,7 +11,7 @@ namespace Race.UI.TrapMenu
     {
 
         private bool cooldown = false;
-        private int selectedTrap = -1;
+        private float cooldownTime = 10f;
         private Image buttonImg;
         private Image cdImg;
 
@@ -30,27 +30,34 @@ namespace Race.UI.TrapMenu
         // Update is called once per frame
         void Update()
         {
-            cdImg.fillAmount -= Time.deltaTime;
+            cdImg.fillAmount -= Time.deltaTime/cooldownTime;
         }
 
-        void OnMouseDown()
+        //void OnMouseDown()
+        //{
+        //    if (cooldown == false)
+        //    {
+        //        //if notSelected
+        //        //if (money >= Trap.cost)
+        //        {
+        //            StartCooldown();
+        //        }
+        //        //else insufficient funds error
+        //    }
+        //}
+
+        public void StartCooldown()
         {
-            if (cooldown == false)
-            {
-                //if (money >= Trap.cost)
-                {
-                    buttonImg.color = Color.gray;
-                    cdImg.fillAmount = 1f;
-                    Invoke("ResetCooldown", 5.0f);
-                    cooldown = true;
-                }
-                //else insufficient funds error
-            }
+            buttonImg.color = Color.gray;
+            cdImg.fillAmount = 1f;
+            Invoke("ResetCooldown", 5.0f);
+            cooldown = true;
         }
 
-        void ResetCooldown()
+        public void ResetCooldown()
         {
             cooldown = false;
+            cdImg.fillAmount = 0f;
             //trigger hightlight animation here
         }
     }
