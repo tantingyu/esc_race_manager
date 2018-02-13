@@ -11,14 +11,16 @@ namespace Race.UI.TrapMenu
     {
 
         private bool cooldown = false;
-        private float cooldownTime = 10f;
+        private float cooldownTime = 3f;
         private Image buttonImg;
+        private GameObject child;
         private Image cdImg;
 
         void Awake()
         {
             buttonImg = this.GetComponent<Image>();
-            cdImg = GetComponentInChildren<Image>();
+            child = this.transform.GetChild(0).gameObject;
+            cdImg = child.GetComponent<Image>();
         }
 
         // Use this for initialization
@@ -30,7 +32,11 @@ namespace Race.UI.TrapMenu
         // Update is called once per frame
         void Update()
         {
-            cdImg.fillAmount -= Time.deltaTime/cooldownTime;
+            if (cooldown)
+            {
+                Debug.Log("cdTimer:" + cdImg.fillAmount);
+                cdImg.fillAmount -= Time.deltaTime / cooldownTime;
+            }
         }
 
         //void OnMouseDown()
@@ -50,15 +56,17 @@ namespace Race.UI.TrapMenu
         {
             buttonImg.color = Color.gray;
             cdImg.fillAmount = 1f;
-            Invoke("ResetCooldown", 5.0f);
+            Debug.Log("cdImg:" + cdImg.fillAmount);
+            Invoke("ResetCooldown", cooldownTime);
             cooldown = true;
         }
 
         public void ResetCooldown()
         {
+            buttonImg.color = Color.white;
             cooldown = false;
             cdImg.fillAmount = 0f;
-            //trigger hightlight animation here
+            //trigger ready animation here
         }
     }
 }

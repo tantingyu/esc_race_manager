@@ -10,9 +10,32 @@ namespace Race.UI.TrapMenu
     {
         public Button[] trapButtons = new Button[3];
         [HideInInspector]
-        public static int trapCursor = -1;
+        public int trapCursor = -1;
 
-        // Use this for initialization
+
+        //private static TrapMenuManager _instance;
+        //internal static TrapMenuManager instance {
+        //    get
+        //    {
+        //        if (_instance == null)
+        //            throw new System.NullReferenceException("Trap Menu Manager is not initialized");
+        //        return _instance;
+        //    }
+
+        //    private set
+        //    {
+        //        if (_instance != null)
+        //            throw new System.InvalidOperationException("Trap Menu Manager already exists!");
+        //        _instance = value;
+        //    }
+        //}
+
+        //Singleton for unity gameObject
+        private void Awake()
+        {
+            //TrapMenuManager.instance = this;
+        }
+
         void Start()
         {
             PlayerTraps pt = PlayerTraps.Instance;
@@ -32,6 +55,7 @@ namespace Race.UI.TrapMenu
 
         private void SetSelection(int index)
         {
+            TrapButton trapButton = trapButtons[index].GetComponent<TrapButton>();
             Debug.Log("Index: "+index);
             if (trapCursor != index)
             {

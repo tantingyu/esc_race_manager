@@ -280,6 +280,7 @@ MonoBehaviour:
   - {fileID: 1368493791}
   - {fileID: 166375891}
   - {fileID: 658784958}
+  trapCursor: -1
 --- !u!1 &603245173
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,6 +391,7 @@ MonoBehaviour:
   - {fileID: 1368493791}
   - {fileID: 166375891}
   - {fileID: 658784958}
+  trapCursor: -1
 --- !u!1001 &658784957
 Prefab:
   m_ObjectHideFlags: 0
@@ -674,6 +676,11 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114247067020651402, guid: 5e6e23ffcb151634a8472c007b391087,
+        type: 2}
+      propertyPath: m_FillAmount
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e6e23ffcb151634a8472c007b391087, type: 2}

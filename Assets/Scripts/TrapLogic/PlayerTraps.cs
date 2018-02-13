@@ -13,7 +13,6 @@ namespace TrapLogic
         private PlayerTraps()
         {
             active[0] = Traps.Beartrap;
-            //Debug.Log(active[0].description);
             active[1] = Traps.Caltrops;
             active[2] = Traps.Springboard;
         }
