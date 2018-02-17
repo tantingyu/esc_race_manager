@@ -3,14 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TrapLogic;
+using TrapLogic.TrapAssets;
 
 namespace Race.UI.TrapMenu
 {
     public class TrapMenuManager : MonoBehaviour
     {
-        public Button[] trapButtons = new Button[3];
+        [SerializeField]
+        private Button[] trapButtons = new Button[3];
+        //private List<Button> trapButtons;
+
+
         [HideInInspector]
         public int trapCursor = -1;
+
+        [SerializeField]
+        [Tooltip("Insert Money display GUI game object here")]
+        private Text moneyGUI;
+        [Tooltip("Sets countdown for gold increment in seconds.")]
+        public float goldTimer = 5f;
+        private float counter = 0;
+        public float startGold = 1000f;
+        [SerializeField]
+        private float goldIncrement = 1f;
+
 
 
         //private static TrapMenuManager _instance;
@@ -34,6 +50,10 @@ namespace Race.UI.TrapMenu
         private void Awake()
         {
             //TrapMenuManager.instance = this;
+            //for(int i=0; i < PlayerTraps.Instance.active.Length; i++)
+            //{
+            //    Trap playerTrap = PlayerTraps.Instance.active[i];
+            //}
         }
 
         void Start()
@@ -41,7 +61,7 @@ namespace Race.UI.TrapMenu
             PlayerTraps pt = PlayerTraps.Instance;
             for (int i = 0; i < trapButtons.Length; i++)
             {
-                //trapButtons[i].GetComponent < Image >= PlayerTraps.Instance.active[i].sprite;
+                trapButtons[i].GetComponent<Image>().sprite = Resources.Load<Sprite>(PlayerTraps.Instance.active[i].sprite);
                 int capturedIterator = i;
                 trapButtons[i].onClick.AddListener(() => SetSelection(capturedIterator));
             }
@@ -50,12 +70,17 @@ namespace Race.UI.TrapMenu
         // Update is called once per frame
         void Update()
         {
-
+            counter += Time.deltaTime;
+            if (counter >= goldTimer)
+            {
+                startGold += goldIncrement;
+                moneyGUI.text = string.Format("Funds:\n{0}",startGold);
+                counter = 0;
+            }
         }
 
         private void SetSelection(int index)
         {
-            TrapButton trapButton = trapButtons[index].GetComponent<TrapButton>();
             Debug.Log("Index: "+index);
             if (trapCursor != index)
             {
@@ -69,6 +94,11 @@ namespace Race.UI.TrapMenu
             }
         }
 
+        public bool CheckCooldown(int index)
+        {
+            return trapButtons[index].GetComponent<TrapButton>().cooldown;
+        }
+
         public void StartCooldown(int index)
         {
             trapButtons[index].GetComponent<TrapButton>().StartCooldown();
@@ -77,6 +107,11 @@ namespace Race.UI.TrapMenu
         public void ResetCooldown(int index)
         {
             trapButtons[index].GetComponent<TrapButton>().ResetCooldown();
+        }
+
+        public void setTrap(Vector2 position)
+        {
+
         }
     }
 }

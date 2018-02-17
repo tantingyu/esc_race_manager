@@ -10,7 +10,7 @@ namespace TrapLogic.TrapAssets
             (
                 name: "Beartrap",
                 sprite: "Traps/beartrap",
-                description: "Deal 10 damage and stuns target.",
+                description: "Deals 10 damage and stuns target.",
                 cost: 10,
                 cooldown: 3,
                 trapTrigger: null,
@@ -23,7 +23,7 @@ namespace TrapLogic.TrapAssets
             (
                 name: "Caltrops",
                 sprite: "Traps/caltrops",
-                description: "Deal 10 damage and slows target enemy.",
+                description: "Deals 10 damage and slows target enemy.",
                 cost: 10,
                 cooldown: 3,
                 trapTrigger: null,
@@ -36,7 +36,7 @@ namespace TrapLogic.TrapAssets
             (
                 name: "Springboard",
                 sprite: "Traps/springboard",
-                description: "launches target 3 squares.",
+                description: "Launches target 3 squares.",
                 cost: 10,
                 cooldown: 3,
                 trapTrigger: null,

@@ -10,7 +10,7 @@ namespace Race.UI.TrapMenu
     public class TrapButton : MonoBehaviour
     {
 
-        private bool cooldown = false;
+        public bool cooldown { get; private set; }
         private float cooldownTime = 3f;
         private Image buttonImg;
         private GameObject child;
@@ -18,6 +18,7 @@ namespace Race.UI.TrapMenu
 
         void Awake()
         {
+            cooldown = false;
             buttonImg = this.GetComponent<Image>();
             child = this.transform.GetChild(0).gameObject;
             cdImg = child.GetComponent<Image>();
