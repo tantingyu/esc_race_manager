@@ -26,26 +26,7 @@ namespace Race.UI.TrapMenu
         public float startGold = 1000f;
         [SerializeField]
         private float goldIncrement = 1f;
-
-
-
-        //private static TrapMenuManager _instance;
-        //internal static TrapMenuManager instance {
-        //    get
-        //    {
-        //        if (_instance == null)
-        //            throw new System.NullReferenceException("Trap Menu Manager is not initialized");
-        //        return _instance;
-        //    }
-
-        //    private set
-        //    {
-        //        if (_instance != null)
-        //            throw new System.InvalidOperationException("Trap Menu Manager already exists!");
-        //        _instance = value;
-        //    }
-        //}
-
+        
         //Singleton for unity gameObject
         private void Awake()
         {
@@ -54,10 +35,15 @@ namespace Race.UI.TrapMenu
             //{
             //    Trap playerTrap = PlayerTraps.Instance.active[i];
             //}
+            if (moneyGUI == null)
+            {
+                Debug.Log("Money GUI not initialized");
+            }
         }
 
         void Start()
         {
+            moneyGUI = GameObject.Find("MoneyDisplay").GetComponent<Text>();
             PlayerTraps pt = PlayerTraps.Instance;
             for (int i = 0; i < trapButtons.Length; i++)
             {
@@ -85,6 +71,7 @@ namespace Race.UI.TrapMenu
             if (trapCursor != index)
             {
                 trapCursor = index;
+                // add highlight here
                 StartCooldown(index);   //test
             }
             else
@@ -111,7 +98,10 @@ namespace Race.UI.TrapMenu
 
         public void setTrap(Vector2 position)
         {
+            if (trapCursor != -1)
+            {
 
+            }
         }
     }
 }
