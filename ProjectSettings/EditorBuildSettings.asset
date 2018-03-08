@@ -8,6 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/menu.unity
     guid: 17e05dd12cd85c1469154afe6336ee9d
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/settings.unity
-    guid: 74e0c7a7737f08e4e977d3ce04dd5c83
+    path: Assets/room.unity
+    guid: b4eb260b590c6ac4f97b36228ce3e746
+  - enabled: 1
+    path: Assets/race.unity
+    guid: 00fa562abf2328146bb33e9dfd1e2931

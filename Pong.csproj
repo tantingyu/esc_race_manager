@@ -295,6 +295,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Menu.cs" />
+    <Compile Include="Assets\Scripts\Game\Cameracontroller.cs" />
+    <Compile Include="Assets\Scripts\Game\Playercontroller.cs" />
+    <Compile Include="Assets\Scripts\Game\ToolSpawner.cs" />
+    <Compile Include="Assets\Scripts\InputManager.cs" />
+    <Compile Include="Assets\Scripts\TrapButton.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\PlayerTraps.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\Trap.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\TrapEffect.cs" />
@@ -304,9 +309,11 @@
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\TrapTrigger.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\TrapTriggers\TriggerOnCollision.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\TrapTriggers\TriggerOnTimer.cs" />
+    <Compile Include="Assets\Scripts\TrapMenuManager.cs" />
     <Compile Include="Assets\Simple UI\Samples\IconPreview.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Resources\Art\Player\spritesheet_players.xml" />
     <None Include="Assets\Simple UI\Fonts\OFL.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
