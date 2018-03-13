@@ -2,40 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PlayerLogic.PlayerAssets
+namespace RacerLogic.RacerAssets
 {
-    public static class Players
+    public class CommandDatabase
     {
-        public static Player p1 = new Player
+        public static Command Jump = new Command
             (
-                name: "pipi",
-                sprite: "Players/pipi",
-                description: "Deals 10 damage and stuns target.",
-                specialability: "accelerate",
+                name: "Jump",
+                sprite: "Sprites/Commands/Jump",
+                description: "Jump...",
+                specialAbility: "accelerate",
                 speed: 10,
                 abilityEffect: new AbilityEffect[]
                             {
                             }
             );
 
-        public static Player p2 = new Player
+        public static Command Sprint = new Command
             (
-                name: "lala",
-                sprite: "Players/lala",
+                name: "Sprint",
+                sprite: "Sprites/Commands/Sprint",
                 description: "Deals 10 damage and stuns target.",
-                specialability: "punch",
+                specialAbility: "punch",
                 speed: 12,
                 abilityEffect: new AbilityEffect[]
                             {
                             }
             );
 
-        public static Player p3 = new Player
+        public static Command Neigh = new Command
             (
-                name: "bobo",
-                sprite: "Traps/bobo",
+                name: "Neigh",
+                sprite: "Sprites/Commands/Jump",
                 description: "Deals 10 damage and stuns target.",
-                specialability: "jump",
+                specialAbility: "jump",
                 speed: 12,
                 abilityEffect: new AbilityEffect[]
                             {
@@ -43,4 +43,3 @@ namespace PlayerLogic.PlayerAssets
             );
     }
 }
-

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using RacerLogic;
 
 public class CommandMenuManger : MonoBehaviour {
 
@@ -13,7 +14,7 @@ public class CommandMenuManger : MonoBehaviour {
         //PlayerCommands cmds = PlayerCommands.Instance;
         for (int i = 0; i < commandButtons.Length; i++)
         {
-            //commandButtons[i].GetComponent<Image>().sprite = Resources.Load<Sprite>(PlayerCommands.Instance.active[i].sprite);
+            commandButtons[i].GetComponent<Image>().sprite = Resources.Load<Sprite>(PlayerRacer.Instance.commands[i].sprite);
             int capturedIterator = i;
             commandButtons[i].onClick.AddListener(() => OnClick(capturedIterator));
         }
@@ -29,27 +30,28 @@ public class CommandMenuManger : MonoBehaviour {
         Debug.Log("Index: " + index);
         if (true)   //change to stamina check
         {
+            // hook to player instance
             // invalidate all button inputs?
-            StartCooldown(index);   //test
+            //StartCooldown(index);   //test
         }
         else
         {
-            //no stamina
+            //no stamina exception
         }
     }
 
-    public bool CheckCooldown(int index)
-    {
-        return commandButtons[index].GetComponent<CommandButton>().cooldown;
-    }
+    //public bool CheckCooldown(int index)
+    //{
+    //    return commandButtons[index].GetComponent<CommandButton>().cooldown;
+    //}
 
-    public void StartCooldown(int index)
-    {
-        commandButtons[index].GetComponent<CommandButton>().StartCooldown();
-    }
+    //public void StartCooldown(int index)
+    //{
+    //    commandButtons[index].GetComponent<CommandButton>().StartCooldown();
+    //}
 
-    public void ResetCooldown(int index)
-    {
-        commandButtons[index].GetComponent<CommandButton>().ResetCooldown();
-    }
+    //public void ResetCooldown(int index)
+    //{
+    //    commandButtons[index].GetComponent<CommandButton>().ResetCooldown();
+    //}
 }

@@ -437,9 +437,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 305418018}
-  - component: {fileID: 305418019}
   - component: {fileID: 305418021}
   - component: {fileID: 305418020}
+  - component: {fileID: 305418019}
   m_Layer: 5
   m_Name: CommandMenu
   m_TagString: Untagged
@@ -477,18 +477,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 305418017}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08cfb3097c45c1a40967df91bce66218, type: 3}
+  m_Script: {fileID: 11500000, guid: e1d11b31a94b65946bcb27da8ecc9df8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trapButtons:
+  commandButtons:
   - {fileID: 1368493791}
   - {fileID: 166375891}
   - {fileID: 658784958}
-  trapCursor: -1
-  moneyGUI: {fileID: 104637813}
-  goldTimer: 5
-  startGold: 1000
-  goldIncrement: 1
 --- !u!114 &305418020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,7 +527,7 @@ GameObject:
   - component: {fileID: 603245176}
   - component: {fileID: 603245175}
   - component: {fileID: 603245174}
-  - component: {fileID: 603245178}
+  - component: {fileID: 603245179}
   m_Layer: 5
   m_Name: GUI
   m_TagString: Untagged
@@ -617,7 +612,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &603245178
+--- !u!114 &603245179
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -625,18 +620,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 603245173}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08cfb3097c45c1a40967df91bce66218, type: 3}
+  m_Script: {fileID: 11500000, guid: ae7a7bc893b9ff44dac5f591118438c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trapButtons:
-  - {fileID: 1368493791}
-  - {fileID: 166375891}
-  - {fileID: 658784958}
-  trapCursor: -1
-  moneyGUI: {fileID: 0}
-  goldTimer: 5
-  startGold: 1000
-  goldIncrement: 1
 --- !u!1 &638257909
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,7 +635,7 @@ GameObject:
   - component: {fileID: 638257911}
   - component: {fileID: 638257910}
   - component: {fileID: 638257914}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -863,7 +849,7 @@ GameObject:
   - component: {fileID: 796791749}
   - component: {fileID: 796791748}
   - component: {fileID: 796791751}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1062,12 +1048,12 @@ CanvasRenderer:
 RectTransform:
   m_PrefabParentObject: {fileID: 224810278253369570, guid: 5e6e23ffcb151634a8472c007b391087,
     type: 2}
-  m_PrefabInternal: {fileID: 1666429209}
+  m_PrefabInternal: {fileID: 1839484441}
 --- !u!114 &1368493791 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114809837252156816, guid: 5e6e23ffcb151634a8472c007b391087,
     type: 2}
-  m_PrefabInternal: {fileID: 1666429209}
+  m_PrefabInternal: {fileID: 1839484441}
   m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1480937259
 GameObject:
@@ -1186,7 +1172,7 @@ GameObject:
   - component: {fileID: 1489709160}
   - component: {fileID: 1489709159}
   - component: {fileID: 1489709162}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Midground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1273,7 +1259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 0.1
---- !u!1001 &1666429209
+--- !u!1001 &1839484441
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1369,10 +1355,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1162938489702438, guid: 5e6e23ffcb151634a8472c007b391087, type: 2}
-      propertyPath: m_Name
-      value: CommandButton
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e6e23ffcb151634a8472c007b391087, type: 2}

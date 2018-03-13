@@ -1,4 +1,4 @@
-﻿namespace PlayerLogic.PlayerAssets
+﻿namespace RacerLogic.RacerAssets
 {
     internal class AbilityEffect
     {
