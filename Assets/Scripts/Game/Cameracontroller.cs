@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cameracontroller : MonoBehaviour {
+public class CameraController : MonoBehaviour {
 
-    public Playercontroller thePlayer;
+    public RacerController player;
 
     //know where the position of the player is, store it in a vector
     private Vector3 lastPlayerPosition;
@@ -12,17 +12,19 @@ public class Cameracontroller : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        thePlayer = FindObjectOfType<Playercontroller>();
-        lastPlayerPosition = thePlayer.transform.position;
+        player = FindObjectOfType<RacerController>();
+        lastPlayerPosition = player.transform.position;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        distanceToMove = thePlayer.transform.position.x - lastPlayerPosition.x;
+        if (player!=null) {
+            distanceToMove = player.transform.position.x - lastPlayerPosition.x;
 
-        //let the camera move together with the player, doesn't need to change the y and z value
-        transform.position = new Vector3(transform.position.x + distanceToMove, transform.position.y, transform.position.z);
+            //let the camera move together with the player, doesn't need to change the y and z value
+            transform.position = new Vector3(transform.position.x + distanceToMove, transform.position.y, transform.position.z);
 
-        lastPlayerPosition = thePlayer.transform.position;
+            lastPlayerPosition = player.transform.position;
+        }
 	}
 }

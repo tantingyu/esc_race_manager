@@ -11,8 +11,7 @@ namespace RacerLogic.RacerAssets
                 name: "Jump",
                 sprite: "Sprites/Commands/Jump",
                 description: "Jump...",
-                specialAbility: "accelerate",
-                speed: 10,
+                stCost: 10,
                 abilityEffect: new AbilityEffect[]
                             {
                             }
@@ -23,8 +22,7 @@ namespace RacerLogic.RacerAssets
                 name: "Sprint",
                 sprite: "Sprites/Commands/Sprint",
                 description: "Deals 10 damage and stuns target.",
-                specialAbility: "punch",
-                speed: 12,
+                stCost: 12,
                 abilityEffect: new AbilityEffect[]
                             {
                             }
@@ -35,8 +33,7 @@ namespace RacerLogic.RacerAssets
                 name: "Neigh",
                 sprite: "Sprites/Commands/Jump",
                 description: "Deals 10 damage and stuns target.",
-                specialAbility: "jump",
-                speed: 12,
+                stCost: 12,
                 abilityEffect: new AbilityEffect[]
                             {
                             }
