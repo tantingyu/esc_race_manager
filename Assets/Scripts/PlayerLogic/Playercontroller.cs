@@ -6,12 +6,12 @@ public class Playercontroller : MonoBehaviour
 {
 
     //character speed
-    public float moveSpeed;
+    //public float moveSpeed;
     public float Hp;
     //public float jumpForce;
 
     //2D physics effect
-    // Use this for initialization
+    //Use this for initialization
     private Rigidbody2D myRigidbody;
     private Animator myAnimator;
 
@@ -25,7 +25,7 @@ public class Playercontroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y); //vector means point like(x,y)
+        //myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y); //vector means point like(x,y)
         myAnimator.SetFloat("Speed", myRigidbody.velocity.x);
 
         if (Hp <= 0)
