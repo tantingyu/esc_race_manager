@@ -7,10 +7,9 @@ public class SwipeController : MonoBehaviour {
     private Vector3 fp;   //First touch position
     private Vector3 lp;   //Last touch position
     private float dragDistance;  //minimum distance for a swipe to be registered
-    private bool moveVerticalUp = false;
-    private bool moveVerticalDown = false;
-    private float verticalDistance = 1.24f;
-    private float[] position = { 0.8f, -0.4F, -1.6f };
+    private bool moveVertical = false;
+    
+    private readonly float[] position = { 0.8f, -0.4F, -1.6f };
     private int currentLane;
     private int targetLane;
     private Rigidbody2D myRigidbody;
@@ -23,14 +22,14 @@ public class SwipeController : MonoBehaviour {
         dragDistance = Screen.height * 15 / 100; //dragDistance is 15% height of the screen
         //currentLane=gameObject.transform
         myRigidbody = GetComponent<Rigidbody2D>();
-        SetCurrentLane(2);
-
+        SetCurrentLane(1);
+        myRigidbody.velocity = new Vector2(moveSpeedHorizontal, myRigidbody.velocity.y); //vector means point like(x,y)
     }
 
     void Update()
     {
-        myRigidbody.velocity = new Vector2(moveSpeedHorizontal, myRigidbody.velocity.y); //vector means point like(x,y)
-        if (!moveVerticalUp && !moveVerticalDown)
+        //myRigidbody.velocity = new Vector2(moveSpeedHorizontal, myRigidbody.velocity.y); //vector means point like(x,y)
+        if (!moveVertical)
         {
             if (Input.touchCount == 1) // user is touching the screen with a single touch
             {
@@ -68,25 +67,14 @@ public class SwipeController : MonoBehaviour {
                             if (lp.y > fp.y)  //If the movement was up
                             {   //Up swipe
                                 Debug.Log("Up Swipe");
-
-                                //edited by GU ZHIYAO at 2018-03-13
-                                if (currentLane > 1) { 
-                                    moveVerticalUp = true;
-                                    targetLane = currentLane - 1;
-                                }
-
+                                if (targetLane > 0) targetLane -= 1;
                             }
                             else
                             {   //Down swipe
                                 Debug.Log("Down Swipe");
-
-                                //edited by GU ZHIYAO at 2018-03-13
-                                if (currentLane < 3)
-                                {
-                                    moveVerticalDown = true;
-                                    targetLane = currentLane + 1;
-                                }
+                                if (targetLane < 2) targetLane += 1;
                             }
+                            moveVertical = true;
                         }
                     }
                     else
@@ -95,38 +83,43 @@ public class SwipeController : MonoBehaviour {
                     }
                 }
             }
+
+            //computer debug
+            if (Input.GetKey("up"))
+                if (targetLane > 0)
+                {
+                    targetLane -= 1;
+                    moveVertical = true;
+                }
+            if (Input.GetKey("down"))
+                if (targetLane < 2)
+                {
+                    targetLane += 1;
+                    moveVertical = true;
+                }
         }
 
         else
         {
-            //read current pos
-            //check with target location
-            if (moveVerticalUp)
+            Debug.Log("currentLane:"+currentLane);
+            Debug.Log("targetLane:"+targetLane);
+            
+            float step = moveSpeedVertical * Time.deltaTime;
+            Vector2 targetPos = new Vector2(transform.position.x, GetTargetLanePos(targetLane));
+
+            if (GetPlayerCurrentPos() < GetTargetLanePos(targetLane))
             {
-                if (GetPlayerCurrentPos() < GetTargetLanePos(currentLane))
-                {
-                    myRigidbody.velocity = new Vector2(moveSpeedHorizontal, moveSpeedVertical);
-                }
-                else
-                {
-
-                    moveVerticalUp = false;
-                }
-
+                transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
             }
-
-            else if (moveVerticalDown) {
-
-                if (GetPlayerCurrentPos() > GetTargetLanePos(currentLane))
-                {
-                    myRigidbody.velocity = new Vector2(moveSpeedHorizontal, -moveSpeedVertical);
-                }
-                else
-                {
-                    moveVerticalDown = false;
-                }
+            else if (GetPlayerCurrentPos() > GetTargetLanePos(targetLane))
+            {
+                transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
             }
-
+            else
+            {
+                moveVertical = false;
+                currentLane = targetLane;
+            }
         }
     }
 
@@ -137,11 +130,12 @@ public class SwipeController : MonoBehaviour {
         return gameObject.transform.position.y;
     }
 
-    float GetTargetLanePos(int Lane) {
-        return position[Lane - 1];
+    float GetTargetLanePos(int lane) {
+        return position[lane];
     }
 
-    void SetCurrentLane(int Lane) {
-        myRigidbody.position = new Vector2(-5.5f,GetTargetLanePos(Lane));
+    void SetCurrentLane(int lane) {
+        transform.position = new Vector2(-5.5f,GetTargetLanePos(lane));
+        targetLane = lane;
     }
 }

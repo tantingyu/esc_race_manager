@@ -8,7 +8,9 @@ public class CommandMenuManger : MonoBehaviour {
 
     [SerializeField]
     private Button[] commandButtons = new Button[3];
-    
+    public GameObject player;
+    private bool onCooldown = false;
+
     // Use this for initialization
     void Start () {
         //PlayerCommands cmds = PlayerCommands.Instance;
@@ -30,6 +32,7 @@ public class CommandMenuManger : MonoBehaviour {
         Debug.Log("Index: " + index);
         if (true)   //change to stamina check
         {
+            Invoke("PostCooldown", 3f);
             // hook to player instance
             // invalidate all button inputs?
             //StartCooldown(index);   //test
@@ -40,18 +43,8 @@ public class CommandMenuManger : MonoBehaviour {
         }
     }
 
-    //public bool CheckCooldown(int index)
-    //{
-    //    return commandButtons[index].GetComponent<CommandButton>().cooldown;
-    //}
+    void PostCooldown()
+    {
 
-    //public void StartCooldown(int index)
-    //{
-    //    commandButtons[index].GetComponent<CommandButton>().StartCooldown();
-    //}
-
-    //public void ResetCooldown(int index)
-    //{
-    //    commandButtons[index].GetComponent<CommandButton>().ResetCooldown();
-    //}
+    }
 }
