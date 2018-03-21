@@ -2,28 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RacerLogic.RacerAssets;
+using RacerLogic;
 
+//TODO: merge with PlayerRacer or create player from it depending on networking
 public class RacerController : MonoBehaviour
 {
-    //TODO: set from PlayerRacer/spawner
-    //character speed
-    //public float moveSpeed;
     public float maxHp=150;
     public float maxSt=150;
     public float hp;
     public float st;
     public CommandMenuManger menuManger;
-    //public float jumpForce;
 
     //2D physics effect
-    private Rigidbody2D myRigidbody;
-    private Animator myAnimator;
+    private Racer playerRacer;
+    //private Rigidbody2D myRigidbody;
     private bool commandExecuted;
+    private Animator anim;
 
     void Start()
     {
-        myRigidbody = GetComponent<Rigidbody2D>();
-        myAnimator = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -37,21 +35,22 @@ public class RacerController : MonoBehaviour
         else
         {
             //myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y); //vector means point like(x,y)
-            myAnimator.SetFloat("Speed", myRigidbody.velocity.x);
+            //anim.SetFloat("Speed", myRigidbody.velocity.x);   no more speed for this game
             if (commandExecuted)
             {
-                gameObject.GetComponent<SpriteRenderer>().color=Color.red;
                 //invalidated swipe here
-                //gameObject.GetComponent<Animator>().Play("commandHere");
                 //after animation
                 commandExecuted = false;
             }
         }
     }
 
-    public void runCommand(Command command)
+    public void runCommand(int commandIndex)
     {
         commandExecuted = true;
+        //anim.SetTrigger(animHash[commandIndex]);
+        anim.SetTrigger("Jump");
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)  //The first time the game obj touches a trigger

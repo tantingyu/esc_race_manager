@@ -26,11 +26,6 @@ public class CommandMenuManger : MonoBehaviour {
             commandButtons[i].onClick.AddListener(() => OnClick(capturedIterator));
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     private void OnClick(int index)
     {
@@ -40,11 +35,9 @@ public class CommandMenuManger : MonoBehaviour {
         if (playerController.st >= stCost)   //stamina check
         {
             Invoke("PostCooldown", 3f);
-            // hook to player instance
-            playerController.runCommand(PlayerRacer.Instance.commands[index]);
-            // invalidate all button inputs
-
-            //StartCooldown(index);
+            playerController.runCommand(index);  // hook to player instance
+            SetButtonsEnabled(false);   // invalidate all button inputs
+            
             playerController.st -= stCost;
             stBar.fillAmount -= stCost / playerController.maxHp;
         }
@@ -56,18 +49,33 @@ public class CommandMenuManger : MonoBehaviour {
 
     void PostCooldown()
     {
-
+        SetButtonsEnabled(true);
     }
 
     //Updated by player when collision occurs
     public void OnHpChange(float change)
     {
+        if (change < 0)
+        {
+            //damage ui animation
+            //damage ui sfx
+        }
+        else
+        {
+            //heal sfx
+        }
         hpBar.fillAmount += change/playerController.maxHp;
     }
 
     //Updated to player when command is clicked
     public void OnStaminaChange()
     {
+        
+    }
 
+    void SetButtonsEnabled(bool enable)
+    {
+        foreach (Button button in commandButtons)
+            button.interactable=enable;
     }
 }
