@@ -8,10 +8,16 @@ public class SwipeController : MonoBehaviour {
     private Vector3 lp;   //Last touch position
     private float dragDistance;  //minimum distance for a swipe to be registered
     private bool moveVertical = false;
+    private bool moveHorizontal = false;
     
-    private readonly float[] position = { 0.8f, -0.4F, -1.6f };
+    private readonly float[] positionVertical = { 0.8f, -0.4F, -1.6f };
+    private readonly float[] positionHorizontal = { -5.5f, -4.5f, -3.5f, -2.5f, - 1.5f, - 0.5f, 0.5f, 1.5f, 2.5f, 3.5f, 4.5f, 5.5f };
+
     private int currentLane;
     private int targetLane;
+    private int currentBlock;
+    private int targetBlock;
+
     private Rigidbody2D myRigidbody;
 
     public float moveSpeedHorizontal;
@@ -22,14 +28,14 @@ public class SwipeController : MonoBehaviour {
         dragDistance = Screen.height * 15 / 100; //dragDistance is 15% height of the screen
         //currentLane=gameObject.transform
         myRigidbody = GetComponent<Rigidbody2D>();
-        SetCurrentLane(1);
-        myRigidbody.velocity = new Vector2(moveSpeedHorizontal, myRigidbody.velocity.y); //vector means point like(x,y)
+        SetCurrentPos(1,0);
+        myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, myRigidbody.velocity.y); //vector means point like(x,y)
     }
 
     void Update()
     {
         //myRigidbody.velocity = new Vector2(moveSpeedHorizontal, myRigidbody.velocity.y); //vector means point like(x,y)
-        if (!moveVertical)
+        if (!moveVertical&&!moveHorizontal)
         {
             if (Input.touchCount == 1) // user is touching the screen with a single touch
             {
@@ -56,11 +62,16 @@ public class SwipeController : MonoBehaviour {
                             if ((lp.x > fp.x))  //If the movement was to the right)
                             {   //Right swipe
                                 Debug.Log("Right Swipe");
+                                if (targetBlock > 0) targetBlock -= 1;
                             }
                             else
                             {   //Left swipe
                                 Debug.Log("Left Swipe");
+                                if (targetBlock < positionHorizontal.Length-1) targetLane += 1;
                             }
+
+                            //edited by GU ZHIYAO 2018-03-21
+                            moveHorizontal = true;
                         }
                         else
                         {   //the vertical movement is greater than the horizontal movement
@@ -72,7 +83,7 @@ public class SwipeController : MonoBehaviour {
                             else
                             {   //Down swipe
                                 Debug.Log("Down Swipe");
-                                if (targetLane < 2) targetLane += 1;
+                                if (targetLane < positionVertical.Length-1) targetLane += 1;
                             }
                             moveVertical = true;
                         }
@@ -92,14 +103,28 @@ public class SwipeController : MonoBehaviour {
                     moveVertical = true;
                 }
             if (Input.GetKey("down"))
-                if (targetLane < 2)
+                if (targetLane < positionVertical.Length-1)
                 {
                     targetLane += 1;
                     moveVertical = true;
                 }
+            if (Input.GetKey("left"))
+                if (targetBlock > 0)
+                {
+                    //targetLane -= 1;
+                    targetBlock -= 1;
+                    moveHorizontal = true;
+                }
+            if (Input.GetKey("right"))
+                if (targetBlock < positionHorizontal.Length-1)
+                {
+                    Debug.Log(positionHorizontal.Length - 1);
+                    targetBlock += 1;
+                    moveHorizontal = true;
+                }
         }
 
-        else
+        else if(!moveHorizontal && moveVertical)
         {
             Debug.Log("currentLane:"+currentLane);
             Debug.Log("targetLane:"+targetLane);
@@ -107,11 +132,11 @@ public class SwipeController : MonoBehaviour {
             float step = moveSpeedVertical * Time.deltaTime;
             Vector2 targetPos = new Vector2(transform.position.x, GetTargetLanePos(targetLane));
 
-            if (GetPlayerCurrentPos() < GetTargetLanePos(targetLane))
+            if (GetPlayerCurrentPosY() < GetTargetLanePos(targetLane))
             {
                 transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
             }
-            else if (GetPlayerCurrentPos() > GetTargetLanePos(targetLane))
+            else if (GetPlayerCurrentPosY() > GetTargetLanePos(targetLane))
             {
                 transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
             }
@@ -121,21 +146,59 @@ public class SwipeController : MonoBehaviour {
                 currentLane = targetLane;
             }
         }
+
+
+        else if (!moveVertical && moveHorizontal)
+        {
+            Debug.Log("currentBlock:" + currentBlock);
+            Debug.Log("targetBlock:" + targetBlock);
+
+            float step = moveSpeedHorizontal * Time.deltaTime;
+            Vector2 targetPos = new Vector2(GetTargetBlockPos(targetBlock), transform.position.y);
+
+            if (GetPlayerCurrentPosX() < GetTargetBlockPos(targetBlock))
+            {
+                transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
+            }
+            else if (GetPlayerCurrentPosX() > GetTargetBlockPos(targetBlock))
+            {
+                transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
+            }
+            else
+            {
+                moveHorizontal = false;
+                currentBlock = targetBlock;
+            }
+        }
+
+
     }
 
     void MoveDown() { 
     }
 
-    float GetPlayerCurrentPos() {
+    float GetPlayerCurrentPosY() {
         return gameObject.transform.position.y;
     }
 
-    float GetTargetLanePos(int lane) {
-        return position[lane];
+    float GetPlayerCurrentPosX()
+    {
+        return gameObject.transform.position.x;
     }
 
-    void SetCurrentLane(int lane) {
-        transform.position = new Vector2(-5.5f,GetTargetLanePos(lane));
-        targetLane = lane;
+    float GetTargetLanePos(int lane) {
+        return positionVertical[lane];
     }
+
+    float GetTargetBlockPos(int block)
+    {
+        return positionHorizontal[block];
+    }
+
+    void SetCurrentPos(int lane, int block) {
+        transform.position = new Vector2(GetTargetBlockPos(block),GetTargetLanePos(lane));
+        targetLane = lane;
+        targetBlock = block;
+    }
+
 }
