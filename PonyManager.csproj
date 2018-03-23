@@ -322,10 +322,12 @@
     <Compile Include="Assets\Scripts\SwipeController.cs" />
     <Compile Include="Assets\Scripts\TrapButton.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\PlayerTraps.cs" />
+    <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\BaseTrap.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\Trap.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\TrapEffect.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\TrapEffects\MoveTarget.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\TrapEffects\StatusEffects\Slow.cs" />
+    <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\TrapInterface.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\Traps.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\TrapTrigger.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\TrapTriggers\TriggerOnCollision.cs" />
