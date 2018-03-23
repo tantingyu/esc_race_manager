@@ -5,13 +5,44 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+using RacerLogic.RacerAssets;
+
 namespace Prototype.NetworkLobby
 {
     //Player entry in the lobby. Handle selecting color/setting name & getting ready for the game
     //Any LobbyHook can then grab it and pass those value to the game player prefab (see the Pong Example in the Samples Scenes)
     public class LobbyPlayer : NetworkLobbyPlayer
     {
-        static Color[] Colors = new Color[] { Color.magenta, Color.red, Color.cyan, Color.blue, Color.green, Color.yellow };
+		//racer select
+		/*static Racer[] Racers = new Racer[0];
+		public CommandButton racerButton;
+
+		[SyncVar(hook = "OnMyRacer")]
+		public Racer playerRacer = new Racer();
+
+		void ChangeRacerButtonImage(Racer newRacer) 
+		{
+			//racerButton.GetComponent<Image>().sprite = newRacer.sprite;
+		}
+
+		public void OnMyRacer(Racer newRacer)
+		{
+			playerRacer = newRacer;
+			//racerButton.GetComponent<Image>().sprite = newRacer.sprite;
+		}
+
+		public void OnRacerClicked()
+		{
+			int nextIdx = playerRacer.id + 1;
+			if (playerRacer.id == Racers.Length - 1)
+				nextIdx = 0;
+			playerRacer = Racers [nextIdx];
+			ChangeRacerButtonImage(playerRacer);
+		}*/
+
+		int playerNumber; 
+
+		static Color[] Colors = new Color[] { Color.magenta, Color.red, Color.cyan, Color.blue, Color.green, Color.yellow };
         //used on server to avoid assigning the same color to two player
         static List<int> _colorInUse = new List<int>();
 
@@ -64,6 +95,7 @@ namespace Prototype.NetworkLobby
             //will be created with the right value currently on server
             OnMyName(playerName);
             OnMyColor(playerColor);
+			//OnMyRacer(playerRacer);
         }
 
         public override void OnStartAuthority()
@@ -131,6 +163,9 @@ namespace Prototype.NetworkLobby
 
             readyButton.onClick.RemoveAllListeners();
             readyButton.onClick.AddListener(OnReadyClicked);
+
+			//racerButton.onClick.RemoveAllListeners();
+			//racerButton.onClick.AddListener(OnRacerClicked);
 
             //when OnClientEnterLobby is called, the loval PlayerController is not yet created, so we need to redo that here to disable
             //the add button if we reach maxLocalPlayer. We pass 0, as it was already counted on OnClientEnterLobby
