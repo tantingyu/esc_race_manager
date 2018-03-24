@@ -1,17 +1,37 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RacerLogic.RacerAssets;
+using RacerLogic;
 
-public class SwipeController : MonoBehaviour {
+//TODO: merge with PlayerRacer or create player from it depending on networking
+public class RacerController : MonoBehaviour
+{
+    public float maxHp;
+    public float maxSt;
+    public float hp;
+    public float st;
+    public CommandMenuManger menuManger;
 
+    //2D physics effect
+    private Racer playerRacer;
+    //private Rigidbody2D myRigidbody;
+    private bool commandExecuted;
+    private Animator anim;
+
+    
+
+
+    //swipe Controller
     private Vector3 fp;   //First touch position
     private Vector3 lp;   //Last touch position
     private float dragDistance;  //minimum distance for a swipe to be registered
     private bool moveVertical = false;
     private bool moveHorizontal = false;
-    
+    private bool playerCollision = false;
+
     private readonly float[] positionVertical = { 0.8f, -0.4F, -1.6f };
-    private readonly float[] positionHorizontal = { -5.5f, -4.5f, -3.5f, -2.5f, - 1.5f, - 0.5f, 0.5f, 1.5f, 2.5f, 3.5f, 4.5f, 5.5f };
+    private readonly float[] positionHorizontal = { -5.5f, -4.5f, -3.5f, -2.5f, -1.5f, -0.5f, 0.5f, 1.5f, 2.5f, 3.5f, 4.5f, 5.5f };
 
     private int currentLane;
     private int targetLane;
@@ -23,19 +43,49 @@ public class SwipeController : MonoBehaviour {
     public float moveSpeedHorizontal;
     public float moveSpeedVertical;
 
+
     void Start()
     {
-        dragDistance = Screen.height * 15 / 100; //dragDistance is 15% height of the screen
+        anim = GetComponent<Animator>();
+        playerRacer = PlayerRacer.Instance.racer;
+        maxHp = playerRacer.hp;
+        maxSt = playerRacer.st;
+
+        //swipe controller
+        
+        //dragDistance is 15% height of the screen
+        dragDistance = Screen.height * 15 / 100; 
         //currentLane=gameObject.transform
         myRigidbody = GetComponent<Rigidbody2D>();
-        SetCurrentPos(1,0);
-        myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, myRigidbody.velocity.y); //vector means point like(x,y)
+        SetCurrentPos(1, 0);
+        myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, myRigidbody.velocity.y); 
     }
 
+    // Update is called once per frame
     void Update()
     {
+        if (hp <= 0)
+        {
+            //lose screen
+            Destroy(gameObject);
+        }
+        else
+        {
+            //myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y); //vector means point like(x,y)
+            //anim.SetFloat("Speed", myRigidbody.velocity.x);   no more speed for this game
+            if (commandExecuted)
+            {
+                //invalidated swipe here
+                //after animation
+                commandExecuted = false;
+            }
+        }
+
+
+
+        //swipe controller
         //myRigidbody.velocity = new Vector2(moveSpeedHorizontal, myRigidbody.velocity.y); //vector means point like(x,y)
-        if (!moveVertical&&!moveHorizontal)
+        if (!moveVertical && !moveHorizontal)
         {
             if (Input.touchCount == 1) // user is touching the screen with a single touch
             {
@@ -62,12 +112,12 @@ public class SwipeController : MonoBehaviour {
                             if ((lp.x > fp.x))  //If the movement was to the right)
                             {   //Right swipe
                                 Debug.Log("Right Swipe");
-                                if (targetBlock > 0) targetBlock -= 1;
+                                if (targetBlock > 0 && !playerCollision) targetBlock -= 1;
                             }
                             else
                             {   //Left swipe
                                 Debug.Log("Left Swipe");
-                                if (targetBlock < positionHorizontal.Length-1) targetLane += 1;
+                                if (targetBlock < positionHorizontal.Length - 1 && !playerCollision) targetLane += 1;
                             }
 
                             //edited by GU ZHIYAO 2018-03-21
@@ -75,15 +125,17 @@ public class SwipeController : MonoBehaviour {
                         }
                         else
                         {   //the vertical movement is greater than the horizontal movement
+
+
                             if (lp.y > fp.y)  //If the movement was up
                             {   //Up swipe
                                 Debug.Log("Up Swipe");
-                                if (targetLane > 0) targetLane -= 1;
+                                if (targetLane > 0 && !playerCollision) targetLane -= 1;
                             }
                             else
                             {   //Down swipe
                                 Debug.Log("Down Swipe");
-                                if (targetLane < positionVertical.Length-1) targetLane += 1;
+                                if (targetLane < positionVertical.Length - 1 & !playerCollision) targetLane += 1;
                             }
                             moveVertical = true;
                         }
@@ -97,26 +149,26 @@ public class SwipeController : MonoBehaviour {
 
             //computer debug
             if (Input.GetKey("up"))
-                if (targetLane > 0)
+                if (targetLane > 0 && !playerCollision)
                 {
                     targetLane -= 1;
                     moveVertical = true;
                 }
             if (Input.GetKey("down"))
-                if (targetLane < positionVertical.Length-1)
+                if (targetLane < positionVertical.Length - 1 && !playerCollision)
                 {
                     targetLane += 1;
                     moveVertical = true;
                 }
             if (Input.GetKey("left"))
-                if (targetBlock > 0)
+                if (targetBlock > 0 && !playerCollision)
                 {
                     //targetLane -= 1;
                     targetBlock -= 1;
                     moveHorizontal = true;
                 }
             if (Input.GetKey("right"))
-                if (targetBlock < positionHorizontal.Length-1)
+                if (targetBlock < positionHorizontal.Length - 1 && !playerCollision)
                 {
                     Debug.Log(positionHorizontal.Length - 1);
                     targetBlock += 1;
@@ -124,16 +176,17 @@ public class SwipeController : MonoBehaviour {
                 }
         }
 
-        else if(!moveHorizontal && moveVertical)
+        else if (!moveHorizontal && moveVertical)
         {
-            Debug.Log("currentLane:"+currentLane);
-            Debug.Log("targetLane:"+targetLane);
-            
+            Debug.Log("currentLane:" + currentLane);
+            Debug.Log("targetLane:" + targetLane);
+
             float step = moveSpeedVertical * Time.deltaTime;
             Vector2 targetPos = new Vector2(transform.position.x, GetTargetLanePos(targetLane));
 
             if (GetPlayerCurrentPosY() < GetTargetLanePos(targetLane))
             {
+
                 transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
             }
             else if (GetPlayerCurrentPosY() > GetTargetLanePos(targetLane))
@@ -171,13 +224,54 @@ public class SwipeController : MonoBehaviour {
             }
         }
 
+    }
+
+    public void runCommand(int commandIndex)
+    {
+        commandExecuted = true;
+        //anim.SetTrigger(animHash[commandIndex]);
+        anim.SetTrigger("Jump");
 
     }
 
-    void MoveDown() { 
+    private void OnTriggerEnter2D(Collider2D collision)  //The first time the game obj touches a trigger
+    {
+        //check trap type here
+        Debug.Log("Trigger Detected");
+
+        if (collision.tag == "trap")
+        {
+            hp -= 100;
+            menuManger.OnHpChange(-100);
+            Debug.Log("HP -100");
+        }
+
+        if (collision.tag == "Player")
+        {
+            Debug.Log("Player Collision");
+            playerCollision = true;
+
+        }
+
+
+
     }
 
-    float GetPlayerCurrentPosY() {
+    /*
+    private void OnTriggerStay2D(Collider2D collision)  //When you are in the frame, the trap is triggerred
+    {
+        Debug.Log("You Enterred the trap! Trigger Detected");
+    }
+
+    private void OnTriggerExit2D(Collider2D collision) //When you leave the frame, the trap is triggerred
+    {
+        Debug.Log("You left the trap! Trigger Detected");
+    }
+    */
+
+    //swipe controller
+    float GetPlayerCurrentPosY()
+    {
         return gameObject.transform.position.y;
     }
 
@@ -186,7 +280,8 @@ public class SwipeController : MonoBehaviour {
         return gameObject.transform.position.x;
     }
 
-    float GetTargetLanePos(int lane) {
+    float GetTargetLanePos(int lane)
+    {
         return positionVertical[lane];
     }
 
@@ -195,10 +290,12 @@ public class SwipeController : MonoBehaviour {
         return positionHorizontal[block];
     }
 
-    void SetCurrentPos(int lane, int block) {
-        transform.position = new Vector2(GetTargetBlockPos(block),GetTargetLanePos(lane));
+    void SetCurrentPos(int lane, int block)
+    {
+        transform.position = new Vector2(GetTargetBlockPos(block), GetTargetLanePos(lane));
         targetLane = lane;
         targetBlock = block;
     }
+
 
 }

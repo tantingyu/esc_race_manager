@@ -125,11 +125,10 @@ GameObject:
   - component: {fileID: 11764632}
   - component: {fileID: 11764634}
   - component: {fileID: 11764635}
-  - component: {fileID: 11764636}
   - component: {fileID: 11764631}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,11 +154,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 11764629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae7a7bc893b9ff44dac5f591118438c4, type: 3}
+  m_Script: {fileID: 11500000, guid: 13350059ab7dc5e45bc73d7b3dddef7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedHorizontal: 2
-  moveSpeedVertical: 5
+  maxHp: 150
+  maxSt: 150
+  hp: 150
+  st: 150
+  menuManger: {fileID: 305418019}
+  moveSpeedHorizontal: 0
+  moveSpeedVertical: 0
 --- !u!50 &11764632
 Rigidbody2D:
   serializedVersion: 4
@@ -266,22 +270,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7890625, y: 1.125}
   m_EdgeRadius: 0
---- !u!114 &11764636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 11764629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ffb6455d3fb7e0478dd425ba72f2e58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHp: 150
-  maxSt: 150
-  hp: 150
-  st: 150
-  menuManger: {fileID: 305418019}
 --- !u!1001 &166375890
 Prefab:
   m_ObjectHideFlags: 0
@@ -1571,9 +1559,8 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2104125982}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49e065d7115cd3f4590ea0ce5c20b0ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
