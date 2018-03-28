@@ -11,8 +11,10 @@ public class CommandMenuManger : MonoBehaviour {
     public GameObject player;
     public Image hpBar;
     public Image stBar;
+    public RacerController rac;
 
     private bool onCooldown = false;
+
     private RacerController playerController;
 
     // Use this for initialization
@@ -21,7 +23,7 @@ public class CommandMenuManger : MonoBehaviour {
         playerController = player.GetComponent<RacerController>();
         for (int i = 0; i < commandButtons.Length; i++)
         {
-            commandButtons[i].GetComponent<Image>().sprite = Resources.Load<Sprite>(PlayerRacer.Instance.commands[i].sprite);
+            commandButtons[i].GetComponent<Image>().sprite = Resources.Load<Sprite>(playerController.playerRacer.commands[i].sprite);
             int capturedIterator = i;
             commandButtons[i].onClick.AddListener(() => OnClick(capturedIterator));
         }
@@ -30,12 +32,12 @@ public class CommandMenuManger : MonoBehaviour {
     private void OnClick(int index)
     {
         Debug.Log("Command initiated: " + index);
-        float stCost = PlayerRacer.Instance.commands[index].stCost;
+        float stCost = playerController.playerRacer.commands[index].stCost;
 
         if (playerController.st >= stCost)   //stamina check
         {
             Invoke("PostCooldown", 3f);
-            playerController.runCommand(index);  // hook to player instance
+            playerController.RunCommand(index);  // hook to player instance
             SetButtonsEnabled(false);   // invalidate all button inputs
             
             playerController.st -= stCost;
@@ -78,4 +80,6 @@ public class CommandMenuManger : MonoBehaviour {
         foreach (Button button in commandButtons)
             button.interactable=enable;
     }
+
+    
 }
