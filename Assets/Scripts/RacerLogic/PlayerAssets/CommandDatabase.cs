@@ -12,6 +12,7 @@ namespace RacerLogic.RacerAssets
                 sprite: "Sprites/Commands/Jump",
                 description: "Jump...",
                 stCost: 10,
+                objectCreate: "empty",
                 abilityEffect: new AbilityEffect[]
                             {
                             }
@@ -23,6 +24,7 @@ namespace RacerLogic.RacerAssets
                 sprite: "Sprites/Commands/Sprint",
                 description: "Deals 10 damage and stuns target.",
                 stCost: 12,
+                objectCreate: "empty",
                 abilityEffect: new AbilityEffect[]
                             {
                             }
@@ -34,9 +36,36 @@ namespace RacerLogic.RacerAssets
                 sprite: "Sprites/Commands/Jump",
                 description: "Deals 10 damage and stuns target.",
                 stCost: 12,
+                objectCreate: "empty",
                 abilityEffect: new AbilityEffect[]
                             {
                             }
             );
+
+        //Traps
+        public static Command Doge = new Command
+            (
+                name: "Doge",
+                sprite: "Sprites/Traps/Doge",
+                description: "Deals 10 damage and stuns target.",
+                stCost: 0,
+                objectCreate: "Prefabs/TrapSet",
+                abilityEffect: new AbilityEffect[]
+                            {
+
+                            }
+            );
+
+        public static Command PlayerTrap2 = new Command
+           (
+               name: "Rocket",
+               sprite: "Sprites/Traps/Rocket",
+               description: "Deals 10 damage and stuns target.",
+               stCost: 0,
+               objectCreate: "Rocket",
+               abilityEffect: new AbilityEffect[]
+                           {
+                           }
+           );
     }
 }

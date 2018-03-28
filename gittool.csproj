@@ -294,25 +294,56 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Lobby\Scripts\DraggablePanel.cs" />
+    <Compile Include="Assets\Lobby\Scripts\EventSystemChecker.cs" />
+    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyCountdownPanel.cs" />
+    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyHook.cs" />
+    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyInfoPanel.cs" />
+    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyMainMenu.cs" />
+    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyManager.cs" />
+    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyPlayer.cs" />
+    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyPlayerList.cs" />
+    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyServerEntry.cs" />
+    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyServerList.cs" />
+    <Compile Include="Assets\Lobby\Scripts\Lobby\LobbyTopPanel.cs" />
     <Compile Include="Assets\Menu.cs" />
+    <Compile Include="Assets\NetworkLobbyHook.cs" />
+    <Compile Include="Assets\Scripts\Game\BGScroller.cs" />
     <Compile Include="Assets\Scripts\Game\Cameracontroller.cs" />
-    <Compile Include="Assets\Scripts\Game\Playercontroller.cs" />
+    <Compile Include="Assets\Scripts\Game\OffsetScroller.cs" />
+    <Compile Include="Assets\Scripts\Game\PlayerSpawner.cs" />
     <Compile Include="Assets\Scripts\Game\ToolSpawner.cs" />
+    <Compile Include="Assets\Scripts\Game\TrapSpawner.cs" />
+    <Compile Include="Assets\Scripts\GUI\CommandButton.cs" />
+    <Compile Include="Assets\Scripts\GUI\CommandMenuManger.cs" />
     <Compile Include="Assets\Scripts\InputManager.cs" />
+    <Compile Include="Assets\Scripts\RacerLogic\PlayerAssets\AbilityEffect\AbilityEffect.cs" />
+    <Compile Include="Assets\Scripts\RacerLogic\PlayerAssets\Command.cs" />
+    <Compile Include="Assets\Scripts\RacerLogic\PlayerAssets\CommandDatabase.cs" />
+    <Compile Include="Assets\Scripts\RacerLogic\PlayerAssets\Racer.cs" />
+    <Compile Include="Assets\Scripts\RacerLogic\PlayerAssets\RacerDatabase.cs" />
+    <Compile Include="Assets\Scripts\RacerLogic\PlayerRacer.cs" />
+    <Compile Include="Assets\Scripts\RacerLogic\RacerController.cs" />
     <Compile Include="Assets\Scripts\TrapButton.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\PlayerTraps.cs" />
+    <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\BaseTrap.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\Trap.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\TrapEffect.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\TrapEffects\MoveTarget.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\TrapEffects\StatusEffects\Slow.cs" />
+    <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\TrapInterface.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\Traps.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\TrapTrigger.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\TrapTriggers\TriggerOnCollision.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\TrapTriggers\TriggerOnTimer.cs" />
     <Compile Include="Assets\Scripts\TrapMenuManager.cs" />
     <Compile Include="Assets\Simple UI\Samples\IconPreview.cs" />
+    <Compile Include="Assets\TrapOnTrigger.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Fonts\OpenSans\License!.txt" />
+    <None Include="Assets\Lobby\Documentation.txt" />
+    <None Include="Assets\Lobby\Instruction.txt" />
     <None Include="Assets\Resources\Art\Player\spritesheet_players.xml" />
     <None Include="Assets\Simple UI\Fonts\OFL.txt" />
   </ItemGroup>

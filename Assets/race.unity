@@ -161,9 +161,8 @@ MonoBehaviour:
   maxSt: 150
   hp: 150
   st: 150
-  menuManger: {fileID: 305418019}
-  moveSpeedHorizontal: 0
-  moveSpeedVertical: 0
+  playerNumber: 1
+  moveSpeed: 4
 --- !u!50 &11764632
 Rigidbody2D:
   serializedVersion: 4
@@ -445,6 +444,7 @@ MonoBehaviour:
   player: {fileID: 11764629}
   hpBar: {fileID: 2074360938}
   stBar: {fileID: 1568264494}
+  rac: {fileID: 0}
 --- !u!114 &305418020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,11 +518,11 @@ GameObject:
   - component: {fileID: 487302554}
   m_Layer: 0
   m_Name: BehindTrapSpawner
-  m_TagString: Untagged
+  m_TagString: trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &487302553
 Transform:
   m_ObjectHideFlags: 0
@@ -873,11 +873,11 @@ GameObject:
   - component: {fileID: 660761713}
   m_Layer: 0
   m_Name: FrontTrapSpawner
-  m_TagString: Untagged
+  m_TagString: trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &660761712
 Transform:
   m_ObjectHideFlags: 0

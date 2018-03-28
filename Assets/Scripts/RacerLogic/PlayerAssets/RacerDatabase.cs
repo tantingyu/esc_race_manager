@@ -17,7 +17,7 @@ namespace RacerLogic.RacerAssets
                             {
                                 CommandDatabase.Jump,
                                 CommandDatabase.Sprint,
-                                CommandDatabase.Neigh
+                                CommandDatabase.Doge
                             }
             );
 

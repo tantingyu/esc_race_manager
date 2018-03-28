@@ -16,7 +16,6 @@ public class RacerController : NetworkBehaviour
 
     public float hp;
     public float st;
-    public CommandMenuManger menuManger;
 
     //pass lobby values in these vars
     public Racer playerRacer;
@@ -107,8 +106,13 @@ public class RacerController : NetworkBehaviour
         commandExecuted = true;
         //anim.SetTrigger(animHash[commandIndex]);
         //movetile
+        if (playerRacer.commands[commandIndex].objectCreate != "")
+        {
+    
+            Instantiate(Resources.Load(playerRacer.commands[commandIndex].objectCreate), new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+            
+        }
         anim.SetTrigger(playerRacer.commands[commandIndex].sprite);
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)  //The first time the game obj touches a trigger
@@ -119,7 +123,7 @@ public class RacerController : NetworkBehaviour
         if (collision.tag == "trap")
         {
             hp -= 100;
-            menuManger.OnHpChange(-100);
+            commandMenuManger.OnHpChange(-100);
             Debug.Log("HP -100");
         }
 
