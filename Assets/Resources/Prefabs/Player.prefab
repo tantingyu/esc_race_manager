@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114498709830771982}
   - component: {fileID: 114784593710804342}
   - component: {fileID: 114475020349139034}
+  - component: {fileID: 114640015212731802}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -159,6 +160,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeedHorizontal: 2
   moveSpeedVertical: 5
+--- !u!114 &114640015212731802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1502142141829580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13350059ab7dc5e45bc73d7b3dddef7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 0
+  maxSt: 0
+  hp: 0
+  st: 0
+  playerName: 
+  playerNumber: 0
+  racerIdx: 0
+  moveSpeed: 10
 --- !u!114 &114784593710804342
 MonoBehaviour:
   m_ObjectHideFlags: 1

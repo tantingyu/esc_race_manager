@@ -68,7 +68,7 @@ MonoBehaviour:
     y: 30
     width: 1234
     height: 690
-  m_MinSize: {x: 683, y: 492}
+  m_MinSize: {x: 681, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
   controlID: 126
@@ -117,10 +117,10 @@ MonoBehaviour:
     y: 0
     width: 877
     height: 690
-  m_MinSize: {x: 406, y: 492}
+  m_MinSize: {x: 404, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 14
+  controlID: 54
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -210,10 +210,10 @@ MonoBehaviour:
     y: 0
     width: 877
     height: 418
-  m_MinSize: {x: 406, y: 221}
-  m_MaxSize: {x: 8006, y: 4021}
+  m_MinSize: {x: 404, y: 221}
+  m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
-  controlID: 15
+  controlID: 55
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -252,8 +252,8 @@ MonoBehaviour:
     y: 0
     width: 617
     height: 418
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 204, y: 221}
+  m_MaxSize: {x: 4004, y: 4021}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -428,19 +428,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scripts/RacerLogic/PlayerAssets
+    - Assets/Resources/Prefabs
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/RacerLogic/PlayerAssets
+  - Assets/Resources/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\tingyu\Documents\Pong
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 198}
-    m_SelectedIDs: 54280000
-    m_LastClickedID: 10324
-    m_ExpandedIDs: 00000000b6270000c22700006e280000f028000092290000e6290000182a0000882a0000e82a0000922b0000042c0000462c00001831000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 102}
+    m_SelectedIDs: d62a0000
+    m_LastClickedID: 10966
+    m_ExpandedIDs: 00000000ba280000c628000072290000f4290000942a0000e62a0000182b0000862b0000e22b00007c2c0000f22c0000342d0000e831000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -468,7 +468,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000b6270000c22700006e280000f028000092290000e6290000182a0000882a0000e82a0000922b0000042c0000462c000018310000
+    m_ExpandedIDs: 00000000ba280000c628000072290000f4290000942a0000e62a0000182b0000862b0000e22b00007c2c0000f22c0000342d0000e8310000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -633,9 +633,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 225.58562, y: 140.82726, z: 6.6502233}
+    m_Target: {x: 227.66035, y: 136.74016, z: 6.756814}
     speed: 2
-    m_Value: {x: 225.58562, y: 140.82726, z: 6.6502233}
+    m_Value: {x: 227.66035, y: 136.74016, z: 6.756814}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -663,9 +663,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 486.96295
+    m_Target: 476.37143
     speed: 2
-    m_Value: 486.96295
+    m_Value: 476.37143
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -708,7 +708,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 9efbffff00000000
+    m_ExpandedIDs: 6cddfffff8f4ffff2cfaffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

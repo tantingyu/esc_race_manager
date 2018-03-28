@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RacerLogic.RacerAssets;
 using UnityEngine.Networking;
+using RacerLogic.RacerAssets;
 using RacerLogic;
-
-//TODO: merge with PlayerRacer or create player from it depending on networking
 
 public class RacerController : NetworkBehaviour
 {
@@ -17,17 +15,26 @@ public class RacerController : NetworkBehaviour
     public float hp;
     public float st;
 
+    static Racer[] Racers = new Racer[] { RacerDatabase.p1, RacerDatabase.p2, RacerDatabase.p3 };
     //pass lobby values in these vars
-    public Racer playerRacer;
+    public Racer playerRacer = Racers[0];
+
+    [SyncVar]
+    public string playerName;
+
+    [SyncVar]
     public int playerNumber; //the starting position according to the player number
-    
+
+    [SyncVar]
+    public int racerIdx;
+
     private bool commandExecuted;
     private Animator anim;
-    
-    //swipe Controller
-    private Vector3 fp;   //First touch position
-    private Vector3 lp;   //Last touch position
-    private float dragDistance;  //minimum distance for a swipe to be registered
+
+    //Swipe Controller
+    private Vector3 fp; //First touch position
+    private Vector3 lp; //Last touch position
+    private float dragDistance; //minimum distance for a swipe to be registered
     private bool moveVertical = false;
     private bool moveHorizontal = false;
     private bool playerCollision = false;
@@ -46,7 +53,7 @@ public class RacerController : NetworkBehaviour
 
     private CommandMenuManger commandMenuManger;
     private GameObject menu;
-    
+
 
     void Start()
     {
@@ -57,26 +64,26 @@ public class RacerController : NetworkBehaviour
         commandMenuManger.player = this.gameObject;
 
         anim = GetComponent<Animator>();
-        playerRacer = PlayerRacer.Instance.racer;
+
+        Racer dbRacer = Racers[racerIdx];
+        playerRacer = new Racer(dbRacer.name, dbRacer.sprite, dbRacer.hp,
+            dbRacer.st, dbRacer.speed, dbRacer.commands);
         maxHp = playerRacer.hp;
         maxSt = playerRacer.st;
 
         //swipe controller
-        
+
         //dragDistance is 15% height of the screen
-        dragDistance = Screen.height * 15 / 100; 
+        dragDistance = Screen.height * 15 / 100;
         //currentLane=gameObject.transform
         myRigidbody = GetComponent<Rigidbody2D>();
         SetCurrentPos(playerNumber, 0);
-        myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, myRigidbody.velocity.y); 
+        myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, myRigidbody.velocity.y);
     }
 
-    // Update is called once per frame
+    //Update is called once per frame
     void Update()
     {
-
-       
-
         if (hp <= 0)
         {
             //lose screen
@@ -94,11 +101,6 @@ public class RacerController : NetworkBehaviour
                 commandExecuted = false;
             }
         }
-
-
-
-
-
     }
 
     public void RunCommand(int commandIndex)
@@ -108,9 +110,9 @@ public class RacerController : NetworkBehaviour
         //movetile
         if (playerRacer.commands[commandIndex].objectCreate != "")
         {
-    
-            Instantiate(Resources.Load(playerRacer.commands[commandIndex].objectCreate), new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-            
+            Instantiate(Resources.Load(playerRacer.commands[commandIndex].objectCreate), 
+                new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+
         }
         anim.SetTrigger(playerRacer.commands[commandIndex].sprite);
     }
@@ -133,12 +135,10 @@ public class RacerController : NetworkBehaviour
             playerCollision = true;
 
         }
-
-
-
     }
 
-    public void SwipeControl() {
+    public void SwipeControl()
+    {
         //swipe controller
         //myRigidbody.velocity = new Vector2(moveSpeedHorizontal, myRigidbody.velocity.y); //vector means point like(x,y)
         if (!moveVertical && !moveHorizontal)
@@ -278,8 +278,6 @@ public class RacerController : NetworkBehaviour
                 currentBlock = targetBlock;
             }
         }
-
-
     }
 
     /*
@@ -321,6 +319,4 @@ public class RacerController : NetworkBehaviour
         targetLane = lane;
         targetBlock = block;
     }
-
-
 }

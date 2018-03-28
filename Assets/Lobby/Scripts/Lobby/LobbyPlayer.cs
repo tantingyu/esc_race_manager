@@ -13,36 +13,71 @@ namespace Prototype.NetworkLobby
     //Any LobbyHook can then grab it and pass those value to the game player prefab (see the Pong Example in the Samples Scenes)
     public class LobbyPlayer : NetworkLobbyPlayer
     {
-		//racer select
-		/*static Racer[] Racers = new Racer[0];
-		public CommandButton racerButton;
+        static bool[] _numberInUse = new bool[4];
+        public int lengthDb = 3;
 
-		[SyncVar(hook = "OnMyRacer")]
-		public Racer playerRacer = new Racer();
+        [SyncVar(hook = "OnMyRacer")]
+        public int racerIdx = -1; //no racer assigned
 
-		void ChangeRacerButtonImage(Racer newRacer) 
-		{
-			//racerButton.GetComponent<Image>().sprite = newRacer.sprite;
-		}
+        [SyncVar(hook = "OnMyNumber")]
+        public int playerNumber = -1; //no number assigned
 
-		public void OnMyRacer(Racer newRacer)
-		{
-			playerRacer = newRacer;
-			//racerButton.GetComponent<Image>().sprite = newRacer.sprite;
-		}
+        void ChangeRacerButtonImage(int newRacer)
+        {
+            //update UI
+        }
 
-		public void OnRacerClicked()
-		{
-			int nextIdx = playerRacer.id + 1;
-			if (playerRacer.id == Racers.Length - 1)
-				nextIdx = 0;
-			playerRacer = Racers [nextIdx];
-			ChangeRacerButtonImage(playerRacer);
-		}*/
+        public void OnMyRacer(int newRacer)
+        {
+            racerIdx = newRacer;
+        }
 
-		int playerNumber; 
+        public void OnMyNumber(int newNumber)
+        {
+            playerNumber = newNumber;
+        }
 
-		static Color[] Colors = new Color[] { Color.magenta, Color.red, Color.cyan, Color.blue, Color.green, Color.yellow };
+        public void OnRacerClicked()
+        {
+            CmdRacerChanged();
+        }
+
+        [Command]
+        public void CmdRacerChanged()
+        {
+            int currIdx = racerIdx;
+            int nextIdx = (currIdx + 1) % lengthDb;
+            if (currIdx == lengthDb - 1)
+            {
+                nextIdx = 1;
+            }
+            racerIdx = nextIdx;
+
+            ChangeRacerButtonImage(racerIdx);
+        }
+
+        [Command]
+        public void CmdNumberChanged()
+        {
+            if (racerIdx < 0) racerIdx = 0;
+
+            bool alreadyInUse = false;
+            do
+            {
+                alreadyInUse = false;
+                for (int i = 0; i < _numberInUse.Length; ++i)
+                {
+                    if (_numberInUse[i])
+                    {//that number is already in use
+                        alreadyInUse = true;
+                        racerIdx = (racerIdx + 1) % 4;
+                    }
+                }
+            }
+            while (alreadyInUse);
+        }
+
+        static Color[] Colors = new Color[] { Color.magenta, Color.red, Color.cyan, Color.blue, Color.green, Color.yellow };
         //used on server to avoid assigning the same color to two player
         static List<int> _colorInUse = new List<int>();
 
@@ -64,7 +99,7 @@ namespace Prototype.NetworkLobby
         public Color OddRowColor = new Color(250.0f / 255.0f, 250.0f / 255.0f, 250.0f / 255.0f, 1.0f);
         public Color EvenRowColor = new Color(180.0f / 255.0f, 180.0f / 255.0f, 180.0f / 255.0f, 1.0f);
 
-        static Color JoinColor = new Color(255.0f/255.0f, 0.0f, 101.0f/255.0f,1.0f);
+        static Color JoinColor = new Color(255.0f / 255.0f, 0.0f, 101.0f / 255.0f, 1.0f);
         static Color NotReadyColor = new Color(34.0f / 255.0f, 44 / 255.0f, 55.0f / 255.0f, 1.0f);
         static Color ReadyColor = new Color(0.0f, 204.0f / 255.0f, 204.0f / 255.0f, 1.0f);
         static Color TransparentColor = new Color(0, 0, 0, 0);
@@ -95,7 +130,7 @@ namespace Prototype.NetworkLobby
             //will be created with the right value currently on server
             OnMyName(playerName);
             OnMyColor(playerColor);
-			//OnMyRacer(playerRacer);
+            //OnMyRacer(playerRacer);
         }
 
         public override void OnStartAuthority()
@@ -105,7 +140,7 @@ namespace Prototype.NetworkLobby
             //if we return from a game, color of text can still be the one for "Ready"
             readyButton.transform.GetChild(0).GetComponent<Text>().color = Color.white;
 
-           SetupLocalPlayer();
+            SetupLocalPlayer();
         }
 
         void ChangeReadyButtonColor(Color c)
@@ -142,6 +177,9 @@ namespace Prototype.NetworkLobby
             if (playerColor == Color.white)
                 CmdColorChange();
 
+            if (playerNumber == -1)
+                CmdNumberChanged();
+
             ChangeReadyButtonColor(JoinColor);
 
             readyButton.transform.GetChild(0).GetComponent<Text>().text = "JOIN";
@@ -149,7 +187,7 @@ namespace Prototype.NetworkLobby
 
             //have to use child count of player prefab already setup as "this.slot" is not set yet
             if (playerName == "")
-                CmdNameChanged("Player" + (LobbyPlayerList._instance.playerListContentTransform.childCount-1));
+                CmdNameChanged("Player" + (LobbyPlayerList._instance.playerListContentTransform.childCount - 1));
 
             //we switch from simple name display to name input
             colorButton.interactable = true;
@@ -164,8 +202,8 @@ namespace Prototype.NetworkLobby
             readyButton.onClick.RemoveAllListeners();
             readyButton.onClick.AddListener(OnReadyClicked);
 
-			//racerButton.onClick.RemoveAllListeners();
-			//racerButton.onClick.AddListener(OnRacerClicked);
+            //racerButton.onClick.RemoveAllListeners();
+            //racerButton.onClick.AddListener(OnRacerClicked);
 
             //when OnClientEnterLobby is called, the loval PlayerController is not yet created, so we need to redo that here to disable
             //the add button if we reach maxLocalPlayer. We pass 0, as it was already counted on OnClientEnterLobby
@@ -212,7 +250,7 @@ namespace Prototype.NetworkLobby
         }
 
         public void OnPlayerListChanged(int idx)
-        { 
+        {
             GetComponent<Image>().color = (idx % 2 == 0) ? EvenRowColor : OddRowColor;
         }
 
@@ -257,7 +295,7 @@ namespace Prototype.NetworkLobby
             }
             else if (isServer)
                 LobbyManager.s_Singleton.KickPlayer(connectionToClient);
-                
+
         }
 
         public void ToggleJoinButton(bool enabled)
@@ -285,13 +323,11 @@ namespace Prototype.NetworkLobby
         public void CmdColorChange()
         {
             int idx = System.Array.IndexOf(Colors, playerColor);
-
             int inUseIdx = _colorInUse.IndexOf(idx);
 
             if (idx < 0) idx = 0;
 
             idx = (idx + 1) % Colors.Length;
-
             bool alreadyInUse = false;
 
             do
@@ -316,7 +352,6 @@ namespace Prototype.NetworkLobby
             {//else we add it
                 _colorInUse.Add(idx);
             }
-
             playerColor = Colors[idx];
         }
 
