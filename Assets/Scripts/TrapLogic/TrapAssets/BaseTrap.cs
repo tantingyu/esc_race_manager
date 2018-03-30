@@ -35,6 +35,7 @@ public class BaseTrap : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //trigger animation state
+        anim.SetTrigger("collide");
         Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length + delay);
     }
 }

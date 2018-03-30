@@ -165,7 +165,7 @@ public class RacerController : NetworkBehaviour
             }
         }
 
-        anim.SetTrigger(playerRacer.commands[commandIndex].sprite);
+        anim.SetTrigger(playerRacer.commands[commandIndex].name);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)  //The first time the game obj touches a trigger
@@ -175,9 +175,10 @@ public class RacerController : NetworkBehaviour
 
         if (collision.tag == "trap" && !offGround)
         {
-            hp -= 100;
-            commandMenuManger.OnHpChange(-100);
-            Debug.Log("HP -100");
+            float damage = collision.gameObject.GetComponent<BaseTrap>().damage;
+            hp -= damage;
+            commandMenuManger.OnHpChange(-damage);
+            Debug.Log("HP -"+damage);
         }
 
         if (collision.tag == "Player" && !offGround)
