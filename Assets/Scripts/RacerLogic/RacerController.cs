@@ -28,7 +28,9 @@ public class RacerController : NetworkBehaviour
     [SyncVar]
     public int racerIdx;
 
-    private bool commandExecuted;
+    [HideInInspector]
+    public bool commandExecuted;
+
     private Animator anim;
 
     //Swipe Controller
@@ -38,6 +40,7 @@ public class RacerController : NetworkBehaviour
     private bool moveVertical = false;
     private bool moveHorizontal = false;
     private bool playerCollision = false;
+    //private bool invincible
 
     private readonly float[] positionVertical = { 0.8f, -0.4F, -1.6f };
     private readonly float[] positionHorizontal = { -5.5f, -4.5f, -3.5f, -2.5f, -1.5f, -0.5f, 0.5f, 1.5f, 2.5f, 3.5f, 4.5f, 5.5f };
@@ -47,9 +50,16 @@ public class RacerController : NetworkBehaviour
     private int currentBlock;
     private int targetBlock;
 
-    private Rigidbody2D myRigidbody;
+    //private Rigidbody2D myRigidbody;
 
+    //player Command
+    //[HideInInspector]
     public float moveSpeed;
+    [HideInInspector]
+    public float defaultSpeed = 5;
+    [HideInInspector]
+    public bool offGround = false;
+    public bool changePosition = false;
 
     private CommandMenuManger commandMenuManger;
     private GameObject menu;
@@ -64,10 +74,8 @@ public class RacerController : NetworkBehaviour
         commandMenuManger.player = this.gameObject;
 
         anim = GetComponent<Animator>();
-
-        Racer dbRacer = Racers[racerIdx];
-        playerRacer = new Racer(dbRacer.name, dbRacer.sprite, dbRacer.hp,
-            dbRacer.st, dbRacer.speed, dbRacer.commands);
+        
+        playerRacer = Racers[racerIdx];
         maxHp = playerRacer.hp;
         maxSt = playerRacer.st;
 
@@ -76,9 +84,12 @@ public class RacerController : NetworkBehaviour
         //dragDistance is 15% height of the screen
         dragDistance = Screen.height * 15 / 100;
         //currentLane=gameObject.transform
-        myRigidbody = GetComponent<Rigidbody2D>();
+        //myRigidbody = GetComponent<Rigidbody2D>();
         SetCurrentPos(playerNumber, 0);
-        myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, myRigidbody.velocity.y);
+        //myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, myRigidbody.velocity.y);
+
+        //initial player state
+        moveSpeed = defaultSpeed;
     }
 
     //Update is called once per frame
@@ -99,6 +110,16 @@ public class RacerController : NetworkBehaviour
                 //invalidated swipe here
                 //after animation
                 commandExecuted = false;
+
+
+            }
+            else
+            {
+                if (changePosition)
+                {
+                    moveHorizontally();
+                    moveVertically();
+                }
             }
         }
     }
@@ -107,6 +128,8 @@ public class RacerController : NetworkBehaviour
     {
         commandExecuted = true;
         //anim.SetTrigger(animHash[commandIndex]);
+
+
         //movetile
         if (playerRacer.commands[commandIndex].objectCreate != "")
         {
@@ -114,6 +137,34 @@ public class RacerController : NetworkBehaviour
                 new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
 
         }
+
+        //change speed
+        if (playerRacer.commands[commandIndex].changeSpeed != 0) {
+            moveSpeed = playerRacer.commands[commandIndex].changeSpeed;
+            SwipeControl();
+        }
+
+
+        //off ground
+        if (playerRacer.commands[commandIndex].offGround) {
+            Debug.Log("Currently OffGround!");
+        }
+
+        //change position
+        if (playerRacer.commands[commandIndex].changePosition[0] != 0 || playerRacer.commands[commandIndex].changePosition[1] != 0) {
+
+            targetLane = currentLane + playerRacer.commands[commandIndex].changePosition[0];
+            targetBlock = currentBlock + playerRacer.commands[commandIndex].changePosition[1];
+
+            if ((targetLane >= 0) && (targetLane <= 2)
+                && (targetBlock >= 0) && (targetBlock <= 11)
+                 && !playerCollision)
+            {
+
+                changePosition = true;
+            }
+        }
+
         anim.SetTrigger(playerRacer.commands[commandIndex].sprite);
     }
 
@@ -122,14 +173,14 @@ public class RacerController : NetworkBehaviour
         //check trap type here
         Debug.Log("Trigger Detected");
 
-        if (collision.tag == "trap")
+        if (collision.tag == "trap" && !offGround)
         {
             hp -= 100;
             commandMenuManger.OnHpChange(-100);
             Debug.Log("HP -100");
         }
 
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" && !offGround)
         {
             Debug.Log("Player Collision");
             playerCollision = true;
@@ -226,7 +277,7 @@ public class RacerController : NetworkBehaviour
             if (Input.GetKey("right"))
                 if (targetBlock < positionHorizontal.Length - 1 && !playerCollision)
                 {
-                    Debug.Log(positionHorizontal.Length - 1);
+                    //Debug.Log(positionHorizontal.Length - 1);
                     targetBlock += 1;
                     moveHorizontal = true;
                 }
@@ -234,52 +285,62 @@ public class RacerController : NetworkBehaviour
 
         else if (!moveHorizontal && moveVertical)
         {
-            Debug.Log("currentLane:" + currentLane);
-            Debug.Log("targetLane:" + targetLane);
 
-            float step = moveSpeed * Time.deltaTime;
-            Vector2 targetPos = new Vector2(transform.position.x, GetTargetLanePos(targetLane));
-
-            if (GetPlayerCurrentPosY() < GetTargetLanePos(targetLane))
-            {
-
-                transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
-            }
-            else if (GetPlayerCurrentPosY() > GetTargetLanePos(targetLane))
-            {
-                transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
-            }
-            else
-            {
-                moveVertical = false;
-                currentLane = targetLane;
-            }
+            moveVertically();
         }
 
         else if (!moveVertical && moveHorizontal)
         {
-            Debug.Log("currentBlock:" + currentBlock);
-            Debug.Log("targetBlock:" + targetBlock);
-
-            float step = moveSpeed * Time.deltaTime;
-            Vector2 targetPos = new Vector2(GetTargetBlockPos(targetBlock), transform.position.y);
-
-            if (GetPlayerCurrentPosX() < GetTargetBlockPos(targetBlock))
-            {
-                transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
-            }
-            else if (GetPlayerCurrentPosX() > GetTargetBlockPos(targetBlock))
-            {
-                transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
-            }
-            else
-            {
-                moveHorizontal = false;
-                currentBlock = targetBlock;
-            }
+            moveHorizontally();
         }
     }
 
+    public void moveHorizontally()
+    {
+        Debug.Log("currentBlock:" + currentBlock);
+        Debug.Log("targetBlock:" + targetBlock);
+
+        float step = moveSpeed * Time.deltaTime;
+        Vector2 targetPos = new Vector2(GetTargetBlockPos(targetBlock), transform.position.y);
+
+        if (GetPlayerCurrentPosX() < GetTargetBlockPos(targetBlock))
+        {
+            transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
+        }
+        else if (GetPlayerCurrentPosX() > GetTargetBlockPos(targetBlock))
+        {
+            transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
+        }
+        else
+        {
+            moveHorizontal = false;
+            currentBlock = targetBlock;
+        }
+    }
+
+    public void moveVertically()
+    {
+        Debug.Log("targetLane:" + targetLane);
+
+        float step = moveSpeed * Time.deltaTime;
+        Vector2 targetPos = new Vector2(transform.position.x, GetTargetLanePos(targetLane));
+
+        if (GetPlayerCurrentPosY() < GetTargetLanePos(targetLane))
+        {
+
+            transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
+        }
+        else if (GetPlayerCurrentPosY() > GetTargetLanePos(targetLane))
+        {
+            transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
+        }
+        else
+        {
+            moveVertical = false;
+            currentLane = targetLane;
+            Debug.Log("currentLane:" + currentLane);
+        }
+    }
     /*
     private void OnTriggerStay2D(Collider2D collision)  //When you are in the frame, the trap is triggerred
     {
@@ -318,5 +379,7 @@ public class RacerController : NetworkBehaviour
         transform.position = new Vector2(GetTargetBlockPos(block), GetTargetLanePos(lane));
         targetLane = lane;
         targetBlock = block;
+        currentLane = lane;
+        currentBlock = block;
     }
 }

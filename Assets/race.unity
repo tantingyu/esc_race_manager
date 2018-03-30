@@ -122,7 +122,6 @@ GameObject:
   m_Component:
   - component: {fileID: 11764630}
   - component: {fileID: 11764633}
-  - component: {fileID: 11764632}
   - component: {fileID: 11764634}
   - component: {fileID: 11764635}
   - component: {fileID: 11764631}
@@ -164,27 +163,11 @@ MonoBehaviour:
   playerName: 
   playerNumber: 1
   racerIdx: 0
+  commandExecuted: 0
   moveSpeed: 4
---- !u!50 &11764632
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 11764629}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
+  defaultSpeed: 5
+  offGround: 0
+  changePosition: 0
 --- !u!212 &11764633
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1481,7 +1464,6 @@ GameObject:
   - component: {fileID: 2104125985}
   - component: {fileID: 2104125984}
   - component: {fileID: 2104125983}
-  - component: {fileID: 2104125987}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1555,15 +1537,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2104125987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2104125982}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49e065d7115cd3f4590ea0ce5c20b0ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}

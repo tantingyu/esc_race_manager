@@ -36,7 +36,8 @@ public class CommandMenuManger : MonoBehaviour {
 
         if (playerController.st >= stCost)   //stamina check
         {
-            Invoke("PostCooldown", 3f);
+            //Invoke("PostCooldown", 3f);
+            Invoke("PostCooldown", playerController.playerRacer.commands[index].commandLength);
             playerController.RunCommand(index);  // hook to player instance
             SetButtonsEnabled(false);   // invalidate all button inputs
             
@@ -52,6 +53,13 @@ public class CommandMenuManger : MonoBehaviour {
     void PostCooldown()
     {
         SetButtonsEnabled(true);
+
+        //set parameters back to initial after command excuted
+        playerController.commandExecuted = false;
+        playerController.moveSpeed = playerController.defaultSpeed;
+        playerController.offGround = false;
+        playerController.changePosition = false;
+
     }
 
     //Updated by player when collision occurs
