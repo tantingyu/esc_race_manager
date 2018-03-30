@@ -42,6 +42,7 @@ public class RacerController : NetworkBehaviour
     private bool playerCollision = false;
     //private bool invincible
 
+    private readonly float[] zPositions = { 1, 0, -1 };
     private readonly float[] positionVertical = { 0.8f, -0.4F, -1.6f };
     private readonly float[] positionHorizontal = { -5.5f, -4.5f, -3.5f, -2.5f, -1.5f, -0.5f, 0.5f, 1.5f, 2.5f, 3.5f, 4.5f, 5.5f };
 
@@ -80,13 +81,9 @@ public class RacerController : NetworkBehaviour
         maxSt = playerRacer.st;
 
         //swipe controller
-
         //dragDistance is 15% height of the screen
         dragDistance = Screen.height * 15 / 100;
-        //currentLane=gameObject.transform
-        //myRigidbody = GetComponent<Rigidbody2D>();
         SetCurrentPos(playerNumber, 0);
-        //myRigidbody.velocity = new Vector2(myRigidbody.velocity.x, myRigidbody.velocity.y);
 
         //initial player state
         moveSpeed = defaultSpeed;
@@ -102,16 +99,13 @@ public class RacerController : NetworkBehaviour
         }
         else
         {
-            //myRigidbody.velocity = new Vector2(moveSpeed, myRigidbody.velocity.y); //vector means point like(x,y)
-            //anim.SetFloat("Speed", myRigidbody.velocity.x);   no more speed for this game
             if (!commandExecuted)
             {
                 SwipeControl();
                 //invalidated swipe here
                 //after animation
                 commandExecuted = false;
-
-
+                
             }
             else
             {
@@ -298,7 +292,6 @@ public class RacerController : NetworkBehaviour
 
         else if (!moveHorizontal && moveVertical)
         {
-
             moveVertically();
         }
 
@@ -314,15 +307,15 @@ public class RacerController : NetworkBehaviour
         Debug.Log("targetBlock:" + targetBlock);
 
         float step = moveSpeed * Time.deltaTime;
-        Vector2 targetPos = new Vector2(GetTargetBlockPos(targetBlock), transform.position.y);
+        Vector3 targetPos = new Vector3(GetTargetBlockPos(targetBlock), transform.position.y, zPositions[targetLane]);
 
         if (GetPlayerCurrentPosX() < GetTargetBlockPos(targetBlock))
         {
-            transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
         }
         else if (GetPlayerCurrentPosX() > GetTargetBlockPos(targetBlock))
         {
-            transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
         }
         else
         {
@@ -336,16 +329,16 @@ public class RacerController : NetworkBehaviour
         Debug.Log("targetLane:" + targetLane);
 
         float step = moveSpeed * Time.deltaTime;
-        Vector2 targetPos = new Vector2(transform.position.x, GetTargetLanePos(targetLane));
+        Vector3 targetPos = new Vector3(transform.position.x, GetTargetLanePos(targetLane), zPositions[targetLane]);
 
         if (GetPlayerCurrentPosY() < GetTargetLanePos(targetLane))
         {
 
-            transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
         }
         else if (GetPlayerCurrentPosY() > GetTargetLanePos(targetLane))
         {
-            transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
         }
         else
         {
@@ -389,7 +382,7 @@ public class RacerController : NetworkBehaviour
 
     void SetCurrentPos(int lane, int block)
     {
-        transform.position = new Vector2(GetTargetBlockPos(block), GetTargetLanePos(lane));
+        transform.position = new Vector3(GetTargetBlockPos(block), GetTargetLanePos(lane), zPositions[lane]);
         targetLane = lane;
         targetBlock = block;
         currentLane = lane;
