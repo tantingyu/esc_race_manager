@@ -147,6 +147,7 @@ public class RacerController : NetworkBehaviour
 
         //off ground
         if (playerRacer.commands[commandIndex].offGround) {
+            offGround = true;
             Debug.Log("Currently OffGround!");
         }
 
@@ -163,6 +164,11 @@ public class RacerController : NetworkBehaviour
 
                 changePosition = true;
             }
+            else
+            {
+                targetLane = currentLane;
+                targetBlock = currentBlock;
+            }
         }
 
         anim.SetTrigger(playerRacer.commands[commandIndex].name);
@@ -173,12 +179,17 @@ public class RacerController : NetworkBehaviour
         //check trap type here
         Debug.Log("Trigger Detected");
 
-        if (collision.tag == "trap" && !offGround)
+        if (collision.tag == "trap")
         {
-            float damage = collision.gameObject.GetComponent<BaseTrap>().damage;
-            hp -= damage;
-            commandMenuManger.OnHpChange(-damage);
-            Debug.Log("HP -"+damage);
+            if (offGround && collision.gameObject.GetComponent<BaseTrap>().ground) { }
+
+            else
+            {
+                float damage = collision.gameObject.GetComponent<BaseTrap>().damage;
+                hp -= damage;
+                commandMenuManger.OnHpChange(-damage);
+                Debug.Log("HP -" + damage);
+            }
         }
 
         if (collision.tag == "Player" && !offGround)
@@ -187,6 +198,7 @@ public class RacerController : NetworkBehaviour
             playerCollision = true;
 
         }
+        
     }
 
     public void SwipeControl()

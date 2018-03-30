@@ -265,7 +265,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4621321063955858, guid: 09b534974fa7f5544bc95671687ff452, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 09b534974fa7f5544bc95671687ff452, type: 2}
@@ -430,8 +430,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4178988332620902, guid: 59d22404040573e46bdbacebadb964a4, type: 2}
       propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 61754377275362076, guid: 59d22404040573e46bdbacebadb964a4,
+        type: 2}
+      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114277424978233132, guid: 59d22404040573e46bdbacebadb964a4,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1144689176}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 59d22404040573e46bdbacebadb964a4, type: 2}
   m_IsPrefabParent: 0
@@ -1003,6 +1013,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1043077121}
+--- !u!1 &1144689176 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1239664201434636, guid: 96863ab7ccd98634daa6111c205fdc90,
+    type: 2}
+  m_PrefabInternal: {fileID: 1725712823}
 --- !u!1001 &1250066429
 Prefab:
   m_ObjectHideFlags: 0
@@ -1040,7 +1055,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4010693721739028, guid: 8a402a0cdef1aeb43b249e9cf34f1242, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a402a0cdef1aeb43b249e9cf34f1242, type: 2}
@@ -1308,6 +1323,10 @@ Prefab:
     - target: {fileID: 4203855123538410, guid: 96863ab7ccd98634daa6111c205fdc90, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1239664201434636, guid: 96863ab7ccd98634daa6111c205fdc90, type: 2}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96863ab7ccd98634daa6111c205fdc90, type: 2}

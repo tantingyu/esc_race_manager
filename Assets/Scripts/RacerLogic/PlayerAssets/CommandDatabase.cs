@@ -14,9 +14,9 @@ namespace RacerLogic.RacerAssets
                 objectCreate: "",
                 stCost: 10,
                 changeSpeed: 0,
-                commandLength: 2,
+                commandLength: 3,
                 offGround: true,
-                changePosition: new int[] {0,2} //(lane,block)
+                changePosition: new int[] {0,4} //(lane,block)
 
             );
 
@@ -26,12 +26,12 @@ namespace RacerLogic.RacerAssets
                 sprite: "Sprites/Commands/Sprint",
                 //description: "Deals 10 damage and stuns target.",
                 
-                objectCreate: "empty",
+                objectCreate: "",
                 stCost: 12,
-                changeSpeed: 0,
+                changeSpeed: 10,
                 commandLength: 1,
                 offGround: true,
-                changePosition: new int[] {0,0}
+                changePosition: new int[] {0,2}
 
 
             );
@@ -41,7 +41,7 @@ namespace RacerLogic.RacerAssets
                 name: "Neigh",
                 sprite: "Sprites/Commands/Jump",
                 //description: "Deals 10 damage and stuns target.",
-                objectCreate: "empty",
+                objectCreate: "",
                 stCost: 12,
                 changeSpeed: 0,
                 commandLength: 1,
