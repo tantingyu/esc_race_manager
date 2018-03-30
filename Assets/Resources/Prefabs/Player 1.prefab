@@ -23,6 +23,9 @@ GameObject:
   - component: {fileID: 95729033130951058}
   - component: {fileID: 61612868101831350}
   - component: {fileID: 114033215520000818}
+  - component: {fileID: 114156160100250942}
+  - component: {fileID: 114259345943359560}
+  - component: {fileID: 114413243212895336}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player
@@ -91,19 +94,101 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1239664201434636}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13350059ab7dc5e45bc73d7b3dddef7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 150
-  maxSt: 150
-  hp: 150
-  st: 150
-  playerName: 
-  playerNumber: 1
-  racerIdx: 0
+  commandExecuted: 0
+  currentLane: 0
+  targetLane: 0
+  currentBlock: 0
+  targetBlock: 0
   moveSpeed: 4
+  defaultSpeed: 5
+  offGround: 0
+  changePosition: 0
+--- !u!114 &114156160100250942
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1239664201434636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 150
+    i1: 134
+    i2: 58
+    i3: 183
+    i4: 204
+    i5: 217
+    i6: 134
+    i7: 52
+    i8: 218
+    i9: 166
+    i10: 17
+    i11: 28
+    i12: 32
+    i13: 95
+    i14: 220
+    i15: 144
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
+--- !u!114 &114259345943359560
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1239664201434636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5153d404168dff641ba84c78414f3f0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: 
+  racerIdx: 0
+  playerNumber: 0
+  maxHp: 0
+  maxSt: 0
+  hp: 0
+  st: 0
+  playerController: {fileID: 0}
+  HUD: {fileID: 1134303180389664, guid: b6449693cd5a07b45b546f88f1fc7e2a, type: 2}
+  instanceHUD: {fileID: 0}
+  hpBar: {fileID: 0}
+  stBar: {fileID: 0}
+  commandButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  commandExecuted: 0
+--- !u!114 &114413243212895336
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1239664201434636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!212 &212652262781512572
 SpriteRenderer:
   m_ObjectHideFlags: 1

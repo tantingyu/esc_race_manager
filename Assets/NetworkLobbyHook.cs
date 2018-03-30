@@ -9,11 +9,11 @@ public class NetworkLobbyHook : LobbyHook
             GameObject lobbyPlayer, GameObject gamePlayer)
     {
         LobbyPlayer lobby = lobbyPlayer.GetComponent<LobbyPlayer>();
-        RacerController localPlayer = gamePlayer.GetComponent<RacerController>();
+        SetupLocalPlayer localPlayer = gamePlayer.GetComponent<SetupLocalPlayer>();
 
         //link SyncVars
-        lobby.playerName = localPlayer.playerName; //player name
-        lobby.playerNumber = localPlayer.playerNumber; //player number
-        lobby.racerIdx = localPlayer.racerIdx; //player racer
+        localPlayer.playerName = lobby.playerName;
+        localPlayer.playerNumber = lobby.playerNumber;
+        localPlayer.racerIdx = lobby.racerIdx;
     }
 }

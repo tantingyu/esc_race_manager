@@ -8,35 +8,13 @@ using RacerLogic;
 public class RacerController : NetworkBehaviour
 {
     [HideInInspector]
-    public float maxHp;
-    [HideInInspector]
-    public float maxSt;
-
-    public float hp;
-    public float st;
-
-    static Racer[] Racers = new Racer[] { RacerDatabase.p1, RacerDatabase.p2, RacerDatabase.p3 };
-    //pass lobby values in these vars
-    public Racer playerRacer = Racers[0];
-
-    [SyncVar]
-    public string playerName;
-
-    [SyncVar]
-    public int playerNumber; //the starting position according to the player number
-
-    [SyncVar]
-    public int racerIdx;
-
-    [HideInInspector]
     public bool commandExecuted;
-
     private Animator anim;
 
     //Swipe Controller
     private Vector3 fp; //First touch position
     private Vector3 lp; //Last touch position
-    private float dragDistance; //minimum distance for a swipe to be registered
+    private float dragDistance = Screen.height * 15 / 100; //minimum distance for a swipe to be registered
     private bool moveVertical = false;
     private bool moveHorizontal = false;
     private bool playerCollision = false;
@@ -46,15 +24,16 @@ public class RacerController : NetworkBehaviour
     private readonly float[] positionVertical = { 0.8f, -0.4F, -1.6f };
     private readonly float[] positionHorizontal = { -5.5f, -4.5f, -3.5f, -2.5f, -1.5f, -0.5f, 0.5f, 1.5f, 2.5f, 3.5f, 4.5f, 5.5f };
 
-    private int currentLane;
-    private int targetLane;
-    private int currentBlock;
-    private int targetBlock;
+    public int currentLane;
+    public int targetLane;
+    public int currentBlock;
+    public int targetBlock;
 
-    //private Rigidbody2D myRigidbody;
+    // private Rigidbody2D myRigidbody;
 
-    //player Command
-    //[HideInInspector]
+    // player Command
+
+    // [HideInInspector]
     public float moveSpeed;
     [HideInInspector]
     public float defaultSpeed = 5;
@@ -62,67 +41,64 @@ public class RacerController : NetworkBehaviour
     public bool offGround = false;
     public bool changePosition = false;
 
-    private CommandMenuManger commandMenuManger;
-    private GameObject menu;
+    //private CommandMenuManger commandMenuManger;
+    //private GameObject menu;
 
+    private SetupLocalPlayer gamePlayer;
+    private Racer playerRacer;
 
-    void Start()
+    /*void Start()
     {
         //get reference to CommandMenu in game scene
-        menu = GameObject.Find("CommandMenu");
+        //menu = GameObject.Find("CommandMenu");
         //pass self (gameObject) to CommandMenuManager script to CM referenced
-        commandMenuManger = menu.GetComponent<CommandMenuManger>();
-        commandMenuManger.player = this.gameObject;
+        //commandMenuManger = menu.GetComponent<CommandMenuManger>();
+        //commandMenuManger.player = this.gameObject;
 
+        gamePlayer = GetComponent<SetupLocalPlayer>();
+        playerRacer = gamePlayer.playerRacer;
         anim = GetComponent<Animator>();
         
-        playerRacer = Racers[racerIdx];
-        maxHp = playerRacer.hp;
-        maxSt = playerRacer.st;
+        //playerRacer = Racers[racerIdx];
+        //maxHp = playerRacer.hp;
+        //maxSt = playerRacer.st;
 
         //swipe controller
         //dragDistance is 15% height of the screen
         dragDistance = Screen.height * 15 / 100;
-        SetCurrentPos(playerNumber, 0);
+        SetCurrentPos(gamePlayer.playerNumber, 0);
 
         //initial player state
         moveSpeed = defaultSpeed;
-    }
+    }*/
 
     //Update is called once per frame
     void Update()
     {
-        if (hp <= 0)
+        if (!commandExecuted)
         {
-            //lose screen
-            Destroy(gameObject);
+            SwipeControl();
+            //invalidated swipe here
+            //after animation
+            commandExecuted = false;
+                
         }
         else
         {
-            if (!commandExecuted)
+            if (changePosition)
             {
-                SwipeControl();
-                //invalidated swipe here
-                //after animation
-                commandExecuted = false;
-                
-            }
-            else
-            {
-                if (changePosition)
-                {
-                    moveHorizontally();
-                    moveVertically();
-                }
+                moveHorizontally();
+                moveVertically();
             }
         }
     }
 
-    public void RunCommand(int commandIndex)
+    [Command]
+    public void CmdRunCmd(int commandIndex)
     {
+        Debug.Log("Running a command...");
         commandExecuted = true;
         //anim.SetTrigger(animHash[commandIndex]);
-
 
         //movetile
         if (playerRacer.commands[commandIndex].objectCreate != "")
@@ -168,7 +144,7 @@ public class RacerController : NetworkBehaviour
         anim.SetTrigger(playerRacer.commands[commandIndex].name);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)  //The first time the game obj touches a trigger
+    /*private void OnTriggerEnter2D(Collider2D collision)  //The first time the game obj touches a trigger
     {
         //check trap type here
         Debug.Log("Trigger Detected");
@@ -180,8 +156,8 @@ public class RacerController : NetworkBehaviour
             else
             {
                 float damage = collision.gameObject.GetComponent<BaseTrap>().damage;
-                hp -= damage;
-                commandMenuManger.OnHpChange(-damage);
+                gamePlayer.hp -= damage;
+                gamePlayer.OnHpChange(-damage);
                 Debug.Log("HP -" + damage);
             }
         }
@@ -193,7 +169,7 @@ public class RacerController : NetworkBehaviour
 
         }
         
-    }
+    }*/
 
     public void SwipeControl()
     {
@@ -347,6 +323,7 @@ public class RacerController : NetworkBehaviour
             Debug.Log("currentLane:" + currentLane);
         }
     }
+
     /*
     private void OnTriggerStay2D(Collider2D collision)  //When you are in the frame, the trap is triggerred
     {
@@ -360,27 +337,27 @@ public class RacerController : NetworkBehaviour
     */
 
     //swipe controller
-    float GetPlayerCurrentPosY()
+    public float GetPlayerCurrentPosY()
     {
         return gameObject.transform.position.y;
     }
 
-    float GetPlayerCurrentPosX()
+    public float GetPlayerCurrentPosX()
     {
         return gameObject.transform.position.x;
     }
 
-    float GetTargetLanePos(int lane)
+    public float GetTargetLanePos(int lane)
     {
         return positionVertical[lane];
     }
 
-    float GetTargetBlockPos(int block)
+    public float GetTargetBlockPos(int block)
     {
         return positionHorizontal[block];
     }
 
-    void SetCurrentPos(int lane, int block)
+    public void SetCurrentPos(int lane, int block)
     {
         transform.position = new Vector3(GetTargetBlockPos(block), GetTargetLanePos(lane), zPositions[lane]);
         targetLane = lane;

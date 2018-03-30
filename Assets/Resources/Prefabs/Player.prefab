@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 95119139336616536}
   - component: {fileID: 61751319842827360}
   - component: {fileID: 114196333994629754}
+  - component: {fileID: 114550292694472046}
+  - component: {fileID: 114106775212290814}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -106,7 +108,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114196333994629754
+--- !u!114 &114106775212290814
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -114,17 +116,72 @@ MonoBehaviour:
   m_GameObject: {fileID: 1667889120322156}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5153d404168dff641ba84c78414f3f0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: 
+  racerIdx: 0
+  playerNumber: 0
+  maxHp: 0
+  maxSt: 0
+  hp: 0
+  st: 0
+  playerController: {fileID: 0}
+  HUD: {fileID: 1134303180389664, guid: b6449693cd5a07b45b546f88f1fc7e2a, type: 2}
+  hpBar: {fileID: 114700918613723166, guid: b6449693cd5a07b45b546f88f1fc7e2a, type: 2}
+  stBar: {fileID: 114186321083075608, guid: b6449693cd5a07b45b546f88f1fc7e2a, type: 2}
+  commandButtons:
+  - {fileID: 114413408041933614, guid: b6449693cd5a07b45b546f88f1fc7e2a, type: 2}
+  - {fileID: 114920695214124000, guid: b6449693cd5a07b45b546f88f1fc7e2a, type: 2}
+  - {fileID: 114158404900096882, guid: b6449693cd5a07b45b546f88f1fc7e2a, type: 2}
+--- !u!114 &114196333994629754
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1667889120322156}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13350059ab7dc5e45bc73d7b3dddef7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 150
-  maxSt: 150
-  hp: 150
-  st: 150
-  playerName: 
-  playerNumber: 1
-  racerIdx: 0
+  commandExecuted: 0
   moveSpeed: 4
+  defaultSpeed: 5
+  offGround: 0
+  changePosition: 0
+--- !u!114 &114550292694472046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1667889120322156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 184
+    i1: 169
+    i2: 248
+    i3: 233
+    i4: 138
+    i5: 189
+    i6: 89
+    i7: 100
+    i8: 201
+    i9: 203
+    i10: 40
+    i11: 68
+    i12: 95
+    i13: 149
+    i14: 93
+    i15: 248
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!212 &212182695393555902
 SpriteRenderer:
   m_ObjectHideFlags: 1

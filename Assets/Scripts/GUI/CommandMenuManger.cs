@@ -6,7 +6,7 @@ using RacerLogic;
 
 public class CommandMenuManger : MonoBehaviour {
 
-    [SerializeField]
+    /*[SerializeField]
     private Button[] commandButtons = new Button[3];
     public GameObject player;
     public Image hpBar;
@@ -87,7 +87,7 @@ public class CommandMenuManger : MonoBehaviour {
     {
         foreach (Button button in commandButtons)
             button.interactable=enable;
-    }
+    }*/
 
     
 }
