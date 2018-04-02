@@ -21,6 +21,9 @@ GameObject:
   - component: {fileID: 4010693721739028}
   - component: {fileID: 212210204741387996}
   - component: {fileID: 95599236574004260}
+  - component: {fileID: 114269300200448412}
+  - component: {fileID: 114463909916802280}
+  - component: {fileID: 114918756728772648}
   m_Layer: 0
   m_Name: Pinata
   m_TagString: Untagged
@@ -35,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1267910992364174}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.63, y: 0.4577027, z: 0}
+  m_LocalPosition: {x: -8.68, y: 0.58, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,6 +61,71 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114269300200448412
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1267910992364174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 138
+    i1: 64
+    i2: 42
+    i3: 12
+    i4: 222
+    i5: 241
+    i6: 174
+    i7: 180
+    i8: 59
+    i9: 36
+    i10: 158
+    i11: 156
+    i12: 243
+    i13: 79
+    i14: 18
+    i15: 66
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114463909916802280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1267910992364174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114918756728772648
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1267910992364174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 144b747a65084b843afc691f346b6aae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 1006447578581932, guid: 09b534974fa7f5544bc95671687ff452, type: 2}
 --- !u!212 &212210204741387996
 SpriteRenderer:
   m_ObjectHideFlags: 1

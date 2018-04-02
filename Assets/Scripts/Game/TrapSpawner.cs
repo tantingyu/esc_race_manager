@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class TrapSpawner : MonoBehaviour {
+public class TrapSpawner : NetworkBehaviour {
 
     public int startLevel = 0;
     public Level[] levels=new Level[3];
@@ -31,11 +32,11 @@ public class TrapSpawner : MonoBehaviour {
             //int randY = Random.Range(0, 3);
             
             if (RandomBool())
-                Instantiate(levels[currentLevel].trapsToSpawn[randTrap], new Vector2(transform.position.x, position[0]), Quaternion.identity);
+                NetworkServer.Spawn(Instantiate(levels[currentLevel].trapsToSpawn[randTrap], new Vector2(transform.position.x, position[0]), Quaternion.identity));
             if (RandomBool())
-                Instantiate(levels[currentLevel].trapsToSpawn[randTrap], new Vector2(transform.position.x, position[1]), Quaternion.identity);
+                NetworkServer.Spawn(Instantiate(levels[currentLevel].trapsToSpawn[randTrap], new Vector2(transform.position.x, position[1]), Quaternion.identity));
             if (RandomBool())
-                Instantiate(levels[currentLevel].trapsToSpawn[randTrap], new Vector2(transform.position.x, position[2]), Quaternion.identity);
+                NetworkServer.Spawn(Instantiate(levels[currentLevel].trapsToSpawn[randTrap], new Vector2(transform.position.x, position[2]), Quaternion.identity));
             levels[currentLevel].spawnTimer = levels[currentLevel].spawnTime;
         }
 
@@ -56,7 +57,7 @@ public class Level
 {
     public float levelDuration;
     public float spawnTime = 2f;
-    public Transform[] trapsToSpawn = new Transform[1];
+    public GameObject[] trapsToSpawn = new GameObject[1];
 
     [HideInInspector]
     public float spawnTimer;
