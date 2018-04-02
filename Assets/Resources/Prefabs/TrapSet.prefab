@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 50217884772493312}
   - component: {fileID: 61342042002331036}
   - component: {fileID: 114835012479583774}
+  - component: {fileID: 114168418865536090}
   m_Layer: 10
   m_Name: TrapSet
   m_TagString: trap
@@ -88,6 +89,38 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.41, y: 1.41}
   m_EdgeRadius: 0
+--- !u!114 &114168418865536090
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1479370837377040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 73
+    i1: 148
+    i2: 39
+    i3: 122
+    i4: 124
+    i5: 74
+    i6: 149
+    i7: 52
+    i8: 219
+    i9: 110
+    i10: 152
+    i11: 213
+    i12: 212
+    i13: 70
+    i14: 161
+    i15: 86
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114835012479583774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,6 +135,7 @@ MonoBehaviour:
   damage: 20
   movePosition: 0
   speed: -5.43
+  ground: 1
 --- !u!212 &212711117324069824
 SpriteRenderer:
   m_ObjectHideFlags: 1

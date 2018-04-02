@@ -14,7 +14,7 @@ public class RacerController : NetworkBehaviour
     //Swipe Controller
     private Vector3 fp; //First touch position
     private Vector3 lp; //Last touch position
-    private float dragDistance = Screen.height * 15 / 100; //minimum distance for a swipe to be registered
+    private float dragDistance; //minimum distance for a swipe to be registered
     private bool moveVertical = false;
     private bool moveHorizontal = false;
     private bool playerCollision = false;
@@ -47,7 +47,7 @@ public class RacerController : NetworkBehaviour
     private SetupLocalPlayer gamePlayer;
     private Racer playerRacer;
 
-    /*void Start()
+    void Start()
     {
         //get reference to CommandMenu in game scene
         //menu = GameObject.Find("CommandMenu");
@@ -70,7 +70,7 @@ public class RacerController : NetworkBehaviour
 
         //initial player state
         moveSpeed = defaultSpeed;
-    }*/
+    }
 
     //Update is called once per frame
     void Update()
@@ -103,8 +103,8 @@ public class RacerController : NetworkBehaviour
         //movetile
         if (playerRacer.commands[commandIndex].objectCreate != "")
         {
-            Instantiate(Resources.Load(playerRacer.commands[commandIndex].objectCreate), 
-                new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+            NetworkServer.Spawn((GameObject)Instantiate(Resources.Load(playerRacer.commands[commandIndex].objectCreate), 
+                new Vector2(transform.position.x, transform.position.y), Quaternion.identity));
 
         }
 
@@ -141,10 +141,10 @@ public class RacerController : NetworkBehaviour
             }
         }
 
-        anim.SetTrigger(playerRacer.commands[commandIndex].name);
+        // anim.SetTrigger(playerRacer.commands[commandIndex].name);
     }
 
-    /*private void OnTriggerEnter2D(Collider2D collision)  //The first time the game obj touches a trigger
+    private void OnTriggerEnter2D(Collider2D collision)  //The first time the game obj touches a trigger
     {
         //check trap type here
         Debug.Log("Trigger Detected");
@@ -169,7 +169,7 @@ public class RacerController : NetworkBehaviour
 
         }
         
-    }*/
+    }
 
     public void SwipeControl()
     {
