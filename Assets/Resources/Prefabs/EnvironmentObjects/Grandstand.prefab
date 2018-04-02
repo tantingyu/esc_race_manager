@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 95748069560718934}
   - component: {fileID: 50413531257856766}
   - component: {fileID: 114958122227948464}
+  - component: {fileID: 114769940368616016}
+  - component: {fileID: 114949447656053390}
   m_Layer: 0
   m_Name: Grandstand
   m_TagString: Untagged
@@ -80,6 +82,59 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114769940368616016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1169471565548338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 135
+    i1: 31
+    i2: 196
+    i3: 24
+    i4: 161
+    i5: 164
+    i6: 158
+    i7: 132
+    i8: 184
+    i9: 220
+    i10: 218
+    i11: 74
+    i12: 221
+    i13: 173
+    i14: 118
+    i15: 51
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114949447656053390
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1169471565548338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114958122227948464
 MonoBehaviour:
   m_ObjectHideFlags: 1

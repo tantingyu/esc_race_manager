@@ -158,6 +158,7 @@ MonoBehaviour:
   maxSt: 0
   hp: 0
   st: 0
+  stRegenTimer: 0
   playerController: {fileID: 0}
   HUD: {fileID: 1134303180389664, guid: b6449693cd5a07b45b546f88f1fc7e2a, type: 2}
   instanceHUD: {fileID: 0}
@@ -167,7 +168,24 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  commandExecuted: 0
+  levels:
+  - levelDuration: 0
+    spawnTime: 2
+    trapsToSpawn:
+    - {fileID: 0}
+    spawnTimer: 0
+  - levelDuration: 0
+    spawnTime: 2
+    trapsToSpawn:
+    - {fileID: 0}
+    spawnTimer: 0
+  - levelDuration: 0
+    spawnTime: 2
+    trapsToSpawn:
+    - {fileID: 0}
+    spawnTimer: 0
+  bearTrap: {fileID: 1265403313988480, guid: 59d22404040573e46bdbacebadb964a4, type: 2}
+  isHost: 0
 --- !u!114 &114413243212895336
 MonoBehaviour:
   m_ObjectHideFlags: 1

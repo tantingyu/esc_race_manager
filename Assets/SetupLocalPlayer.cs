@@ -19,8 +19,12 @@ public class SetupLocalPlayer : NetworkBehaviour
     public float maxHp;
     public float maxSt;
 
+    // [SyncVar(hook = "OnChangedHp")]
     public float hp;
+    // [SyncVar(hook = "OnChangedSt")]
     public float st;
+
+    public float stRegenTimer;
 
     public Racer playerRacer;
     public RacerController playerController;
@@ -33,9 +37,6 @@ public class SetupLocalPlayer : NetworkBehaviour
 
     [SerializeField]
     private Button[] commandButtons = new Button[3];
-
-    private bool onCooldown = false;
-    public bool commandExecuted;
 
 
     void Start()
@@ -52,7 +53,7 @@ public class SetupLocalPlayer : NetworkBehaviour
 
             playerController = GetComponent<RacerController>();
             playerController.enabled = true;
-            //playerController.SetCurrentPos(playerNumber, 0);
+            playerController.SetCurrentPos(playerNumber, 0);
 
             for (int i = 0; i < commandButtons.Length; i++)
             {
@@ -64,7 +65,6 @@ public class SetupLocalPlayer : NetworkBehaviour
 
             hpBar = instanceHUD.transform.GetChild(2).gameObject.GetComponent<Image>();
             stBar = instanceHUD.transform.GetChild(3).gameObject.GetComponent<Image>();
-
             hpBar.fillAmount = 1;
             stBar.fillAmount = 1;
         }
@@ -74,64 +74,98 @@ public class SetupLocalPlayer : NetworkBehaviour
     {
         if (hp <= 0)
         {
-            //lose screen
             Destroy(gameObject);
+        }
+
+        stRegenTimer -= Time.deltaTime;
+        if (stRegenTimer <= 0)
+        {
+            OnReplenish(2);
+            stRegenTimer = 3;
+        }
+
+        // update hp and st bars
+        if (isLocalPlayer)
+        {
+            OnChangedHp(hp);
+            OnChangedSt(st);
         }
     }
 
     private void OnClick(int index)
     {
-        Debug.Log("Command initiated: " + index);
+        // Debug.Log("Command initiated: " + index);
         float stCost = playerRacer.commands[index].stCost;
-
-        if (st >= stCost)   //stamina check
+        // stamina check
+        if (st >= stCost) 
         {
-            //Invoke("PostCooldown", 3f);
-            Invoke("PostCooldown", playerRacer.commands[index].commandLength);
-            playerController.CmdRunCmd(index);  // hook to player instance
-            SetButtonsEnabled(false);   // invalidate all button inputs
+            playerController.CmdRunCmd(index);
 
-            st -= stCost;
-            stBar.fillAmount -= stCost / maxHp;
+            // activate cooldown timer
+            float cooldown = playerRacer.commands[index].commandLength;
+            Invoke("PostCooldown", cooldown);
+
+            // disable buttons and deduct stamina
+            SetButtonsEnabled(false);
+            OnCommand(stCost);
         }
         else
         {
-            //no stamina exception
+            Debug.Log("Insufficient stamina!");
+            // no stamina exception
         }
+    }
+
+    void OnChangedHp(float hp)
+    {
+        hpBar.fillAmount = hp / maxHp;
+    }
+
+    void OnChangedSt(float hp)
+    {
+        stBar.fillAmount = st / maxSt;
     }
 
     void PostCooldown()
     {
         SetButtonsEnabled(true);
-
-        //set parameters back to initial after command excuted
+        // set parameters back to initial after command excuted
         playerController.commandExecuted = false;
         playerController.moveSpeed = playerController.defaultSpeed;
         playerController.offGround = false;
         playerController.changePosition = false;
-
     }
 
-    //Updated by player when collision occurs
-    public void OnHpChange(float change)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (change < 0)
+        if (collision.tag == "trap")
         {
-            //damage ui animation
-            //damage ui sfx
+            float damage = collision.gameObject.GetComponent<BaseTrap>().damage;
+            OnDamage(damage);
         }
-        else
-        {
-            //heal sfx
-        }
-        hpBar.fillAmount += change / maxHp;
-        Debug.Log("Hp changed: " + hp);
     }
 
-    //Updated to player when command is clicked
-    public void OnStaminaChange()
+    public void OnDamage(float damage)
     {
+        // damage ui animation
+        // damage ui sfx
+        hp -= damage;
+    }
 
+    public void OnHeal(float heal)
+    {
+        // heal ui sfx
+        hp += heal;
+    }
+
+    public void OnCommand(float cost)
+    {
+        st -= cost;
+    }
+
+    public void OnReplenish(float amount)
+    {
+        st += amount;
     }
 
     void SetButtonsEnabled(bool enable)

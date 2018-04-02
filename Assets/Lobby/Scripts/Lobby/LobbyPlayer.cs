@@ -119,7 +119,7 @@ namespace Prototype.NetworkLobby
             if (playerColor == Color.white)
                 CmdColorChange();
 
-            if (playerNumber == -1)
+            if (playerNumber == 0)
                 CmdNumberChanged();
 
             ChangeReadyButtonColor(JoinColor);

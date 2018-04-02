@@ -332,6 +332,7 @@
     <Compile Include="Assets\Scripts\RacerLogic\PlayerRacer.cs" />
     <Compile Include="Assets\Scripts\RacerLogic\RacerController.cs" />
     <Compile Include="Assets\Scripts\TrapButton.cs" />
+    <Compile Include="Assets\Scripts\TrapLogic\Pinata.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\BaseTrap.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\Trap.cs" />
     <Compile Include="Assets\Scripts\TrapLogic\TrapAssets\TrapEffect.cs" />

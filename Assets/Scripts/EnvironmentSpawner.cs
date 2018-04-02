@@ -1,27 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class EnvironmentSpawner : MonoBehaviour {
+public class EnvironmentSpawner : NetworkBehaviour {
 
-    public float spawnTime=10f;
+    public float spawnTime = 10f;
     public GameObject[] objectsToSpawn;
     private float timer;
 
-    // Use this for initialization
+    public GameObject fence;
+    public GameObject grandstand;
+
     void Start () {
         timer = spawnTime;
 	}
 	
-	// Update is called once per frame
 	void Update () {
         timer -= Time.deltaTime;
         if (timer < 0)
         {
             int r = Random.Range(0, objectsToSpawn.Length);
-            Instantiate(objectsToSpawn[r], new Vector3(Random.Range(28f, 50f), objectsToSpawn[r].transform.position.y, objectsToSpawn[r].transform.position.z), 
-                Quaternion.identity);
+            if (r == 0)
+                CmdSpawnBackground(fence);
+            if (r == 1)
+                CmdSpawnBackground(grandstand);
             timer = spawnTime;
         }
 	}
+
+    [Command]
+    void CmdSpawnBackground(GameObject background)
+    {
+        Vector3 pos = new Vector3(Random.Range(28f, 50f), background.transform.position.y, background.transform.position.z);
+        GameObject backgroundInstance = Instantiate(background, pos, Quaternion.identity);
+        NetworkServer.Spawn(backgroundInstance);
+    }
 }

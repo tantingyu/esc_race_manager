@@ -118,7 +118,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Race.UI.TrapMenu.TrapButton
-27009a225fd03e7e3ff0822110425a07 Assembly-CSharp.dll:.SetupLocalPlayer
+9a1d56f2cd250004856286ba2931e1ae Assembly-CSharp.dll:.SetupLocalPlayer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.NetworkLobbyHook
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TriggerOnTimer
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
@@ -131,7 +131,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Menu
 7564d82f6a2bfa5b9ed53c77650da71c Assembly-CSharp.dll:.BGScroller
 c99104cca6f33db39d236f8efb9aafb4 Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyCountdownPanel
-0a837f11d6aed807792d0fb7c43f4188 Assembly-CSharp.dll:.TrapSpawner
+2a98c1f9e6233b208313904db6279956 Assembly-CSharp.dll:.TrapSpawner
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
 9ec8b688ec9ee78e569c94de4d591801 Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyManager
@@ -168,8 +168,9 @@ c0385414027b5bb0037c7106f31119b4 Assembly-CSharp.dll:.ToolSpawner
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TrapOnTrigger
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PlayerSpawner
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-c2f962976dfd1d128320e59fb3bbdeb6 Assembly-CSharp.dll:.EnvironmentSpawner
+e6d044f887a1c8f6aeb947c2c6381b00 Assembly-CSharp.dll:.EnvironmentSpawner
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MoveTarget
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Prototype.NetworkLobby.DraggablePanel
-1a8f564219014a94b6a576cfda622ee5 Assembly-CSharp.dll:.BaseTrap
+473e71656d9bc97976e87d78e9fe2988 Assembly-CSharp.dll:.BaseTrap
 239d2cc8d353bbfcbefc27fa8f0221cc Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyServerList
+36e3e62744d14053fe844afa99aa0af6 Assembly-CSharp.dll:.Pinata

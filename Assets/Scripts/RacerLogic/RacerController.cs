@@ -14,7 +14,8 @@ public class RacerController : NetworkBehaviour
     //Swipe Controller
     private Vector3 fp; //First touch position
     private Vector3 lp; //Last touch position
-    private float dragDistance; //minimum distance for a swipe to be registered
+
+    private float dragDistance = Screen.height * 15 / 100; //minimum distance for a swipe to be registered
     private bool moveVertical = false;
     private bool moveHorizontal = false;
     private bool playerCollision = false;
@@ -65,8 +66,8 @@ public class RacerController : NetworkBehaviour
 
         //swipe controller
         //dragDistance is 15% height of the screen
-        dragDistance = Screen.height * 15 / 100;
-        SetCurrentPos(gamePlayer.playerNumber, 0);
+        //dragDistance = Screen.height * 15 / 100;
+        //SetCurrentPos(gamePlayer.playerNumber, 0);
 
         //initial player state
         moveSpeed = defaultSpeed;
@@ -77,11 +78,7 @@ public class RacerController : NetworkBehaviour
     {
         if (!commandExecuted)
         {
-            SwipeControl();
-            //invalidated swipe here
-            //after animation
-            commandExecuted = false;
-                
+            SwipeControl();        
         }
         else
         {
@@ -103,9 +100,8 @@ public class RacerController : NetworkBehaviour
         //movetile
         if (playerRacer.commands[commandIndex].objectCreate != "")
         {
-            NetworkServer.Spawn((GameObject)Instantiate(Resources.Load(playerRacer.commands[commandIndex].objectCreate), 
+            NetworkServer.Spawn((GameObject) Instantiate(Resources.Load(playerRacer.commands[commandIndex].objectCreate), 
                 new Vector2(transform.position.x, transform.position.y), Quaternion.identity));
-
         }
 
         //change speed
@@ -118,7 +114,7 @@ public class RacerController : NetworkBehaviour
         //off ground
         if (playerRacer.commands[commandIndex].offGround) {
             offGround = true;
-            Debug.Log("Currently OffGround!");
+            Debug.Log("Currently Off Ground!");
         }
 
         //change position
@@ -144,7 +140,7 @@ public class RacerController : NetworkBehaviour
         // anim.SetTrigger(playerRacer.commands[commandIndex].name);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)  //The first time the game obj touches a trigger
+    /*private void OnTriggerEnter2D(Collider2D collision)  //The first time the game obj touches a trigger
     {
         //check trap type here
         Debug.Log("Trigger Detected");
@@ -155,10 +151,10 @@ public class RacerController : NetworkBehaviour
 
             else
             {
-                float damage = collision.gameObject.GetComponent<BaseTrap>().damage;
-                gamePlayer.hp -= damage;
-                gamePlayer.OnHpChange(-damage);
-                Debug.Log("HP -" + damage);
+                // float damage = collision.gameObject.GetComponent<BaseTrap>().damage;
+                // gamePlayer.hp -= damage;
+                // gamePlayer.OnHpChange(-damage);
+                // Debug.Log("HP -" + damage);
             }
         }
 
@@ -168,8 +164,7 @@ public class RacerController : NetworkBehaviour
             playerCollision = true;
 
         }
-        
-    }
+    }*/
 
     public void SwipeControl()
     {
@@ -309,7 +304,6 @@ public class RacerController : NetworkBehaviour
 
         if (GetPlayerCurrentPosY() < GetTargetLanePos(targetLane))
         {
-
             transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
         }
         else if (GetPlayerCurrentPosY() > GetTargetLanePos(targetLane))
