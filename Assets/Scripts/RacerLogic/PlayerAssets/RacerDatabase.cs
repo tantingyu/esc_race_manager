@@ -11,7 +11,7 @@ namespace RacerLogic.RacerAssets
                 name: "pipi",
                 sprite: "Players/pipi",
                 hp: 150,
-                st: 50,
+                st: 80,
                 speed: 10,
                 commands: new Command[]
                             {

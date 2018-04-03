@@ -19,7 +19,7 @@ public class RacerSpawner : NetworkBehaviour
     [Command]
     public void CmdSpawnHeal()
     {
-        GameObject healInstance = Instantiate(heal, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        GameObject healInstance = Instantiate(heal, new Vector2(transform.position.x + 0.5f, transform.position.y), Quaternion.identity);
         healInstance.transform.parent = gameObject.transform;
         NetworkServer.Spawn(healInstance);
     }

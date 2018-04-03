@@ -13,6 +13,7 @@ public class NetworkLobbyHook : LobbyHook
 
         //link SyncVars
         localPlayer.playerName = lobby.playerName;
+        localPlayer.playerColor = lobby.playerColor;
         localPlayer.playerNumber = lobby.playerNumber;
         localPlayer.racerIdx = lobby.racerIdx;
     }

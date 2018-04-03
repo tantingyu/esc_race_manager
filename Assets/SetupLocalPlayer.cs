@@ -49,6 +49,7 @@ public class SetupLocalPlayer : NetworkBehaviour
 
     void Start()
     {
+        Debug.Log("Player Number: " + playerNumber);
         // for local testing only
         if (playerNumber == 0)
         {
@@ -91,11 +92,11 @@ public class SetupLocalPlayer : NetworkBehaviour
 
             scoreDisplay = instanceHUD.transform.GetChild(9).gameObject.GetComponent<Text>();
             levelDisplay = instanceHUD.transform.GetChild(10).gameObject.GetComponent<Text>();
-        }
 
-        Renderer[] rends = GetComponentsInChildren<Renderer>();
-        foreach (Renderer r in rends)
-            r.material.color = playerColor;
+            Renderer[] rends = GetComponentsInChildren<Renderer>();
+            foreach (Renderer r in rends)
+                r.material.color = playerColor;
+        }
     }
 
     void Update()

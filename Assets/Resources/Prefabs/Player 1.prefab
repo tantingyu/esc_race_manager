@@ -154,14 +154,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: 
-  playerColor: {r: 0, g: 0, b: 0, a: 0}
+  playerColor: {r: 1, g: 1, b: 1, a: 0}
   racerIdx: 0
   playerNumber: 0
   maxHp: 0
   maxSt: 0
   hp: 0
   st: 0
+  hpRegenTimer: 1
   stRegenTimer: 0
+  scoreTimer: 0
+  scoreDisplay: {fileID: 0}
+  levelDisplay: {fileID: 0}
   playerController: {fileID: 0}
   playerSpawner: {fileID: 0}
   HUD: {fileID: 1134303180389664, guid: b6449693cd5a07b45b546f88f1fc7e2a, type: 2}
@@ -205,7 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shield: {fileID: 1523059576340788, guid: 5d31af49e0b5fc342a0ce78b3d84c0a7, type: 2}
-  heal: {fileID: 1123277265483508, guid: a2d2081e077fb5a47ad317b3384ad912, type: 2}
+  heal: {fileID: 1162879630466894, guid: a8a95de1b0ffbb84d87ff34f58326f38, type: 2}
 --- !u!212 &212652262781512572
 SpriteRenderer:
   m_ObjectHideFlags: 1
