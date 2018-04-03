@@ -190,12 +190,18 @@ public class RacerController : NetworkBehaviour
                             if ((lp.x > fp.x))  //If the movement was to the right)
                             {   //Right swipe
                                 Debug.Log("Right Swipe");
-                                if (targetBlock > 0 && !playerCollision) targetBlock -= 1;
+                                if (targetBlock < positionHorizontal.Length - 1 && !playerCollision)
+                                {
+                                    targetBlock += 1;
+                                }
                             }
                             else
                             {   //Left swipe
                                 Debug.Log("Left Swipe");
-                                if (targetBlock < positionHorizontal.Length - 1 && !playerCollision) targetLane += 1;
+                                if (targetBlock > 0 && !playerCollision)
+                                {
+                                    targetBlock -= 1;
+                                }
                             }
 
                             //edited by GU ZHIYAO 2018-03-21

@@ -91,7 +91,7 @@ MonoBehaviour:
     i13: 79
     i14: 18
     i15: 66
-  m_ServerOnly: 1
+  m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!114 &114463909916802280
 MonoBehaviour:
@@ -125,7 +125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144b747a65084b843afc691f346b6aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 100
   moveSpeed: 3
+  initMovePos: {x: 0, y: 0, z: 0}
   projectile: {fileID: 1006447578581932, guid: 09b534974fa7f5544bc95671687ff452, type: 2}
   projectileTime: 3
 --- !u!212 &212210204741387996
