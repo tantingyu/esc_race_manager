@@ -18,7 +18,7 @@ public class RacerController : NetworkBehaviour
     private float dragDistance = Screen.height * 15 / 100; //minimum distance for a swipe to be registered
     private bool moveVertical = false;
     private bool moveHorizontal = false;
-    private bool playerCollision = false;
+    public bool playerCollision = false;
     //private bool invincible
 
     private readonly float[] zPositions = { 1, 0, -1 };
@@ -42,55 +42,37 @@ public class RacerController : NetworkBehaviour
     public bool offGround = false;
     public bool changePosition = false;
 
-    //private CommandMenuManger commandMenuManger;
-    //private GameObject menu;
-
     private SetupLocalPlayer gamePlayer;
     private Racer playerRacer;
 
     void Start()
     {
-        //get reference to CommandMenu in game scene
-        //menu = GameObject.Find("CommandMenu");
-        //pass self (gameObject) to CommandMenuManager script to CM referenced
-        //commandMenuManger = menu.GetComponent<CommandMenuManger>();
-        //commandMenuManger.player = this.gameObject;
-
-        gamePlayer = GetComponent<SetupLocalPlayer>();
-        playerRacer = gamePlayer.playerRacer;
         anim = GetComponent<Animator>();
-        
-        //playerRacer = Racers[racerIdx];
-        //maxHp = playerRacer.hp;
-        //maxSt = playerRacer.st;
+        moveSpeed = defaultSpeed;
 
         //swipe controller
         //dragDistance is 15% height of the screen
         //dragDistance = Screen.height * 15 / 100;
         //SetCurrentPos(gamePlayer.playerNumber, 0);
 
-        //initial player state
-        moveSpeed = defaultSpeed;
+        // set initial player states
+
     }
 
     //Update is called once per frame
     void Update()
     {
         if (!commandExecuted)
-        {
             SwipeControl();        
-        }
-        else
+
+        if (changePosition)
         {
-            if (changePosition)
-            {
-                moveHorizontally();
-                moveVertically();
-            }
+            moveHorizontally();
+            moveVertically();
         }
     }
 
-    [Command]
+    /*[Command]
     public void CmdRunCmd(int commandIndex)
     {
         Debug.Log("Running a command...");
@@ -100,7 +82,7 @@ public class RacerController : NetworkBehaviour
         //movetile
         if (playerRacer.commands[commandIndex].objectCreate != "")
         {
-            /*
+            
             if (playerRacer.commands[commandIndex].objectCreate == "Heal" || playerRacer.commands[commandIndex].objectCreate == "Shield")
             {
 
@@ -109,15 +91,12 @@ public class RacerController : NetworkBehaviour
                 equipment.transform.parent = gameObject.transform;
 
             }
-            */
-
             
             NetworkServer.Spawn((GameObject)Instantiate(Resources.Load(playerRacer.commands[commandIndex].objectCreate),
             new Vector2(transform.position.x, transform.position.y), Quaternion.identity));
             
         }
         
-
         //change speed
             if (playerRacer.commands[commandIndex].changeSpeed != 0) {
             moveSpeed = playerRacer.commands[commandIndex].changeSpeed;
@@ -152,7 +131,7 @@ public class RacerController : NetworkBehaviour
         }
 
         // anim.SetTrigger(playerRacer.commands[commandIndex].name);
-    }
+    }*/
 
     /*private void OnTriggerEnter2D(Collider2D collision)  //The first time the game obj touches a trigger
     {
@@ -344,7 +323,7 @@ public class RacerController : NetworkBehaviour
     }
     */
 
-    //swipe controller
+    // swipe controller
     public float GetPlayerCurrentPosY()
     {
         return gameObject.transform.position.y;

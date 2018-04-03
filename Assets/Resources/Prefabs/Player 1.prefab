@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114156160100250942}
   - component: {fileID: 114259345943359560}
   - component: {fileID: 114413243212895336}
+  - component: {fileID: 114656323397156320}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player
@@ -100,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commandExecuted: 0
+  playerCollision: 0
   currentLane: 0
   targetLane: 0
   currentBlock: 0
@@ -152,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: 
+  playerColor: {r: 0, g: 0, b: 0, a: 0}
   racerIdx: 0
   playerNumber: 0
   maxHp: 0
@@ -160,6 +163,7 @@ MonoBehaviour:
   st: 0
   stRegenTimer: 0
   playerController: {fileID: 0}
+  playerSpawner: {fileID: 0}
   HUD: {fileID: 1134303180389664, guid: b6449693cd5a07b45b546f88f1fc7e2a, type: 2}
   instanceHUD: {fileID: 0}
   hpBar: {fileID: 0}
@@ -168,24 +172,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  levels:
-  - levelDuration: 0
-    spawnTime: 2
-    trapsToSpawn:
-    - {fileID: 0}
-    spawnTimer: 0
-  - levelDuration: 0
-    spawnTime: 2
-    trapsToSpawn:
-    - {fileID: 0}
-    spawnTimer: 0
-  - levelDuration: 0
-    spawnTime: 2
-    trapsToSpawn:
-    - {fileID: 0}
-    spawnTimer: 0
-  bearTrap: {fileID: 1265403313988480, guid: 59d22404040573e46bdbacebadb964a4, type: 2}
-  isHost: 0
 --- !u!114 &114413243212895336
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,6 +193,19 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114656323397156320
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1239664201434636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49596b64ffe13db42bd893678349239e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shield: {fileID: 1523059576340788, guid: 5d31af49e0b5fc342a0ce78b3d84c0a7, type: 2}
+  heal: {fileID: 1123277265483508, guid: a2d2081e077fb5a47ad317b3384ad912, type: 2}
 --- !u!212 &212652262781512572
 SpriteRenderer:
   m_ObjectHideFlags: 1

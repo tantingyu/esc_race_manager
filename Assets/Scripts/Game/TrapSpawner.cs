@@ -26,7 +26,7 @@ public class TrapSpawner : NetworkBehaviour {
         levels[currentLevel].levelDuration -= Time.deltaTime;
         levels[currentLevel].spawnTimer -= Time.deltaTime;
 
-        if (levels[currentLevel].spawnOnce) {
+        if (levels[currentLevel].spawnOnce && levels[currentLevel].hasTraps()) {
             if (!levels[currentLevel].hasSpawned)
             {
                 CmdSpawnTrap(levels[currentLevel].trapsToSpawn[0], 1);
