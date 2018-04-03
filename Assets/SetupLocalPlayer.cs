@@ -26,8 +26,12 @@ public class SetupLocalPlayer : NetworkBehaviour
     // [SyncVar(hook = "OnChangedSt")]
     public float st;
 
-    // public float hpRegenTimer;
-    public float stRegenTimer;
+    public float hpRegenTimer = 1;
+    public float stRegenTimer = 2;
+
+    public float scoreTimer = 0;
+    public Text scoreDisplay;
+    public Text levelDisplay;
 
     public Racer playerRacer;
     public RacerController playerController;
@@ -48,7 +52,7 @@ public class SetupLocalPlayer : NetworkBehaviour
         // for local testing only
         if (playerNumber == 0)
         {
-            playerNumber = 1;
+            playerNumber = 2;
             playerColor = Color.white;
         }
 
@@ -71,6 +75,7 @@ public class SetupLocalPlayer : NetworkBehaviour
 
             // instantiate HUD and configure elements
             instanceHUD = Instantiate(HUD, transform.position, Quaternion.identity);
+
             for (int i = 0; i < commandButtons.Length; i++)
             {
                 commandButtons[i] = instanceHUD.transform.GetChild(i + 4).gameObject.GetComponent<Button>();
@@ -78,10 +83,14 @@ public class SetupLocalPlayer : NetworkBehaviour
                 int capturedIterator = i;
                 commandButtons[i].onClick.AddListener(() => OnClick(capturedIterator));
             }
+
             hpBar = instanceHUD.transform.GetChild(2).gameObject.GetComponent<Image>();
             stBar = instanceHUD.transform.GetChild(3).gameObject.GetComponent<Image>();
             hpBar.fillAmount = 1;
             stBar.fillAmount = 1;
+
+            scoreDisplay = instanceHUD.transform.GetChild(9).gameObject.GetComponent<Text>();
+            levelDisplay = instanceHUD.transform.GetChild(10).gameObject.GetComponent<Text>();
         }
 
         Renderer[] rends = GetComponentsInChildren<Renderer>();
@@ -96,7 +105,7 @@ public class SetupLocalPlayer : NetworkBehaviour
             Destroy(gameObject);
             SceneManager.LoadScene(0);
         }
-
+       
         stRegenTimer -= Time.deltaTime;
         if (stRegenTimer <= 0)
         {
@@ -105,9 +114,11 @@ public class SetupLocalPlayer : NetworkBehaviour
             stRegenTimer = 2;
         }
 
-        // update hp and st bars
+        scoreTimer += Time.deltaTime;
+        // update score and level displays, hp and st bars
         if (isLocalPlayer)
         {
+            scoreDisplay.text = string.Format("Score: {0:f0}", scoreTimer * 100);
             OnChangedHp(hp);
             OnChangedSt(st);
         }
@@ -115,7 +126,6 @@ public class SetupLocalPlayer : NetworkBehaviour
 
     private void OnClick(int idx)
     {
-        // Debug.Log("Command initiated: " + index);
         float stCost = playerRacer.commands[idx].stCost;
         // stamina check
         if (st >= stCost)
@@ -163,6 +173,20 @@ public class SetupLocalPlayer : NetworkBehaviour
         }
         if (collision.tag == "Player")
             playerController.playerCollision = true;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "heal")
+        {
+            hpRegenTimer -= Time.deltaTime;
+            if (hpRegenTimer <= 0)
+            {
+                if (hp < maxHp)
+                    OnHeal(10);
+                hpRegenTimer = 1;
+            }
+        }
     }
 
     void OnChangedHp(float hp)

@@ -17,7 +17,7 @@ namespace RacerLogic.RacerAssets
                             {
                                 CommandDatabase.Jump,
                                 CommandDatabase.Shield,
-                                CommandDatabase.Doge
+                                CommandDatabase.Sprint
                             }
             );
 
@@ -31,7 +31,7 @@ namespace RacerLogic.RacerAssets
                 commands: new Command[]
                             {
                                 CommandDatabase.Sprint,
-                                CommandDatabase.Doge,
+                                CommandDatabase.Heal,
                                 CommandDatabase.Jump
                             }
             );
@@ -45,7 +45,7 @@ namespace RacerLogic.RacerAssets
                 speed: 12,
                 commands: new Command[]
                             {
-                                CommandDatabase.Doge,
+                                CommandDatabase.Shield,
                                 CommandDatabase.Jump,
                                 CommandDatabase.Sprint
                             }

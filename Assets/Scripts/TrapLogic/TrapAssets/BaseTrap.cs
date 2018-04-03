@@ -13,7 +13,7 @@ public class BaseTrap : NetworkBehaviour {
     private Animator anim;
     private Renderer rend;
     private bool seen = false;
-    private float delay = 0.4f;
+    private float delay = 0.3f;
     //private RacerController playerController;
     //public GameObject player;
     // Use this for initialization
@@ -40,15 +40,18 @@ public class BaseTrap : NetworkBehaviour {
         if (collision.tag == "shield")
         {
             anim.SetTrigger("collide");
-            Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length + delay);
+            Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length + delay); 
         }
 
-       
-        if (collision.tag == "Player" && !collision.gameObject.GetComponent<RacerController>().offGround)
+
+        if (collision.tag == "Player")
         {
-            anim.SetTrigger("collide");
-            Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length+delay);
-            //Network.Destroy(gameObject);
+            if (!collision.gameObject.GetComponent<RacerController>().offGround)
+            {
+                anim.SetTrigger("collide");
+                Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length + delay);
+                //Network.Destroy(gameObject);
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ public class TrapSpawner : NetworkBehaviour {
     public int startLevel = 0;
     public Level[] levels = new Level[3];
 
-    private int currentLevel;
+    public int currentLevel;
     private readonly float[] position = { 1.32f, 0.12f, -1.08f };
     private readonly float[] spawnXRange = new float[2];
 

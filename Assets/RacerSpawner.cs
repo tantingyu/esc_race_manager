@@ -11,7 +11,7 @@ public class RacerSpawner : NetworkBehaviour
     [Command]
     public void CmdSpawnShield()
     {
-        GameObject shieldInstance = Instantiate(shield, new Vector2(transform.position.x + 5, transform.position.y), Quaternion.identity);
+        GameObject shieldInstance = Instantiate(shield, new Vector2(transform.position.x + 3f, transform.position.y), Quaternion.identity);
         shieldInstance.transform.parent = gameObject.transform;
         NetworkServer.Spawn(shieldInstance);
     }
@@ -20,6 +20,7 @@ public class RacerSpawner : NetworkBehaviour
     public void CmdSpawnHeal()
     {
         GameObject healInstance = Instantiate(heal, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
+        healInstance.transform.parent = gameObject.transform;
         NetworkServer.Spawn(healInstance);
     }
 }
