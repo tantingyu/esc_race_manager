@@ -45,7 +45,7 @@ namespace RacerLogic.RacerAssets
                 stCost: 12,
                 changeSpeed: 0,
                 commandLength: 1,
-                offGround: true,
+                offGround: false,
                 changePosition: new int[] {0,0}
 
 
@@ -62,23 +62,41 @@ namespace RacerLogic.RacerAssets
                 stCost: 0,
                 changeSpeed: 0,
                 commandLength: 1,
-                offGround: true,
+                offGround: false,
                 changePosition: new int[] {0,0}
 
             );
 
-        public static Command PlayerTrap2 = new Command
+        public static Command Shield = new Command
            (
-               name: "Rocket",
-               sprite: "Sprites/Traps/Rocket",
+               name: "Shield",
+               sprite: "Sprites/Commands/Shield",
                //description: "Deals 10 damage and stuns target.",
                
-               objectCreate: "Rocket",
-               stCost: 0,
+               objectCreate: "Prefabs/Shield",
+               stCost: 50,
                changeSpeed: 0,
                commandLength: 1,
-               offGround: true,
+               offGround: false,
                changePosition: new int[] {0,0}
+
+           /*abilityEffect: new AbilityEffect[]
+                       {
+                       }*/
+           );
+
+        public static Command Heal = new Command
+           (
+               name: "Heal",
+               sprite: "Sprites/Commands/Heal",
+               //description: "Deals 10 damage and stuns target.",
+
+               objectCreate: "Prefabs/Heal",
+               stCost: 50,
+               changeSpeed: 0,
+               commandLength: 1,
+               offGround: false,
+               changePosition: new int[] { 0, 0 }
 
            /*abilityEffect: new AbilityEffect[]
                        {

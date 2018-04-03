@@ -16,7 +16,7 @@ namespace RacerLogic.RacerAssets
                 commands: new Command[]
                             {
                                 CommandDatabase.Jump,
-                                CommandDatabase.Sprint,
+                                CommandDatabase.Shield,
                                 CommandDatabase.Doge
                             }
             );
