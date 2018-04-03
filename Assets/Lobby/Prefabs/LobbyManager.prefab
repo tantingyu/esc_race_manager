@@ -606,6 +606,7 @@ GameObject:
   - component: {fileID: 11475086}
   - component: {fileID: 11415508}
   - component: {fileID: 114683430219726540}
+  - component: {fileID: 114248513682444618}
   m_Layer: 5
   m_Name: LobbyManager
   m_TagString: Untagged
@@ -3211,7 +3212,7 @@ MonoBehaviour:
   - {fileID: 1006447578581932, guid: 09b534974fa7f5544bc95671687ff452, type: 2}
   - {fileID: 1267910992364174, guid: 8a402a0cdef1aeb43b249e9cf34f1242, type: 2}
   - {fileID: 1523059576340788, guid: 5d31af49e0b5fc342a0ce78b3d84c0a7, type: 2}
-  - {fileID: 1123277265483508, guid: a2d2081e077fb5a47ad317b3384ad912, type: 2}
+  - {fileID: 1162879630466894, guid: a8a95de1b0ffbb84d87ff34f58326f38, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -3268,9 +3269,9 @@ MonoBehaviour:
   isNetworkActive: 0
   matchMaker: {fileID: 0}
   m_ShowLobbyGUI: 0
-  m_MaxPlayers: 4
+  m_MaxPlayers: 3
   m_MaxPlayersPerConnection: 1
-  m_MinPlayers: 1
+  m_MinPlayers: 2
   m_LobbyPlayerPrefab: {fileID: 11487034, guid: ad727d7e1462ecc4f83c898ecc501997,
     type: 2}
   m_GamePlayerPrefab: {fileID: 1239664201434636, guid: 96863ab7ccd98634daa6111c205fdc90,
@@ -6039,7 +6040,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114066516428254280}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 155310}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114011241745398380
@@ -6193,6 +6205,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114248513682444618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ead526af2e96354db0d1c2fd1f650c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114286405375014384
 MonoBehaviour:
   m_ObjectHideFlags: 1
