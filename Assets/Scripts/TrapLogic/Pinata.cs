@@ -6,6 +6,8 @@ using UnityEngine.Networking;
 public class Pinata : NetworkBehaviour {
 
     [SerializeField]
+    private float hp = 100f;
+    [SerializeField]
     private float moveSpeed = 2f;
     [SerializeField]
     private Vector3 initMovePos = new Vector3();

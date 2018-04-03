@@ -23,30 +23,37 @@ public class Projectile : MonoBehaviour {
 
         GameObject[] gos;
         gos = GameObject.FindGameObjectsWithTag("Player");
-        int rand = Random.Range(0, gos.Length);
-
-        target = gos[rand].GetComponent<Transform>();
+        if (gos.Length > 0)
+        {
+            int rand = Random.Range(0, gos.Length);
+            target = gos[rand].GetComponent<Transform>();
+        }
+        else Destroy(this.gameObject);
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+
         if (target == null) explode();
-        if (rend.isVisible)
-            seen = true;
-        if (seen && !rend.isVisible)
-            Destroy(gameObject);
+        else
+        {
+            if (rend.isVisible)
+                seen = true;
+            if (seen && !rend.isVisible)
+                Destroy(gameObject);
+            
+            //rotate towards target
+            Vector3 vectorToTarget = target.position - transform.position;
+            float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * rotationSpeed);
 
-        //rotate towards target
-        Vector3 vectorToTarget = target.position - transform.position;
-        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
-        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * rotationSpeed);
-
-        //move towards target
-        Vector3 dir = transform.rotation * Vector2.right;
-        float step = speed * Time.deltaTime;
-        transform.position += dir * step;
+            //move towards target
+            Vector3 dir = transform.rotation * Vector2.right;
+            float step = speed * Time.deltaTime;
+            transform.position += dir * step;
+        }
     }
 
     public static Vector2 RadianToVector2(float radian)

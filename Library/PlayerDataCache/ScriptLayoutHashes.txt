@@ -1,4 +1,4 @@
-WindowsStandalone
+Android
 SceneListBegin?
 Assets/room.unity
 Assets/race.unity
@@ -18,6 +18,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 6af7378a45ad6da4992a71ef50ddc2eb UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 9ca6347af5ceb6b0d1c105af31b6722e UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TrapInterface
+65f4ad4165e9c4145284849a1d9a0b95 Assembly-CSharp.dll:.Projectile
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CommandMenuManger
 76e06ba249210c5086ddfccdba52b57c Assembly-CSharp.dll:.IconPreview
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Prototype.NetworkLobby.EventSystemChecker
@@ -131,10 +132,12 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Menu
 7564d82f6a2bfa5b9ed53c77650da71c Assembly-CSharp.dll:.BGScroller
 c99104cca6f33db39d236f8efb9aafb4 Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyCountdownPanel
-2a98c1f9e6233b208313904db6279956 Assembly-CSharp.dll:.TrapSpawner
+da77842197dffbec95bbce108785de16 Assembly-CSharp.dll:.TrapSpawner
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
+3cde06cff27d26cf6e81900d369e1fce Assembly-CSharp.dll:.CameraController
 9ec8b688ec9ee78e569c94de4d591801 Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyManager
+a877b7005a40a6f3ebb33263c7351be2 Assembly-CSharp.dll:.HealScript
 0e0671daccfdc07c5a4a410c6329cba4 Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyTopPanel
 e6350cd68599b2548aa4e19498eaa341 Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyPlayer
 1e9e0a0bde0c0f903d7d137aa2c6286b Assembly-CSharp.dll:.RacerController
@@ -152,6 +155,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 3f32f08a64daf40b09ed864d96fe3840 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 73843688b51256aed059f049c540bca8 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
+f8d55d9db7f871f7a505134a12c141a2 Assembly-CSharp.dll:.Pinata
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 96d0fbde9fd209878a0a291f82c9bcdd UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
 64eb32cc721b1cc68a91ed57461e188c UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.RemoteTestResultSender
@@ -166,11 +170,11 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 c0385414027b5bb0037c7106f31119b4 Assembly-CSharp.dll:.ToolSpawner
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TrapOnTrigger
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PlayerSpawner
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 e6d044f887a1c8f6aeb947c2c6381b00 Assembly-CSharp.dll:.EnvironmentSpawner
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MoveTarget
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Prototype.NetworkLobby.DraggablePanel
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SheildScript
 473e71656d9bc97976e87d78e9fe2988 Assembly-CSharp.dll:.BaseTrap
 239d2cc8d353bbfcbefc27fa8f0221cc Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyServerList
-36e3e62744d14053fe844afa99aa0af6 Assembly-CSharp.dll:.Pinata
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.LevelManager
