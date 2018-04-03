@@ -22,7 +22,7 @@ public class RacerController : NetworkBehaviour
     //private bool invincible
 
     private readonly float[] zPositions = { 1, 0, -1 };
-    private readonly float[] positionVertical = { 0.8f, -0.4F, -1.6f };
+    private readonly float[] positionVertical = { 1.7f, 0.5F, -0.7f };
     private readonly float[] positionHorizontal = { -5.5f, -4.5f, -3.5f, -2.5f, -1.5f, -0.5f, 0.5f, 1.5f, 2.5f, 3.5f, 4.5f, 5.5f };
 
     public int currentLane;
@@ -100,12 +100,26 @@ public class RacerController : NetworkBehaviour
         //movetile
         if (playerRacer.commands[commandIndex].objectCreate != "")
         {
-            NetworkServer.Spawn((GameObject) Instantiate(Resources.Load(playerRacer.commands[commandIndex].objectCreate), 
-                new Vector2(transform.position.x, transform.position.y), Quaternion.identity));
+            /*
+            if (playerRacer.commands[commandIndex].objectCreate == "Heal" || playerRacer.commands[commandIndex].objectCreate == "Shield")
+            {
+
+                GameObject equipment = (GameObject)Instantiate(Resources.Load(playerRacer.commands[commandIndex].objectCreate), 
+                    Vector2.zero, Quaternion.identity);
+                equipment.transform.parent = gameObject.transform;
+
+            }
+            */
+
+            
+            NetworkServer.Spawn((GameObject)Instantiate(Resources.Load(playerRacer.commands[commandIndex].objectCreate),
+            new Vector2(transform.position.x, transform.position.y), Quaternion.identity));
+            
         }
+        
 
         //change speed
-        if (playerRacer.commands[commandIndex].changeSpeed != 0) {
+            if (playerRacer.commands[commandIndex].changeSpeed != 0) {
             moveSpeed = playerRacer.commands[commandIndex].changeSpeed;
             SwipeControl();
         }

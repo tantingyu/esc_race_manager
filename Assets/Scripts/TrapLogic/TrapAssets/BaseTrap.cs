@@ -37,8 +37,14 @@ public class BaseTrap : NetworkBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //trigger animation state
+        if (collision.tag == "shield")
+        {
+            anim.SetTrigger("collide");
+            Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length + delay);
+        }
 
-        if (!collision.gameObject.GetComponent<RacerController>().offGround)
+       
+        if (collision.tag == "Player" && !collision.gameObject.GetComponent<RacerController>().offGround)
         {
             anim.SetTrigger("collide");
             Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length+delay);
