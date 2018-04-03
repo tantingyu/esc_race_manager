@@ -2,16 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-    int menuIndex = 0;
-    int settingsIndex = 1;
-
-    public void goToSettings()
-    {
-        SceneManager.LoadScene(settingsIndex);
-    }
+    int lobbyIndex = 0;
 
     public void QuitGame()
     {

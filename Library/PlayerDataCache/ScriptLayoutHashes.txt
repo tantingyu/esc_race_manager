@@ -1,4 +1,4 @@
-Android
+WindowsStandalone
 SceneListBegin?
 Assets/room.unity
 Assets/race.unity
@@ -119,8 +119,9 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:Race.UI.TrapMenu.TrapButton
-9a1d56f2cd250004856286ba2931e1ae Assembly-CSharp.dll:.SetupLocalPlayer
+e34cf912ac9e44f2f2f8fa4087e46e29 Assembly-CSharp.dll:.SetupLocalPlayer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.NetworkLobbyHook
+46537ffb4eb9f050725d94e143ab953b Assembly-CSharp.dll:.RacerSpawner
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TriggerOnTimer
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
@@ -132,15 +133,14 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Menu
 7564d82f6a2bfa5b9ed53c77650da71c Assembly-CSharp.dll:.BGScroller
 c99104cca6f33db39d236f8efb9aafb4 Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyCountdownPanel
-da77842197dffbec95bbce108785de16 Assembly-CSharp.dll:.TrapSpawner
+5ea32db54b2daaf7a621e9f16afc3f33 Assembly-CSharp.dll:.TrapSpawner
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
-3cde06cff27d26cf6e81900d369e1fce Assembly-CSharp.dll:.CameraController
 9ec8b688ec9ee78e569c94de4d591801 Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyManager
 a877b7005a40a6f3ebb33263c7351be2 Assembly-CSharp.dll:.HealScript
 0e0671daccfdc07c5a4a410c6329cba4 Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyTopPanel
 e6350cd68599b2548aa4e19498eaa341 Assembly-CSharp.dll:Prototype.NetworkLobby.LobbyPlayer
-1e9e0a0bde0c0f903d7d137aa2c6286b Assembly-CSharp.dll:.RacerController
+b15b337c5a5dd3d695c4b2ce00b9c14a Assembly-CSharp.dll:.RacerController
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery

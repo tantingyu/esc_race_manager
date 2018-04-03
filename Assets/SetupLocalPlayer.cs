@@ -92,11 +92,11 @@ public class SetupLocalPlayer : NetworkBehaviour
 
             scoreDisplay = instanceHUD.transform.GetChild(9).gameObject.GetComponent<Text>();
             levelDisplay = instanceHUD.transform.GetChild(10).gameObject.GetComponent<Text>();
-
-            Renderer[] rends = GetComponentsInChildren<Renderer>();
-            foreach (Renderer r in rends)
-                r.material.color = playerColor;
         }
+
+        Renderer[] rends = GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in rends)
+            r.material.color = playerColor;
     }
 
     void Update()
@@ -104,7 +104,7 @@ public class SetupLocalPlayer : NetworkBehaviour
         if (hp <= 0)
         {
             Destroy(gameObject);
-            SceneManager.LoadScene(0);
+            // SceneManager.LoadScene(0);
         }
        
         stRegenTimer -= Time.deltaTime;
