@@ -7,6 +7,7 @@ public class Pinata : NetworkBehaviour {
 
     [SerializeField]
     private float moveSpeed = 2f;
+    [SerializeField]
     private Vector3 initMovePos = new Vector3();
     private int state = 0;
 

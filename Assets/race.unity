@@ -190,6 +190,8 @@ MonoBehaviour:
   - {fileID: 1265403313988480, guid: 59d22404040573e46bdbacebadb964a4, type: 2}
   - {fileID: 1644357607710432, guid: 4480075849be33c4bb83ea5cd321e35f, type: 2}
   - {fileID: 1169471565548338, guid: 871fc418a1a49e84b8dcda4addad7633, type: 2}
+  - {fileID: 1006447578581932, guid: 09b534974fa7f5544bc95671687ff452, type: 2}
+  - {fileID: 1678606707862764, guid: 64bf82f43e449a341b986c5bcf8ee2f0, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -414,6 +416,26 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[1].trapsToSpawn.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[2].trapsToSpawn.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[0].trapsToSpawn.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4868411957551616, guid: 610a10b977b941f43b9b8152b8b398a7, type: 2}
       propertyPath: m_LocalPosition.x
       value: -12.88
@@ -446,6 +468,65 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114073002483168786, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[0].spawnTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470981400951578, guid: 610a10b977b941f43b9b8152b8b398a7, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[1].levelDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[1].spawnTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[2].levelDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[2].spawnTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4106740653779728, guid: 610a10b977b941f43b9b8152b8b398a7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[0].trapsToSpawn.Array.data[0]
+      value: 
+      objectReference: {fileID: 1267910992364174, guid: 8a402a0cdef1aeb43b249e9cf34f1242,
+        type: 2}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[0].spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1996200025183688, guid: 610a10b977b941f43b9b8152b8b398a7, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[2].spawnOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[2].trapsToSpawn.Array.data[0]
+      value: 
+      objectReference: {fileID: 1267910992364174, guid: 8a402a0cdef1aeb43b249e9cf34f1242,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 610a10b977b941f43b9b8152b8b398a7, type: 2}
   m_IsPrefabParent: 0
@@ -475,7 +556,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 796791746}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.642, y: -0.08, z: 40}
+  m_LocalPosition: {x: 9.642, y: -0.08, z: -9}
   m_LocalScale: {x: 36.924446, y: 10.243442, z: 1}
   m_Children: []
   m_Father: {fileID: 162645760}
@@ -547,7 +628,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd76ff7043d671e4bb2c3321f264e539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.2
+  scrollSpeed: 0.25
+--- !u!1 &809037062 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1470981400951578, guid: 610a10b977b941f43b9b8152b8b398a7,
+    type: 2}
+  m_PrefabInternal: {fileID: 696089739}
+--- !u!114 &809037065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 809037062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 97
+    i1: 10
+    i2: 16
+    i3: 185
+    i4: 119
+    i5: 185
+    i6: 65
+    i7: 244
+    i8: 59
+    i9: 155
+    i10: 129
+    i11: 82
+    i12: 184
+    i13: 179
+    i14: 152
+    i15: 167
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
 --- !u!1 &1489709157
 GameObject:
   m_ObjectHideFlags: 0
@@ -711,6 +829,22 @@ MonoBehaviour:
     i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!1 &1826811270 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1143743610587916, guid: 610a10b977b941f43b9b8152b8b398a7,
+    type: 2}
+  m_PrefabInternal: {fileID: 696089739}
+--- !u!114 &1826811272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1826811270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931658ffc9712ab45a302bbba0e96bc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2104125982
 GameObject:
   m_ObjectHideFlags: 0
