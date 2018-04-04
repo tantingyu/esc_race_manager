@@ -46,6 +46,8 @@ public class SetupLocalPlayer : NetworkBehaviour
     [SerializeField]
     private Button[] commandButtons = new Button[3];
 
+    public bool invincible = false;
+
 
     void Start()
     {
@@ -157,6 +159,7 @@ public class SetupLocalPlayer : NetworkBehaviour
         playerController.offGround = false;
         playerController.changePosition = false;
         SetButtonsEnabled(true);
+        invincible = false;
     }
 
     void SetButtonsEnabled(bool enable)
@@ -169,8 +172,11 @@ public class SetupLocalPlayer : NetworkBehaviour
     {
         if (collision.tag == "trap")
         {
-            float damage = collision.gameObject.GetComponent<BaseTrap>().damage;
-            OnDamage(damage);
+            if (!playerController.offGround)
+            {
+                float damage = collision.gameObject.GetComponent<BaseTrap>().damage;
+                OnDamage(damage);
+            }
         }
         if (collision.tag == "Player")
             playerController.playerCollision = true;
