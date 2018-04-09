@@ -194,6 +194,7 @@ MonoBehaviour:
   - {fileID: 1678606707862764, guid: 64bf82f43e449a341b986c5bcf8ee2f0, type: 2}
   - {fileID: 1523059576340788, guid: 5d31af49e0b5fc342a0ce78b3d84c0a7, type: 2}
   - {fileID: 1162879630466894, guid: a8a95de1b0ffbb84d87ff34f58326f38, type: 2}
+  - {fileID: 1829115116865488, guid: a6f694225ca61634580927d141b34e04, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -421,7 +422,7 @@ Prefab:
     - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
         type: 2}
       propertyPath: levels.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
         type: 2}
@@ -436,6 +437,11 @@ Prefab:
     - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
         type: 2}
       propertyPath: levels.Array.data[0].trapsToSpawn.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[3].trapsToSpawn.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4868411957551616, guid: 610a10b977b941f43b9b8152b8b398a7, type: 2}
@@ -482,7 +488,7 @@ Prefab:
     - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
         type: 2}
       propertyPath: levels.Array.data[1].levelDuration
-      value: 10
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
         type: 2}
@@ -492,7 +498,7 @@ Prefab:
     - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
         type: 2}
       propertyPath: levels.Array.data[2].levelDuration
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
         type: 2}
@@ -512,7 +518,7 @@ Prefab:
     - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
         type: 2}
       propertyPath: levels.Array.data[0].spawnOnce
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1996200025183688, guid: 610a10b977b941f43b9b8152b8b398a7, type: 2}
       propertyPath: m_IsActive
@@ -529,6 +535,63 @@ Prefab:
       value: 
       objectReference: {fileID: 1267910992364174, guid: 8a402a0cdef1aeb43b249e9cf34f1242,
         type: 2}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[1].spawnCuteTrap
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[2].spawnCuteTrap
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: cuteTrap
+      value: 
+      objectReference: {fileID: 1829115116865488, guid: a6f694225ca61634580927d141b34e04,
+        type: 2}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[0].levelDuration
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[3].levelDuration
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[3].spawnTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[3].trapsToSpawn.Array.data[0]
+      value: 
+      objectReference: {fileID: 1267910992364174, guid: 8a402a0cdef1aeb43b249e9cf34f1242,
+        type: 2}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[3].spawnOnce
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[3].spawnCuteTrap
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114073002483168786, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[0].levelDuration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020497494251794, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: levels.Array.data[0].spawnCuteTrap
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 610a10b977b941f43b9b8152b8b398a7, type: 2}
   m_IsPrefabParent: 0

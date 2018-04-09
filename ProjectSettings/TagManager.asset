@@ -6,6 +6,9 @@ TagManager:
   tags:
   - trap
   - player
+  - heal
+  - shield
+  - laser
   layers:
   - Default
   - TransparentFX

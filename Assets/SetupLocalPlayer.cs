@@ -26,8 +26,9 @@ public class SetupLocalPlayer : NetworkBehaviour
     // [SyncVar(hook = "OnChangedSt")]
     public float st;
 
-    public float hpRegenTimer = 1;
-    public float stRegenTimer = 2;
+    public float hpRegenTimer = 0.3f;
+    public float stRegenTimer = 0.3f;
+    public float laserDmgTimer = 0.1f;
 
     public float scoreTimer = 0;
     public Text scoreDisplay;
@@ -45,7 +46,9 @@ public class SetupLocalPlayer : NetworkBehaviour
 
     [SerializeField]
     private Button[] commandButtons = new Button[3];
-
+    private GameObject[] cautionImg = new GameObject[3];
+    private int currentCautionLane = 0;
+    private TrapSpawner behindTTrapSpawner;
 
     void Start()
     {
@@ -92,6 +95,16 @@ public class SetupLocalPlayer : NetworkBehaviour
 
             scoreDisplay = instanceHUD.transform.GetChild(9).gameObject.GetComponent<Text>();
             levelDisplay = instanceHUD.transform.GetChild(10).gameObject.GetComponent<Text>();
+            
+            for (int i = 0; i < cautionImg.Length; i++)
+            {
+                cautionImg[i] = instanceHUD.transform.GetChild(i + 12).gameObject;
+                cautionImg[i].SetActive(false);
+            }
+
+            //BehindTrapSpawner will inform player if something cute spawns
+            behindTTrapSpawner = GameObject.Find("TrapSpawnManager/BehindTrapSpawner").GetComponent<TrapSpawner>();
+            behindTTrapSpawner.AddObserver(this);
         }
 
         Renderer[] rends = GetComponentsInChildren<Renderer>();
@@ -112,7 +125,7 @@ public class SetupLocalPlayer : NetworkBehaviour
         {
             if (st < maxSt)
                 OnReplenish(1);
-            stRegenTimer = 2;
+            stRegenTimer = 0.3f;
         }
 
         scoreTimer += Time.deltaTime;
@@ -187,8 +200,16 @@ public class SetupLocalPlayer : NetworkBehaviour
             if (hpRegenTimer <= 0)
             {
                 if (hp < maxHp)
-                    OnHeal(10);
-                hpRegenTimer = 1;
+                    OnHeal(2);
+                hpRegenTimer = 0.3f;
+            }
+        }
+        else if (collision.tag == "laser")
+        {
+            laserDmgTimer -= Time.deltaTime;
+            if (laserDmgTimer < 0)
+            {
+                hp -= 2;
             }
         }
     }
@@ -264,5 +285,18 @@ public class SetupLocalPlayer : NetworkBehaviour
                 playerController.changePosition = true;
             }
         }
+    }
+
+    public void OnCaution(int lane)
+    {
+        //To change if multilane 
+        currentCautionLane = lane;
+        cautionImg[lane].SetActive(true);
+        Invoke("OffCaution", 3f);
+    }
+
+    void OffCaution()
+    {
+        cautionImg[currentCautionLane].SetActive(false);
     }
 }

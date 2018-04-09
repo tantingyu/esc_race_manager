@@ -12,6 +12,14 @@ public class TrapSpawner : NetworkBehaviour {
     private readonly float[] position = { 1.32f, 0.12f, -1.08f };
     private readonly float[] spawnXRange = new float[2];
 
+    [SerializeField]
+    private GameObject cuteTrap;
+    private float cuteTrapTimer = 0f;
+    private int cautionLane = 0;
+
+    //A list with stored player GUI that are waiting for something to happen
+    private List<SetupLocalPlayer> observers = new List<SetupLocalPlayer>();
+
     void Start () {
         currentLevel = startLevel;
 		foreach (Level level in levels)
@@ -38,18 +46,30 @@ public class TrapSpawner : NetworkBehaviour {
         else if (levels[currentLevel].spawnTimer < 0 && levels[currentLevel].hasTraps())
         {
             int randTrap = Random.Range(0, levels[currentLevel].trapsToSpawn.Length);
-
+            
             if (RandomBool())
                 CmdSpawnTrap(levels[currentLevel].trapsToSpawn[randTrap], 0);
             if (RandomBool())
                 CmdSpawnTrap(levels[currentLevel].trapsToSpawn[randTrap], 1);
             if (RandomBool())
                 CmdSpawnTrap(levels[currentLevel].trapsToSpawn[randTrap], 2);
-
+            
             levels[currentLevel].spawnTimer = levels[currentLevel].spawnTime;
         }
 
-        // increase difficulty level when duration ends
+        if (levels[currentLevel].spawnCuteTrap)
+        {
+            cuteTrapTimer -= Time.deltaTime;
+            if (cuteTrapTimer < 0)
+            {
+                cautionLane = Random.Range(0, 3);
+                Notify(cautionLane);
+                Invoke("CmdSpawnCuteTrap", 3f);
+                cuteTrapTimer = 10f;
+            }
+        }
+        
+        // increase difficulty level when duration ends otherwise maintain level till everyone dies :D
         if (levels[currentLevel].levelDuration < 0 && currentLevel < levels.Length-1)
             currentLevel++;
     }
@@ -66,6 +86,40 @@ public class TrapSpawner : NetworkBehaviour {
         GameObject trapInstance = Instantiate(trap, pos, Quaternion.identity);
         NetworkServer.Spawn(trapInstance);
     }
+
+    [Command]
+    public void CmdSpawnCuteTrap()
+    {
+        if (cuteTrap != null)
+        {
+            Vector2 pos = new Vector2(cuteTrap.transform.position.x, position[cautionLane]);
+            GameObject trapInstance = Instantiate(cuteTrap, pos, Quaternion.identity);
+            NetworkServer.Spawn(trapInstance);
+        }
+    }
+
+    //Send notifications if dangerous trap is arriving
+    public void Notify(int lane)
+    {
+        for (int i = 0; i < observers.Count; i++)
+        {
+            Debug.Log("CAUTION LANE " + cautionLane);
+            //Notify all observers even though some may not be interested in what has happened
+            //Each observer should check if it is interested in this event
+            observers[i].OnCaution(lane);
+        }
+    }
+
+    //Add observer to the list
+    public void AddObserver(SetupLocalPlayer observer)
+    {
+        observers.Add(observer);
+    }
+
+    //Remove observer from the list
+    public void RemoveObserver(SetupLocalPlayer observer)
+    {
+    }
 }
 
 [System.Serializable]
@@ -75,6 +129,7 @@ public class Level
     public float spawnTime = 2f;
     public GameObject[] trapsToSpawn = new GameObject[1];
     public bool spawnOnce;
+    public bool spawnCuteTrap;
 
     [HideInInspector]
     public float spawnTimer;
