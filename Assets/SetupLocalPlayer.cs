@@ -102,10 +102,11 @@ public class SetupLocalPlayer : NetworkBehaviour
                 cautionImg[i].SetActive(false);
             }
 
-            //BehindTrapSpawner will inform player if something cute spawns
-            behindTTrapSpawner = GameObject.Find("TrapSpawnManager/BehindTrapSpawner").GetComponent<TrapSpawner>();
-            behindTTrapSpawner.AddObserver(this);
         }
+
+        //BehindTrapSpawner will inform player if something cute spawns
+        //behindTTrapSpawner = GameObject.Find("TrapSpawnManager/BehindTrapSpawner").GetComponent<TrapSpawner>();
+        //behindTTrapSpawner.AddObserver(this);
 
         Renderer[] rends = GetComponentsInChildren<Renderer>();
         foreach (Renderer r in rends)

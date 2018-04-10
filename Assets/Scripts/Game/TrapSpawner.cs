@@ -9,7 +9,8 @@ public class TrapSpawner : NetworkBehaviour {
     public Level[] levels = new Level[3];
 
     public int currentLevel;
-    private readonly float[] position = { 1.32f, 0.12f, -1.08f };
+    private readonly float[] position = { 2.03f, 0.65f, -0.82f };
+    private readonly float[] laserPosition = { 1.650871f, 0.2f, -1.24f };
     private readonly float[] spawnXRange = new float[2];
 
     [SerializeField]
@@ -18,7 +19,7 @@ public class TrapSpawner : NetworkBehaviour {
     private int cautionLane = 0;
 
     //A list with stored player GUI that are waiting for something to happen
-    private List<SetupLocalPlayer> observers = new List<SetupLocalPlayer>();
+    private List<SharedCanvas> observers = new List<SharedCanvas>();
 
     void Start () {
         currentLevel = startLevel;
@@ -92,7 +93,7 @@ public class TrapSpawner : NetworkBehaviour {
     {
         if (cuteTrap != null)
         {
-            Vector2 pos = new Vector2(cuteTrap.transform.position.x, position[cautionLane]);
+            Vector2 pos = new Vector2(cuteTrap.transform.position.x, laserPosition[cautionLane]);
             GameObject trapInstance = Instantiate(cuteTrap, pos, Quaternion.identity);
             NetworkServer.Spawn(trapInstance);
         }
@@ -111,7 +112,7 @@ public class TrapSpawner : NetworkBehaviour {
     }
 
     //Add observer to the list
-    public void AddObserver(SetupLocalPlayer observer)
+    public void AddObserver(SharedCanvas observer)
     {
         observers.Add(observer);
     }

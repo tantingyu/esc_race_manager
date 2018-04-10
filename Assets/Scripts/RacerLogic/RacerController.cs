@@ -22,7 +22,7 @@ public class RacerController : NetworkBehaviour
     //private bool invincible
 
     private readonly float[] zPositions = { 1, 0, -1 };
-    private readonly float[] positionVertical = { 1.7f, 0.5F, -0.7f };
+    private readonly float[] positionVertical = { 1.97f, 0.61f, -0.7f };
     private readonly float[] positionHorizontal = { -5.5f, -4.5f, -3.5f, -2.5f, -1.5f, -0.5f, 0.5f, 1.5f, 2.5f, 3.5f, 4.5f, 5.5f };
 
     public int currentLane;
