@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeBackRate: 10
+  healSound: {fileID: 8300000, guid: 96c6b5b6c296b2a4eb7568ef87f72f53, type: 3}
 --- !u!114 &114955122245072182
 MonoBehaviour:
   m_ObjectHideFlags: 1

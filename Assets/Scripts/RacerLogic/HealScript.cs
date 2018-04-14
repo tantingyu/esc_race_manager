@@ -8,6 +8,7 @@ public class HealScript : MonoBehaviour
     [HideInInspector]
     public float lifeBackRate = 10;
     private float duration = 5;
+    public AudioClip healSound;
 
     //private RacerController playerController;
     //public GameObject player;
@@ -15,12 +16,14 @@ public class HealScript : MonoBehaviour
     void Start()
     {
         //myRigidbody.velocity = new Vector2(speed, myRigidbody.velocity.y);
+        SoundManager.instance.PlaySingle(healSound);
         Destroy(gameObject, duration);
     }
 
     // Update is called once per frame
     void Update()
     {
+       
     }
 /*
     private void OnTriggerEnter2D(Collider2D collision)

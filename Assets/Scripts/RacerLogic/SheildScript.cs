@@ -7,6 +7,7 @@ public class SheildScript : MonoBehaviour
 
     //private Rigidbody2D myRigidbody;
     private float shieldDurability = 100;
+    public AudioClip sheildSound;
 
     //private RacerController playerController;
     //public GameObject player;
@@ -15,6 +16,7 @@ public class SheildScript : MonoBehaviour
     {
         //myRigidbody.velocity = new Vector2(speed, myRigidbody.velocity.y);
         //myRigidbody = GetComponent<Rigidbody2D>();
+        SoundManager.instance.PlaySingle(sheildSound);
 
     }
 

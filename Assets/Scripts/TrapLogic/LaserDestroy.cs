@@ -7,11 +7,13 @@ public class LaserDestroy : MonoBehaviour {
     private float timer;
     private Animator anim;
     private float delay = 0.3f;
+    public AudioClip laserSound;
 
     // Use this for initialization
     void Start () {
         //timer = laserTTL;
         anim = GetComponent<Animator>();
+        SoundManager.instance.PlayLoop(laserSound);
 	}
 	
 	// Update is called once per frame
@@ -19,6 +21,7 @@ public class LaserDestroy : MonoBehaviour {
         laserTTL -= Time.deltaTime;
 		if (laserTTL<0)
         {
+            SoundManager.instance.loopSource.Stop();
             anim.SetTrigger("EndLaser");
             Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length + delay);
         }

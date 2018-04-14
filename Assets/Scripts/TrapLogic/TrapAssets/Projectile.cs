@@ -14,6 +14,8 @@ public class Projectile : MonoBehaviour {
     private Renderer rend;
     private bool seen = false;
     private float delay = 0.4f;
+    public AudioClip missileLaunchSound;
+    public AudioClip missileExplosionSound;
 
     // Use this for initialization
     void Start () {
@@ -21,6 +23,7 @@ public class Projectile : MonoBehaviour {
         anim = GetComponent<Animator>();
         rend = GetComponent<Renderer>();
 
+        SoundManager.instance.PlaySingle(missileLaunchSound);
         GameObject[] gos;
         gos = GameObject.FindGameObjectsWithTag("Player");
         if (gos.Length > 0)
@@ -68,6 +71,7 @@ public class Projectile : MonoBehaviour {
 
     void explode()
     {
+        SoundManager.instance.PlaySingle(missileExplosionSound);
         anim.SetTrigger("collide");
         Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length + delay);
     }

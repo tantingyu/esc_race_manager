@@ -122,6 +122,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 1
   speed: 4
+  missileLaunchSound: {fileID: 8300000, guid: 32afd1dcf2390934e95b0037f72415fb, type: 3}
+  missileExplosionSound: {fileID: 8300000, guid: 7c7f7a5695e375948a850ca38fb76b0c,
+    type: 3}
 --- !u!114 &114529985849379424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -169,6 +172,7 @@ MonoBehaviour:
   movePosition: 0
   velocity: {x: 0, y: 0}
   ground: 0
+  baseTrapSound: {fileID: 0}
 --- !u!114 &114964634803373520
 MonoBehaviour:
   m_ObjectHideFlags: 1

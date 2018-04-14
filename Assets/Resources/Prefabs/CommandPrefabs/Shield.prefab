@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 822df31f286ac1c43a825abbb13db366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sheildSound: {fileID: 8300000, guid: 515d9daa96256234db2437d410a1672e, type: 3}
 --- !u!114 &114373255222408176
 MonoBehaviour:
   m_ObjectHideFlags: 1

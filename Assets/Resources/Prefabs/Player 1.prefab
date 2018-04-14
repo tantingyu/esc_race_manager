@@ -173,6 +173,7 @@ MonoBehaviour:
   instanceHUD: {fileID: 0}
   hpBar: {fileID: 0}
   stBar: {fileID: 0}
+  cautionSound: {fileID: 8300000, guid: de8f2092d2830964bbf7abdb5a0e58cd, type: 3}
   commandButtons:
   - {fileID: 0}
   - {fileID: 0}
