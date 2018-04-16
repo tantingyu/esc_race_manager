@@ -30,12 +30,12 @@ namespace Prototype.NetworkLobby
         public void OnClickHost()
         {
             lobbyManager.StartHost();
-            LobbySoundManager.instance.PlaySingle(buttonSound);
+            // LobbySoundManager.instance.PlaySingle(buttonSound);
         }
 
         public void OnClickJoin()
         {
-            LobbySoundManager.instance.PlaySingle(buttonSound);
+            // LobbySoundManager.instance.PlaySingle(buttonSound);
             lobbyManager.ChangeTo(lobbyPanel);
 
             lobbyManager.networkAddress = ipInput.text;
@@ -49,7 +49,7 @@ namespace Prototype.NetworkLobby
 
         public void OnClickDedicated()
         {
-            LobbySoundManager.instance.PlaySingle(buttonSound);
+            // LobbySoundManager.instance.PlaySingle(buttonSound);
             lobbyManager.ChangeTo(null);
             lobbyManager.StartServer();
 
@@ -60,7 +60,7 @@ namespace Prototype.NetworkLobby
 
         public void OnClickCreateMatchmakingGame()
         {
-            LobbySoundManager.instance.PlaySingle(buttonSound);
+            // LobbySoundManager.instance.PlaySingle(buttonSound);
             lobbyManager.StartMatchMaker();
             lobbyManager.matchMaker.CreateMatch(
                 matchNameInput.text,
@@ -78,7 +78,7 @@ namespace Prototype.NetworkLobby
 
         public void OnClickOpenServerList()
         {
-            LobbySoundManager.instance.PlaySingle(buttonSound);
+            // LobbySoundManager.instance.PlaySingle(buttonSound);
             lobbyManager.StartMatchMaker();
             lobbyManager.backDelegate = lobbyManager.SimpleBackClbk;
             lobbyManager.ChangeTo(lobbyServerList);
