@@ -44,6 +44,10 @@ public class SetupLocalPlayer : NetworkBehaviour
     public Image hpBar;
     public Image stBar;
 
+    public AudioClip horseNeigh;
+    public AudioClip jumpSound;
+    public AudioClip deathSound;
+
     [SerializeField]
     private Button[] commandButtons = new Button[3];
     private GameObject[] cautionImg = new GameObject[3];
@@ -116,6 +120,8 @@ public class SetupLocalPlayer : NetworkBehaviour
         if (hp <= 0)
         {
             Destroy(gameObject);
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.PlayOneShot(deathSound);
             // SceneManager.LoadScene(0);
         }
        
@@ -248,8 +254,11 @@ public class SetupLocalPlayer : NetworkBehaviour
 
     void RunCommand(int idx)
     {
+        AudioSource audio1 = GetComponent<AudioSource>();
+        audio1.PlayOneShot(horseNeigh);
         Command command = playerRacer.commands[idx];
         anim.SetTrigger(command.name);
+
 
         if (command.objectCreate != "")
         {
@@ -261,7 +270,12 @@ public class SetupLocalPlayer : NetworkBehaviour
 
         float changeSpeed = command.changeSpeed;
         if (changeSpeed != 0)
+        {
             playerController.moveSpeed = changeSpeed;
+            AudioSource audio2 = GetComponent<AudioSource>();
+            audio2.PlayOneShot(jumpSound);
+        }
+            
 
         bool offGround = command.offGround;
         if (offGround)
