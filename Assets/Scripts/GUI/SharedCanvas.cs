@@ -18,6 +18,7 @@ public class SharedCanvas : MonoBehaviour {
     float scoreTimer = 0;
     Text scoreDisplay;
     Text levelDisplay;
+    public AudioClip cautionSound;
 
     // Use this for initialization
     void Start () {
@@ -72,6 +73,7 @@ public class SharedCanvas : MonoBehaviour {
         //To change if multilane 
         currentCautionLane = lane;
         cautionImg[lane].SetActive(true);
+        SoundManager.instance.PlayLoop(cautionSound);
         Invoke("OffCaution", 3f);
     }
 
@@ -83,5 +85,6 @@ public class SharedCanvas : MonoBehaviour {
     void OffCaution()
     {
         cautionImg[currentCautionLane].SetActive(false);
+        SoundManager.instance.loopSource.Stop();
     }
 }

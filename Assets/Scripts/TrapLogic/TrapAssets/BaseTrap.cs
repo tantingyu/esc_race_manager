@@ -41,7 +41,7 @@ public class BaseTrap : NetworkBehaviour {
         
         if (collision.tag == "shield")
         {
-            // SoundManager.instance.PlaySingle(baseTrapSound);
+            SoundManager.instance.PlaySingle(baseTrapSound);
             anim.SetTrigger("collide");
             Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length + delay); 
         }
@@ -51,7 +51,7 @@ public class BaseTrap : NetworkBehaviour {
         {
             if (!collision.gameObject.GetComponent<RacerController>().offGround)
             {
-                // SoundManager.instance.PlaySingle(baseTrapSound);
+                SoundManager.instance.PlaySingle(baseTrapSound);
                 anim.SetTrigger("collide");
                 Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length + delay);
                 //Network.Destroy(gameObject);
