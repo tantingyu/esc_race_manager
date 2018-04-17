@@ -49,6 +49,7 @@ public class SetupLocalPlayer : NetworkBehaviour
     private GameObject[] cautionImg = new GameObject[3];
     private int currentCautionLane = 0;
     private TrapSpawner behindTTrapSpawner;
+    private Animator anim;
 
     void Start()
     {
@@ -104,10 +105,7 @@ public class SetupLocalPlayer : NetworkBehaviour
 
         }
 
-        //BehindTrapSpawner will inform player if something cute spawns
-        //behindTTrapSpawner = GameObject.Find("TrapSpawnManager/BehindTrapSpawner").GetComponent<TrapSpawner>();
-        //behindTTrapSpawner.AddObserver(this);
-
+        anim = GetComponent<Animator>();
         Renderer[] rends = GetComponentsInChildren<Renderer>();
         foreach (Renderer r in rends)
             r.material.color = playerColor;
@@ -251,6 +249,7 @@ public class SetupLocalPlayer : NetworkBehaviour
     void RunCommand(int idx)
     {
         Command command = playerRacer.commands[idx];
+        anim.SetTrigger(command.name);
 
         if (command.objectCreate != "")
         {

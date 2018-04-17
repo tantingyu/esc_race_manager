@@ -13,17 +13,17 @@ namespace RacerLogic.RacerAssets
                 //description: "Jump...",
                 objectCreate: "",
                 stCost: 10,
-                changeSpeed: 0,
-                commandLength: 3,
+                changeSpeed: 5,
+                commandLength: 1,
                 offGround: true,
-                changePosition: new int[] {0,4} //(lane,block)
+                changePosition: new int[] {0,2} //(lane,block)
 
             );
 
-        public static Command Sprint = new Command
+        public static Command Dash = new Command
             (
-                name: "Sprint",
-                sprite: "Sprites/Commands/Sprint",
+                name: "Dash",
+                sprite: "Sprites/Commands/Dash",
                 //description: "Deals 10 damage and stuns target.",
                 
                 objectCreate: "",
