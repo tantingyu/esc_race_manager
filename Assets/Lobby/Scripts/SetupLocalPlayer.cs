@@ -40,6 +40,7 @@ public class SetupLocalPlayer : NetworkBehaviour
 
     public GameObject HUD;
     public GameObject instanceHUD;
+    public SpriteRenderer indicator;
 
     public Image hpBar;
     public Image stBar;
@@ -62,8 +63,8 @@ public class SetupLocalPlayer : NetworkBehaviour
         // for local testing only
         if (playerNumber == 0)
         {
-            playerNumber = 2;
-            playerColor = Color.white;
+            playerNumber = 1;
+            playerColor = Color.red;
         }
 
         playerRacer = Racers[playerNumber - 1];
@@ -99,20 +100,25 @@ public class SetupLocalPlayer : NetworkBehaviour
             hpBar.fillAmount = 1;
             stBar.fillAmount = 1;
 
+            indicator = Instantiate(transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>(), 
+                    new Vector2(transform.position.x + 1.0f, transform.position.y + 1.5f), Quaternion.identity);
+            indicator.transform.parent = gameObject.transform;
+            indicator.color = playerColor;
+
             // scoreDisplay = instanceHUD.transform.GetChild(9).gameObject.GetComponent<Text>();
             // levelDisplay = instanceHUD.transform.GetChild(10).gameObject.GetComponent<Text>();
-            
+
             for (int i = 0; i < cautionImg.Length; i++)
             {
                 cautionImg[i] = instanceHUD.transform.GetChild(i + 12).gameObject;
                 cautionImg[i].SetActive(false);
             }
-
         }
 
         anim = GetComponent<Animator>();
         linerend = GetComponent<LineRenderer>();
         linerend.enabled = false;
+
         Renderer[] rends = GetComponentsInChildren<Renderer>();
         foreach (Renderer r in rends)
             r.material.color = playerColor;
@@ -133,7 +139,7 @@ public class SetupLocalPlayer : NetworkBehaviour
         {
             if (st < maxSt)
                 OnReplenish(1);
-            stRegenTimer = 0.3f;
+            stRegenTimer = 0.5f;
         }
 
         // scoreTimer += Time.deltaTime;
@@ -176,7 +182,7 @@ public class SetupLocalPlayer : NetworkBehaviour
         playerController.commandExecuted = false;
         playerController.moveSpeed = playerController.defaultSpeed;
         playerController.offGround = false;
-        playerController.attack=false;
+        playerController.attack = false;
         linerend.enabled = false;
         playerController.changePosition = false;
         SetButtonsEnabled(true);
@@ -195,6 +201,10 @@ public class SetupLocalPlayer : NetworkBehaviour
             if (!playerController.offGround)
             {
                 float damage = collision.gameObject.GetComponent<BaseTrap>().damage;
+                if (playerController.attack)
+                {
+                    damage /= 2;
+                }
                 OnDamage(damage);
             }
         }

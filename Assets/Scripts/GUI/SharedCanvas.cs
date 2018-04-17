@@ -20,6 +20,8 @@ public class SharedCanvas : MonoBehaviour {
     Text levelDisplay;
     public AudioClip cautionSound;
 
+    float delayDeathScreen = 3.0f;
+
     // Use this for initialization
     void Start () {
         for (int i = 0; i < cautionImg.Length; i++)
@@ -58,12 +60,19 @@ public class SharedCanvas : MonoBehaviour {
             scoreTimer += Time.deltaTime;
             scoreDisplay.text = string.Format("Score: {0:f0}", scoreTimer * 100);
         }
+        else if (delayDeathScreen <= 0)
+        {
+            deathPanel.SetActive(true);
+        }
+        else
+        {
+            delayDeathScreen -= Time.deltaTime;
+        }
         
         if (numPlayersAlive == 0)
         {
             Text highScore = deathPanel.transform.GetChild(1).gameObject.GetComponent<Text>();
             highScore.text = string.Format("{0:f0}", scoreTimer * 100);
-            deathPanel.SetActive(true);
             gameOver = true;
         }
     }

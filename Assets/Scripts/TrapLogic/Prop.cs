@@ -46,7 +46,7 @@ public class Prop : MonoBehaviour {
 
         if (collision.tag == "Player")
         {
-            if (!collision.gameObject.GetComponent<RacerController>().attack)
+            if (collision.gameObject.GetComponent<RacerController>().attack)
             {
                 //SoundManager.instance.PlaySingle(baseTrapSound);
                 //anim.SetTrigger("Death");

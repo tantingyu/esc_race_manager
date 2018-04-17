@@ -10,9 +10,6 @@ public class SheildScript : MonoBehaviour
     private float shieldDurability = 100;
     public AudioClip sheildSound;
 
-    public GameObject healthBar;
-    public Image foreground;
-
     //private RacerController playerController;
     //public GameObject player;
     // Use this for initialization
@@ -21,10 +18,6 @@ public class SheildScript : MonoBehaviour
         //myRigidbody.velocity = new Vector2(speed, myRigidbody.velocity.y);
         //myRigidbody = GetComponent<Rigidbody2D>();
         // SoundManager.instance.PlaySingle(sheildSound);
-
-        healthBar = Instantiate(healthBar, transform.position, Quaternion.identity);
-        foreground = healthBar.transform.GetChild(1).gameObject.GetComponent<Image>();
-        foreground.fillAmount = 1;
     }
 
     // Update is called once per frame
@@ -46,7 +39,6 @@ public class SheildScript : MonoBehaviour
             //Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length + delay);
             float damage = collision.gameObject.GetComponent<BaseTrap>().damage;
             shieldDurability -= damage;
-            foreground.fillAmount = shieldDurability / 100;
             Debug.Log("AT field Strength: "+shieldDurability);
         }
     }

@@ -12,7 +12,7 @@ namespace RacerLogic.RacerAssets
                 sprite: "Sprites/Commands/Jump",
                 //description: "Jump...",
                 objectCreate: "",
-                stCost: 10,
+                stCost: 20,
                 changeSpeed: 5,
                 commandLength: 1,
                 offGround: true,
@@ -27,11 +27,11 @@ namespace RacerLogic.RacerAssets
                 //description: "Deals 10 damage and stuns target.",
                 
                 objectCreate: "",
-                stCost: 12,
+                stCost: 20,
                 changeSpeed: 10,
                 commandLength: 1,
-                offGround: true,
-                changePosition: new int[] {0,2}
+                offGround: false,
+                changePosition: new int[] {0, 5}
 
 
             );
