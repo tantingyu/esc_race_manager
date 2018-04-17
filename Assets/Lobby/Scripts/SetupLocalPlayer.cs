@@ -54,6 +54,7 @@ public class SetupLocalPlayer : NetworkBehaviour
     private int currentCautionLane = 0;
     private TrapSpawner behindTTrapSpawner;
     private Animator anim;
+    private LineRenderer linerend;
 
     void Start()
     {
@@ -110,6 +111,8 @@ public class SetupLocalPlayer : NetworkBehaviour
         }
 
         anim = GetComponent<Animator>();
+        linerend = GetComponent<LineRenderer>();
+        linerend.enabled = false;
         Renderer[] rends = GetComponentsInChildren<Renderer>();
         foreach (Renderer r in rends)
             r.material.color = playerColor;
@@ -173,6 +176,8 @@ public class SetupLocalPlayer : NetworkBehaviour
         playerController.commandExecuted = false;
         playerController.moveSpeed = playerController.defaultSpeed;
         playerController.offGround = false;
+        playerController.attack=false;
+        linerend.enabled = false;
         playerController.changePosition = false;
         SetButtonsEnabled(true);
     }
@@ -193,6 +198,13 @@ public class SetupLocalPlayer : NetworkBehaviour
                 OnDamage(damage);
             }
         }
+
+        if (collision.tag == "prop")
+        {
+            if (hp < maxHp)
+                OnHeal(30);
+        }
+
         if (collision.tag == "Player")
             playerController.playerCollision = true;
     }
@@ -259,6 +271,11 @@ public class SetupLocalPlayer : NetworkBehaviour
         Command command = playerRacer.commands[idx];
         anim.SetTrigger(command.name);
 
+        if (command.name == "Dash")
+        {
+            linerend.enabled = true;
+            playerController.attack = true;
+        }
 
         if (command.objectCreate != "")
         {
@@ -299,18 +316,5 @@ public class SetupLocalPlayer : NetworkBehaviour
                 playerController.changePosition = true;
             }
         }
-    }
-
-    public void OnCaution(int lane)
-    {
-        //To change if multilane 
-        currentCautionLane = lane;
-        cautionImg[lane].SetActive(true);
-        Invoke("OffCaution", 3f);
-    }
-
-    void OffCaution()
-    {
-        cautionImg[currentCautionLane].SetActive(false);
     }
 }

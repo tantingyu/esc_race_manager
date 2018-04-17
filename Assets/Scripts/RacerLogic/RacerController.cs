@@ -40,7 +40,10 @@ public class RacerController : NetworkBehaviour
     public float defaultSpeed = 5;
     [HideInInspector]
     public bool offGround = false;
+    [HideInInspector]
     public bool changePosition = false;
+    [HideInInspector]
+    public bool attack;
 
     private SetupLocalPlayer gamePlayer;
     private Racer playerRacer;
