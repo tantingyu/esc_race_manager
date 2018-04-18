@@ -20,6 +20,7 @@ public class TrapSpawner : NetworkBehaviour {
 
     //A list with stored player GUI that are waiting for something to happen
     private List<SharedCanvas> observers = new List<SharedCanvas>();
+    public SharedCanvas sharedCanvas;
 
     void Start () {
         currentLevel = startLevel;

@@ -35,9 +35,9 @@ public class Pinata : NetworkBehaviour {
 
         if (hp <= playerDamage)
         {
-            //anim.SetTrigger("IsDead");
-            //Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length + 1.3f);
-            Destroy(gameObject);
+            anim.SetTrigger("IsDead");
+            Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length + 1.3f);
+            //Destroy(gameObject);
             Debug.Log("The pinata is killed by our hero!");
         }
 

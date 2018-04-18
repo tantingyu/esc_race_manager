@@ -36,8 +36,8 @@ public class SharedCanvas : MonoBehaviour {
         }
 
         //BehindTrapSpawner will inform player if something cute spawns
-        //behindTTrapSpawner = GameObject.Find("TrapSpawnManager/BehindTrapSpawner").GetComponent<TrapSpawner>();
-        //behindTTrapSpawner.AddObserver(this);
+        behindTTrapSpawner = GameObject.Find("TrapSpawnManager/BehindTrapSpawner").GetComponent<TrapSpawner>();
+        behindTTrapSpawner.AddObserver(this);
 
         scoreDisplay = transform.GetChild(3).gameObject.GetComponent<Text>();
         levelDisplay = transform.GetChild(4).gameObject.GetComponent<Text>();
@@ -88,6 +88,7 @@ public class SharedCanvas : MonoBehaviour {
     public void UpdateObserver(int eventType, int lane)
     {
         // call concrete method by list index (event type)
+        Debug.Log("Observer has received notification.");
         setActive[eventType](lane);
     }
 
@@ -95,6 +96,7 @@ public class SharedCanvas : MonoBehaviour {
     public void OnCaution(int lane)
     {
         //To change if multilane 
+        Debug.Log("OnCaution called.");
         currentCautionLane = lane;
         cautionImg[lane].SetActive(true);
         SoundManager.instance.PlayLoop(cautionSound);
