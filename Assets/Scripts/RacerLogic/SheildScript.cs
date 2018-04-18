@@ -15,9 +15,8 @@ public class SheildScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //myRigidbody.velocity = new Vector2(speed, myRigidbody.velocity.y);
-        //myRigidbody = GetComponent<Rigidbody2D>();
-        // SoundManager.instance.PlaySingle(sheildSound);
+        AudioSource audio = GetComponent<AudioSource>();
+        audio.PlayOneShot(sheildSound);
     }
 
     // Update is called once per frame

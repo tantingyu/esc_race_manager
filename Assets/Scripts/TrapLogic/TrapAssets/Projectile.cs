@@ -23,7 +23,9 @@ public class Projectile : MonoBehaviour {
         anim = GetComponent<Animator>();
         rend = GetComponent<Renderer>();
 
-        SoundManager.instance.PlaySingle(missileLaunchSound);
+        AudioSource audio = GetComponent<AudioSource>();
+        audio.PlayOneShot(missileLaunchSound);
+
         GameObject[] gos;
         gos = GameObject.FindGameObjectsWithTag("Player");
         if (gos.Length > 0)
@@ -71,14 +73,17 @@ public class Projectile : MonoBehaviour {
 
     void explode()
     {
-        SoundManager.instance.PlaySingle(missileExplosionSound);
+        AudioSource audio2 = GetComponent<AudioSource>();
+        audio2.PlayOneShot(missileExplosionSound);
+        //SoundManager.instance.PlaySingle(missileExplosionSound);
         anim.SetTrigger("collide");
         Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length + delay);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        explode();
+        if(collision.tag == "Player")
+            explode();
     }
 
     

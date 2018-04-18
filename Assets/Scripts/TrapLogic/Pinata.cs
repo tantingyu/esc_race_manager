@@ -7,6 +7,7 @@ public class Pinata : NetworkBehaviour {
 
     [SerializeField]
     private float hp = 100f;
+    private float playerDamage = 50;
     [SerializeField]
     private float moveSpeed = 2f;
     [SerializeField]
@@ -15,6 +16,7 @@ public class Pinata : NetworkBehaviour {
 
     [SerializeField]
     private GameObject projectile;
+    private Animator anim;
     [SerializeField]
     private float projectileTime=1f;
     private float p_timer;
@@ -22,10 +24,21 @@ public class Pinata : NetworkBehaviour {
 	// Use this for initialization
 	void Start () {
         p_timer = projectileTime;
-	}
+        //GameObject player = GetComponent<SetupLocalPlayer>();
+        anim = GetComponent<Animator>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (hp <= playerDamage)
+        {
+            //anim.SetTrigger("IsDead");
+            //Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length + 1.3f);
+            Destroy(gameObject);
+            Debug.Log("The pinata is killed by our hero!");
+        }
+
         p_timer -= Time.deltaTime;
         
         switch (state) {
@@ -50,6 +63,21 @@ public class Pinata : NetworkBehaviour {
                 break;
         }
 	}
+
+    private void OnTriggerEnter2D(Collider2D collisionObj)
+    {
+        Debug.Log("collision with pinata");
+        if (collisionObj.gameObject.tag == "Player")
+        {
+
+            if (collisionObj.gameObject.GetComponent<SetupLocalPlayer>().playerController.attack)
+            {
+                
+                hp -= playerDamage;
+                Debug.Log("Pinata HP: " + hp);
+            }
+        }
+    }
 
     [Command]
     public void CmdSpawnProjectile(GameObject projectile)
