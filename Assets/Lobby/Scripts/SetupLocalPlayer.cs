@@ -56,6 +56,7 @@ public class SetupLocalPlayer : NetworkBehaviour
     private TrapSpawner behindTTrapSpawner;
     private Animator anim;
     private LineRenderer linerend;
+    private bool dead = false;
 
     void Start()
     {
@@ -128,12 +129,9 @@ public class SetupLocalPlayer : NetworkBehaviour
     {
         if (hp <= 0)
         {
-            Destroy(gameObject);
-            AudioSource audio = GetComponent<AudioSource>();
-            audio.PlayOneShot(deathSound);
-            // SceneManager.LoadScene(0);
+            TriggerDeath();
         }
-       
+
         stRegenTimer -= Time.deltaTime;
         if (stRegenTimer <= 0)
         {
@@ -211,7 +209,7 @@ public class SetupLocalPlayer : NetworkBehaviour
 
         if (collision.tag == "prop")
         {
-            if (hp < maxHp)
+            if (hp < maxHp && playerController.attack)
                 OnHeal(30);
         }
 
@@ -251,9 +249,23 @@ public class SetupLocalPlayer : NetworkBehaviour
         stBar.fillAmount = st / maxSt;
     }
 
+    void TriggerDeath()
+    {
+        if (!dead)
+        {
+            dead = true;
+            anim.SetTrigger("Death");
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.PlayOneShot(deathSound);
+            Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length + 1.3f);
+            // SceneManager.LoadScene(0);
+        }
+    }
+
     public void OnDamage(float damage)
     {
         // damage ui animation
+        anim.SetTrigger("Damaged");
         // damage ui sfx
         hp -= damage;
     }
