@@ -30,10 +30,6 @@ public class SetupLocalPlayer : NetworkBehaviour
     public float stRegenTimer = 0.3f;
     public float laserDmgTimer = 0.1f;
 
-    // public float scoreTimer = 0;
-    // public Text scoreDisplay;
-    // public Text levelDisplay;
-
     public Racer playerRacer;
     public RacerController playerController;
     public RacerSpawner playerSpawner;
@@ -51,9 +47,6 @@ public class SetupLocalPlayer : NetworkBehaviour
 
     [SerializeField]
     private Button[] commandButtons = new Button[3];
-    private GameObject[] cautionImg = new GameObject[3];
-    private int currentCautionLane = 0;
-    private TrapSpawner behindTTrapSpawner;
     private Animator anim;
     private LineRenderer linerend;
     private bool dead = false;
@@ -62,10 +55,10 @@ public class SetupLocalPlayer : NetworkBehaviour
     {
         Debug.Log("Player Number: " + playerNumber);
         // for local testing only
-        if (playerNumber == 0)
+        if (playerNumber == 0 || playerNumber == 1)
         {
             playerNumber = 1;
-            playerColor = Color.red;
+            playerColor = Color.white;
         }
 
         playerRacer = Racers[playerNumber - 1];
@@ -105,15 +98,6 @@ public class SetupLocalPlayer : NetworkBehaviour
                     new Vector2(transform.position.x + 1.0f, transform.position.y + 1.5f), Quaternion.identity);
             indicator.transform.parent = gameObject.transform;
             indicator.color = playerColor;
-
-            // scoreDisplay = instanceHUD.transform.GetChild(9).gameObject.GetComponent<Text>();
-            // levelDisplay = instanceHUD.transform.GetChild(10).gameObject.GetComponent<Text>();
-
-            for (int i = 0; i < cautionImg.Length; i++)
-            {
-                cautionImg[i] = instanceHUD.transform.GetChild(i + 12).gameObject;
-                cautionImg[i].SetActive(false);
-            }
         }
 
         anim = GetComponent<Animator>();
