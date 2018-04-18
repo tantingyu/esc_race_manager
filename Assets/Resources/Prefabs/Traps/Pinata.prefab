@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144b747a65084b843afc691f346b6aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pinataMusic: {fileID: 8300000, guid: 7acc74f4ae0f08b41ab141e6315be415, type: 3}
   hp: 100
   moveSpeed: 3
   initMovePos: {x: 0, y: 0, z: 0}

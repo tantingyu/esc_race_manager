@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class Pinata : NetworkBehaviour {
 
+    public AudioClip pinataMusic;
     [SerializeField]
     private float hp = 100f;
     private float playerDamage = 50;
@@ -26,6 +27,7 @@ public class Pinata : NetworkBehaviour {
         p_timer = projectileTime;
         //GameObject player = GetComponent<SetupLocalPlayer>();
         anim = GetComponent<Animator>();
+        SoundManager.instance.musicSource.PlayOneShot(pinataMusic);
     }
 	
 	// Update is called once per frame
@@ -74,6 +76,7 @@ public class Pinata : NetworkBehaviour {
             {
                 
                 hp -= playerDamage;
+                SoundManager.instance.musicSource.Stop();
                 Debug.Log("Pinata HP: " + hp);
             }
         }
