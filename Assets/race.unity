@@ -572,6 +572,10 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 8300000, guid: 04a6be8bccc5b544db744092eaf8c92c, type: 3}
+    - target: {fileID: 1725141018152746, guid: ff616cb0cd86403479ce3d8b90f1deed, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ff616cb0cd86403479ce3d8b90f1deed, type: 2}
   m_IsPrefabParent: 0
@@ -1173,6 +1177,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114073002483168786, guid: 610a10b977b941f43b9b8152b8b398a7,
+        type: 2}
+      propertyPath: sharedCanvas
+      value: 
+      objectReference: {fileID: 32841476}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 610a10b977b941f43b9b8152b8b398a7, type: 2}
   m_IsPrefabParent: 0

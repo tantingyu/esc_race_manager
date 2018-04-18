@@ -48,10 +48,9 @@ public class Prop : MonoBehaviour {
         {
             if (collision.gameObject.GetComponent<RacerController>().attack)
             {
-                //SoundManager.instance.PlaySingle(baseTrapSound);
-                //anim.SetTrigger("Death");
-                Destroy(gameObject);//, anim.GetCurrentAnimatorStateInfo(0).length + delay);
-                //Network.Destroy(gameObject);
+                anim.SetTrigger("IsDead");
+                Destroy(gameObject, anim.GetCurrentAnimatorStateInfo(0).length + 1.3f);
+                //Destroy(gameObject);
             }
         }
     }
