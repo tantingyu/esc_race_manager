@@ -55,7 +55,7 @@ public class SetupLocalPlayer : NetworkBehaviour
     {
         Debug.Log("Player Number: " + playerNumber);
         // for local testing only
-        if (playerNumber == 0 || playerNumber == 1)
+        if (playerNumber == 0)
         {
             playerNumber = 2;
             playerColor = Color.white;
