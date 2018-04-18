@@ -64,7 +64,7 @@ public class TrapSpawner : NetworkBehaviour {
             if (cuteTrapTimer < 0)
             {
                 cautionLane = Random.Range(0, 3);
-                Notify(cautionLane);
+                NotifyObservers(0, cautionLane);
                 Invoke("CmdSpawnCuteTrap", 3f);
                 cuteTrapTimer = 10f;
             }
@@ -100,14 +100,15 @@ public class TrapSpawner : NetworkBehaviour {
     }
 
     //Send notifications if dangerous trap is arriving
-    public void Notify(int lane)
+    public void NotifyObservers(int eventType, int lane)
     {
         for (int i = 0; i < observers.Count; i++)
         {
             Debug.Log("CAUTION LANE " + cautionLane);
             //Notify all observers even though some may not be interested in what has happened
             //Each observer should check if it is interested in this event
-            observers[i].OnCaution(lane);
+            observers[i].UpdateObserver(eventType, lane);
+            // observers[i].OnCaution(lane);
         }
     }
 

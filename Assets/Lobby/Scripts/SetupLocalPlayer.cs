@@ -57,7 +57,7 @@ public class SetupLocalPlayer : NetworkBehaviour
         // for local testing only
         if (playerNumber == 0 || playerNumber == 1)
         {
-            playerNumber = 1;
+            playerNumber = 2;
             playerColor = Color.white;
         }
 
@@ -209,8 +209,8 @@ public class SetupLocalPlayer : NetworkBehaviour
             if (hpRegenTimer <= 0)
             {
                 if (hp < maxHp)
-                    OnHeal(2);
-                hpRegenTimer = 0.3f;
+                    OnHeal(5);
+                hpRegenTimer = 0.5f;
             }
         }
         else if (collision.tag == "laser")

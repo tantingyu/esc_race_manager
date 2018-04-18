@@ -22,6 +22,11 @@ public class SharedCanvas : MonoBehaviour {
 
     float delayDeathScreen = 3.0f;
 
+    // declare delegate
+    delegate void SetActiveMethod(int lane);
+    // initialize list of concrete methods
+    List<SetActiveMethod> setActive = new List<SetActiveMethod>();
+    
     // Use this for initialization
     void Start () {
         for (int i = 0; i < cautionImg.Length; i++)
@@ -31,13 +36,16 @@ public class SharedCanvas : MonoBehaviour {
         }
 
         //BehindTrapSpawner will inform player if something cute spawns
-        behindTTrapSpawner = GameObject.Find("TrapSpawnManager/BehindTrapSpawner").GetComponent<TrapSpawner>();
-        behindTTrapSpawner.AddObserver(this);
+        //behindTTrapSpawner = GameObject.Find("TrapSpawnManager/BehindTrapSpawner").GetComponent<TrapSpawner>();
+        //behindTTrapSpawner.AddObserver(this);
 
         scoreDisplay = transform.GetChild(3).gameObject.GetComponent<Text>();
         levelDisplay = transform.GetChild(4).gameObject.GetComponent<Text>();
         deathPanel = transform.GetChild(5).gameObject;
         deathPanel.SetActive(false);
+
+        // add instances of concrete methods
+        setActive.Add(new SetActiveMethod(OnCaution));
     }
 
     void Update()
@@ -76,6 +84,13 @@ public class SharedCanvas : MonoBehaviour {
             gameOver = true;
         }
     }
+
+    public void UpdateObserver(int eventType, int lane)
+    {
+        // call concrete method by list index (event type)
+        setActive[eventType](lane);
+    }
+
 
     public void OnCaution(int lane)
     {
