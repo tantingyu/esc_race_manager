@@ -162,7 +162,7 @@ MonoBehaviour:
   movePosition: 0
   velocity: {x: -5.3, y: 0}
   ground: 1
-  baseTrapSound: {fileID: 8300000, guid: bcf672eac6abffe438b5f04a47260e35, type: 3}
+  baseTrapSound: {fileID: 8300000, guid: 387f6c7d671aa0047a00a6dccfd2653e, type: 3}
 --- !u!114 &114283011440704490
 MonoBehaviour:
   m_ObjectHideFlags: 1
